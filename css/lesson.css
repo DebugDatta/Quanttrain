@@ -1,0 +1,304 @@
+#lesson-view.active {
+  padding-bottom: var(--space-3xl);
+}
+
+.lesson-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg-primary);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 0;
+}
+.lesson-topbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+.lesson-topbar-top .back-link {
+  cursor: pointer;
+  color: var(--gold);
+  transition: color 200ms;
+}
+.lesson-topbar-top .back-link:hover {
+  color: var(--gold-pale);
+}
+
+.lesson-progress-bar {
+  height: 4px;
+  background: var(--bg-hover);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.lesson-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 999px;
+  transition: width 100ms linear;
+}
+
+.lesson-world-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: var(--space-xs);
+}
+
+.lesson-title {
+  margin-bottom: var(--space-lg);
+}
+.lesson-title h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  color: var(--text-heading);
+}
+
+/* -- Math -- */
+.math-inline {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-style: italic;
+  color: var(--text-heading);
+  padding: 0 2px;
+}
+.math-block {
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-style: italic;
+  color: var(--gold);
+  text-align: center;
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-md) 0;
+  background: var(--bg-deep);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+  overflow-x: auto;
+}
+.math-block sub, .math-block sup,
+.math-inline sub, .math-inline sup {
+  font-style: normal;
+  font-size: 0.75em;
+}
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1.1;
+  padding: 0 3px;
+}
+.frac-num, .frac-den {
+  font-style: normal;
+  font-size: 0.7em;
+  line-height: 1.1;
+}
+.frac-line {
+  display: block;
+  font-size: 0.5em;
+  line-height: 0.5;
+  color: var(--text-heading);
+}
+.sqrt {
+  text-decoration: overline;
+  padding-left: 2px;
+}
+
+/* -- Hook -- */
+.lesson-hook {
+  background: var(--bg-panel);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+/* -- Objectives -- */
+.lesson-objectives {
+  background: var(--bg-panel);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+.lesson-objectives h3 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--patina);
+  margin-bottom: var(--space-md);
+}
+.obj-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-xs) 0;
+  cursor: pointer;
+  color: var(--text-body);
+  font-size: 0.95rem;
+  transition: color 200ms;
+}
+.obj-row:hover {
+  color: var(--text-heading);
+}
+.obj-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--text-faint);
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  transition: background 200ms, border-color 200ms;
+}
+.obj-checkbox.checked {
+  background: var(--patina);
+  border-color: var(--patina);
+  color: var(--bg-deep);
+}
+.obj-checkbox.checked::after {
+  content: '\2713';
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.obj-text {
+  flex: 1;
+}
+.obj-text.done {
+  text-decoration: line-through;
+  color: var(--text-faint);
+}
+
+/* -- Content Sections -- */
+.lesson-section {
+  margin-bottom: var(--space-2xl);
+}
+.lesson-section h3.section-heading {
+  font-family: var(--font-body);
+  font-size: 1.18rem;
+  font-weight: 500;
+  color: var(--text-heading);
+  margin-bottom: var(--space-md);
+}
+
+.lesson-text p {
+  margin-bottom: var(--space-md);
+}
+.lesson-text p:last-child {
+  margin-bottom: 0;
+}
+
+.lesson-code {
+  background: var(--bg-deep);
+  border-left: 2px solid var(--gold);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  overflow-x: auto;
+  position: relative;
+}
+.lesson-code pre {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+.lesson-code-copy {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  padding: 4px 10px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  background: var(--bg-hover);
+  color: var(--text-faint);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: color 200ms, border-color 200ms;
+}
+.lesson-code-copy:hover {
+  color: var(--gold);
+  border-color: var(--hairline-gold);
+}
+
+.lesson-mermaid {
+  background: var(--bg-panel);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.lesson-table th {
+  background: var(--bg-panel);
+  color: var(--text-heading);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--gold-deep);
+  text-align: left;
+}
+.lesson-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--hairline);
+  color: var(--text-body);
+}
+
+/* -- Resources -- */
+.lesson-resources {
+  background: var(--bg-panel);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+.lesson-resources h3 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: var(--space-md);
+}
+.lesson-resources ul {
+  list-style: none;
+  padding: 0;
+}
+.lesson-resources li {
+  padding: var(--space-xs) 0;
+}
+.lesson-resources a {
+  color: var(--gold);
+  font-size: 0.95rem;
+  transition: color 200ms;
+}
+.lesson-resources a:hover {
+  color: var(--gold-pale);
+}
+
+/* -- CTA -- */
+.lesson-cta {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}

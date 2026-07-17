@@ -1,0 +1,56 @@
+:root {
+  /* -- Surfaces -- */
+  --bg-primary: oklch(7% 0.006 95);
+  --bg-panel: oklch(11% 0.006 95);
+  --bg-deep: oklch(4% 0.004 95);
+  --bg-hover: oklch(15% 0.008 95);
+  --bg-input: oklch(15% 0.008 95);
+
+  /* -- Gold Family (Primary Accent) -- */
+  --gold: oklch(84% 0.19 80.46);
+  --gold-rich: oklch(77% 0.13 82);
+  --gold-deep: oklch(61% 0.085 78);
+  --gold-pale: oklch(86% 0.07 84);
+
+  /* -- Patina Family (Secondary Accent) -- */
+  --patina: oklch(70% 0.12 188);
+  --patina-deep: oklch(49% 0.08 188);
+  --patina-pale: oklch(82% 0.07 188);
+
+  /* -- Text -- */
+  --text-heading: oklch(91% 0 0);
+  --text-body: oklch(88% 0 0);
+  --text-muted: oklch(72% 0 0);
+  --text-faint: oklch(62% 0 0);
+  --text-disabled: oklch(52% 0 0);
+
+  /* -- Borders & Dividers -- */
+  --hairline: oklch(78% 0 0 / 0.16);
+  --hairline-gold: oklch(74% 0.09 82 / 0.6);
+
+  /* -- State Colors -- */
+  --error: oklch(58% 0.15 35);
+  --success: oklch(45% 0.18 145);
+
+  /* -- Typography -- */
+  --font-display: 'Alumni Sans', system-ui, sans-serif;
+  --font-body: 'Albert Sans', 'Avenir Next', system-ui, sans-serif;
+  --font-mono: 'SFMono-Regular', 'Roboto Mono', 'Consolas', monospace;
+
+  /* -- Spacing -- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* -- Border Radii -- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+}
