@@ -51,6 +51,3 @@ python -m http.server 8000
 2. `node scripts/parse-md.js` → regenerates `data/curriculum.json`
 3. `node scripts/sync-html.js` → updates inline data in `index.html`
 
-## License
-
-MIT
