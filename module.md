@@ -1235,6 +1235,7 @@ annual_return = (1 + daily_mean) ** 252 - 1
 annual_vol = daily_std * np.sqrt(252)
 print(f"Annualized return: {annual_return:.2%}")
 print(f"Annualized volatility: {annual_vol:.2%}")
+```
 
 ### Understanding the Square Root of Time Rule
 Why does volatility scale with the square root of time while returns scale with multiplication? The answer lies in how variance behaves. Under the assumption that daily returns are independent and identically distributed, the variance of the sum of daily returns equals the sum of their variances. If each day has variance sigma-squared, then n days have variance n * sigma-squared. Taking the square root gives sigma * sqrt(n). This is called the square root of time rule, and it is one of the most widely used formulas in quantitative finance.
@@ -5119,7 +5120,7 @@ A good forecast should beat a naive baseline. If your ARIMA model cannot beat si
 ### 🔗 Free Resources
 - [statsmodels — Time Series Analysis Documentation](https://www.statsmodels.org/stable/tsa.html) — free, official
 - [Towards Data Science — ARIMA Explained](https://towardsdatascience.com/) — free articles (search "ARIMA")
-- [Khan Academy / StatQuest — search "time series" (YouTube)](https://www.youtube.com/results?search_query=statquest+time+series) — free
+- [IBM Technology — What is Time Series Analysis? (YouTube)](https://www.youtube.com/watch?v=GE3JOFwTWVM) — free
 
 ### 📝 Quiz
 1. **Why do quant models typically work on returns rather than raw prices?**
@@ -5355,7 +5356,7 @@ Seasonal effects in financial data tend to be small and unstable over time. They
 
 ### 🔗 Free Resources
 - [statsmodels — Diagnostic Tests Documentation](https://www.statsmodels.org/stable/stats.html#residual-diagnostics-and-specification-tests) — free, official
-- [Khan Academy / search "heteroskedasticity econometrics" (YouTube)](https://www.youtube.com/results?search_query=heteroskedasticity+explained) — free
+- [Ben Lambert — Heteroskedasticity summary (YouTube)](https://www.youtube.com/watch?v=zRklTsY9w9c) — free
 - [Introduction to Econometrics with R (free online book, concepts transfer to Python)](https://www.econometrics-with-r.org/) — free
 
 ### 📝 Quiz
@@ -5626,9 +5627,7 @@ def detect_doji(open_price, close, high, low, body_threshold=0.001):
 opens = np.array([100, 102, 101, 105])
 closes = np.array([100.5, 102.1, 101.2, 104.8])
 highs = np.array([102, 103, 102.5, 106])
-lows = np.array([99, 101, 100, 104)
-# Note: Lows should be as many elements as other arrays
-lows = np.array([99, 101, 100, 104)
+lows = np.array([99, 101, 100, 104])
 dojis = detect_doji(opens, closes, highs, lows)
 print(f"Doji candles detected: {np.sum(dojis)}")
 ```
@@ -7576,7 +7575,7 @@ Survivorship bias is the silent killer of backtest validity. It occurs when your
 # GOOD: point-in-time index constituents for each historical date
 ```
 
-The magnitude of survivorship bias is substantial. Studies estimate that survivorship bias inflates backtest returns by 1-3% per year in equity markets. This is because the worst-performing stocks are precisely the ones that get delisted, and excluding them removes the worst outcomes from your backtest history.
+The magnitude of survivorship bias is substantial. Research estimates that survivorship bias inflates backtest returns by 1-3% per year in equity markets (Brown et al., 1992; van Binsbergen et al., 2025). This is because the worst-performing stocks are precisely the ones that get delisted, and excluding them removes the worst outcomes from your backtest history.
 
 To mitigate survivorship bias, use point-in-time constituent lists. These are available from data vendors and show exactly which stocks were in the index on each date. If you cannot get point-in-time data, include all stocks that ever existed in your universe and allow delistings to occur at their final prices.
 
@@ -7710,7 +7709,7 @@ Remember: the market is a complex adaptive system. No backtest can perfectly cap
 
 ### 🔗 Free Resources
 - [QuantStart — Avoiding Overfitting](https://www.quantstart.com/articles/) — free articles (search "overfitting backtesting")
-- [Marcos López de Prado — free lecture videos on backtesting pitfalls (search "Lopez de Prado backtest overfitting" on YouTube)](https://www.youtube.com/results?search_query=lopez+de+prado+backtest+overfitting) — free
+- [Marcos López de Prado — Dangers of Backtest Overfitting (YouTube)](https://www.youtube.com/watch?v=QxhxLwNbMMg) — free
 - [Investopedia — Survivorship Bias](https://www.investopedia.com/terms/s/survivorshipbias.asp) — free
 
 ### 📝 Quiz
@@ -7934,7 +7933,7 @@ The conclusion: the strategy has a genuine but modest edge, is vulnerable to ext
 
 ### 🔗 Free Resources
 - [QuantStart — Monte Carlo Simulation for Finance](https://www.quantstart.com/articles/) — free (search site for "Monte Carlo")
-- [Khan Academy / search "Geometric Brownian Motion" (YouTube)](https://www.youtube.com/results?search_query=geometric+brownian+motion+explained) — free
+- [QuantPy — Understanding Geometric Brownian Motion using Itô Calculus (YouTube)](https://www.youtube.com/watch?v=Devm4ElEhGc) — free
 - [NumPy/SciPy — Official random sampling documentation](https://numpy.org/doc/stable/reference/random/index.html) — free, official
 
 ### 📝 Quiz
@@ -8748,7 +8747,7 @@ This type of comparison dashboard is directly useful for portfolio construction:
 ### 🔗 Free Resources
 - [Streamlit — Official Documentation](https://docs.streamlit.io/) — free, official
 - [Streamlit — 30 Days of Streamlit (free challenge)](https://30days.streamlit.app/) — free, hands-on
-- [freeCodeCamp — Streamlit Tutorial (YouTube)](https://www.youtube.com/results?search_query=freecodecamp+streamlit+tutorial) — free
+- [freeCodeCamp — Build 12 Data Science Apps with Python and Streamlit (YouTube)](https://www.youtube.com/watch?v=JwSS70SZdyM) — free
 
 ### 📝 Quiz
 1. **Why is `@st.cache_data` important for a dashboard with expensive data pulls?**

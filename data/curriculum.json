@@ -1491,7 +1491,14 @@
             {
               "type": "text",
               "heading": "Annualization",
-              "content": "Returns and volatility are measured over some period: daily, weekly, monthly. To compare across assets or time frames, you must annualize.\n\nReturns annualize with compounding:\n\n$$R_{annual} = (1 + R_{period})^{p} - 1$$\n\nVolatility annualizes with the square root of time:\n\n$$\\sigma_{annual} = \\sigma_{period} \\times \\sqrt{p}$$\n\nwhere p is the number of periods per year. For daily data, p = 252 (trading days per year). For weekly data, p = 52. For monthly data, p = 12.\n\nWhy does volatility use square root of time but returns use exponentiation? Because returns compound multiplicatively over time, while variance (the square of volatility) adds linearly under the assumption that returns are independent across time. Since variance adds linearly, standard deviation scales with the square root of time.\n\n```python\nimport numpy as np\n\ndaily_std = 0.012\ndaily_mean = 0.0005\n\nannual_return = (1 + daily_mean) ** 252 - 1\nannual_vol = daily_std * np.sqrt(252)\nprint(f\"Annualized return: {annual_return:.2%}\")\nprint(f\"Annualized volatility: {annual_vol:.2%}\")"
+              "content": "Returns and volatility are measured over some period: daily, weekly, monthly. To compare across assets or time frames, you must annualize.\n\nReturns annualize with compounding:\n\n$$R_{annual} = (1 + R_{period})^{p} - 1$$\n\nVolatility annualizes with the square root of time:\n\n$$\\sigma_{annual} = \\sigma_{period} \\times \\sqrt{p}$$\n\nwhere p is the number of periods per year. For daily data, p = 252 (trading days per year). For weekly data, p = 52. For monthly data, p = 12.\n\nWhy does volatility use square root of time but returns use exponentiation? Because returns compound multiplicatively over time, while variance (the square of volatility) adds linearly under the assumption that returns are independent across time. Since variance adds linearly, standard deviation scales with the square root of time."
+            },
+            {
+              "type": "code",
+              "heading": "",
+              "language": "python",
+              "code": "import numpy as np\n\ndaily_std = 0.012\ndaily_mean = 0.0005\n\nannual_return = (1 + daily_mean) ** 252 - 1\nannual_vol = daily_std * np.sqrt(252)\nprint(f\"Annualized return: {annual_return:.2%}\")\nprint(f\"Annualized volatility: {annual_vol:.2%}\")",
+              "output": ""
             },
             {
               "type": "text",
@@ -5141,8 +5148,8 @@
               "url": "https://towardsdatascience.com/"
             },
             {
-              "label": "Khan Academy / StatQuest — search \"time series\" (YouTube)",
-              "url": "https://www.youtube.com/results?search_query=statquest+time+series"
+              "label": "IBM Technology — What is Time Series Analysis? (YouTube)",
+              "url": "https://www.youtube.com/watch?v=GE3JOFwTWVM"
             }
           ],
           "quiz": [
@@ -5387,8 +5394,8 @@
               "url": "https://www.statsmodels.org/stable/stats.html#residual-diagnostics-and-specification-tests"
             },
             {
-              "label": "Khan Academy / search \"heteroskedasticity econometrics\" (YouTube)",
-              "url": "https://www.youtube.com/results?search_query=heteroskedasticity+explained"
+              "label": "Ben Lambert — Heteroskedasticity summary (YouTube)",
+              "url": "https://www.youtube.com/watch?v=zRklTsY9w9c"
             },
             {
               "label": "Introduction to Econometrics with R (free online book, concepts transfer to Python)",
@@ -5723,7 +5730,7 @@
               "type": "code",
               "heading": "",
               "language": "python",
-              "code": "import numpy as np\nimport pandas as pd\n\n# Identify doji candles: open approximately equal to close\ndef detect_doji(open_price, close, high, low, body_threshold=0.001):\n    body = np.abs(close - open_price)\n    total_range = high - low\n    doji = (body / total_range) < body_threshold\n    return doji\n\n# Example\nopens = np.array([100, 102, 101, 105])\ncloses = np.array([100.5, 102.1, 101.2, 104.8])\nhighs = np.array([102, 103, 102.5, 106])\nlows = np.array([99, 101, 100, 104)\n# Note: Lows should be as many elements as other arrays\nlows = np.array([99, 101, 100, 104)\ndojis = detect_doji(opens, closes, highs, lows)\nprint(f\"Doji candles detected: {np.sum(dojis)}\")",
+              "code": "import numpy as np\nimport pandas as pd\n\n# Identify doji candles: open approximately equal to close\ndef detect_doji(open_price, close, high, low, body_threshold=0.001):\n    body = np.abs(close - open_price)\n    total_range = high - low\n    doji = (body / total_range) < body_threshold\n    return doji\n\n# Example\nopens = np.array([100, 102, 101, 105])\ncloses = np.array([100.5, 102.1, 101.2, 104.8])\nhighs = np.array([102, 103, 102.5, 106])\nlows = np.array([99, 101, 100, 104])\ndojis = detect_doji(opens, closes, highs, lows)\nprint(f\"Doji candles detected: {np.sum(dojis)}\")",
               "output": ""
             },
             {
@@ -7918,7 +7925,7 @@
             {
               "type": "text",
               "heading": "",
-              "content": "The magnitude of survivorship bias is substantial. Studies estimate that survivorship bias inflates backtest returns by 1-3% per year in equity markets. This is because the worst-performing stocks are precisely the ones that get delisted, and excluding them removes the worst outcomes from your backtest history.\n\nTo mitigate survivorship bias, use point-in-time constituent lists. These are available from data vendors and show exactly which stocks were in the index on each date. If you cannot get point-in-time data, include all stocks that ever existed in your universe and allow delistings to occur at their final prices."
+              "content": "The magnitude of survivorship bias is substantial. Research estimates that survivorship bias inflates backtest returns by 1-3% per year in equity markets (Brown et al., 1992; van Binsbergen et al., 2025). This is because the worst-performing stocks are precisely the ones that get delisted, and excluding them removes the worst outcomes from your backtest history.\n\nTo mitigate survivorship bias, use point-in-time constituent lists. These are available from data vendors and show exactly which stocks were in the index on each date. If you cannot get point-in-time data, include all stocks that ever existed in your universe and allow delistings to occur at their final prices."
             },
             {
               "type": "code",
@@ -8038,8 +8045,8 @@
               "url": "https://www.quantstart.com/articles/"
             },
             {
-              "label": "Marcos López de Prado — free lecture videos on backtesting pitfalls (search \"Lopez de Prado backtest overfitting\" on YouTube)",
-              "url": "https://www.youtube.com/results?search_query=lopez+de+prado+backtest+overfitting"
+              "label": "Marcos López de Prado — Dangers of Backtest Overfitting (YouTube)",
+              "url": "https://www.youtube.com/watch?v=QxhxLwNbMMg"
             },
             {
               "label": "Investopedia — Survivorship Bias",
@@ -8289,8 +8296,8 @@
               "url": "https://www.quantstart.com/articles/"
             },
             {
-              "label": "Khan Academy / search \"Geometric Brownian Motion\" (YouTube)",
-              "url": "https://www.youtube.com/results?search_query=geometric+brownian+motion+explained"
+              "label": "QuantPy — Understanding Geometric Brownian Motion using Itô Calculus (YouTube)",
+              "url": "https://www.youtube.com/watch?v=Devm4ElEhGc"
             },
             {
               "label": "NumPy/SciPy — Official random sampling documentation",
@@ -9171,8 +9178,8 @@
               "url": "https://30days.streamlit.app/"
             },
             {
-              "label": "freeCodeCamp — Streamlit Tutorial (YouTube)",
-              "url": "https://www.youtube.com/results?search_query=freecodecamp+streamlit+tutorial"
+              "label": "freeCodeCamp — Build 12 Data Science Apps with Python and Streamlit (YouTube)",
+              "url": "https://www.youtube.com/watch?v=JwSS70SZdyM"
             }
           ],
           "quiz": [
@@ -9565,54 +9572,43 @@
             {
               "type": "text",
               "heading": "Literature Review",
-              "content": "The literature review situates your work relative to what is already known. It builds on the conceptual framework from Node 23 by showing that you understand the existing research and can position your work within it.\n\nA good literature review is not a list of summaries. It is a narrative that groups related research, identifies themes, and highlights the gap that your paper fills.\n\n```markdown\n## 2. Literature Review"
-            },
-            {
-              "type": "text",
-              "heading": "2.1 Momentum in Developed Markets",
-              "content": "The momentum literature begins with Jegadeesh and Titman (1993), who documented\nthat buying past winners and selling past losers generated excess returns in US\nmarkets. Subsequent research confirmed momentum in Europe (Rouwenhorst, 1998),\nJapan (Liu et al., 1999), and across asset classes (Asness et al., 2013)."
-            },
-            {
-              "type": "text",
-              "heading": "2.2 Momentum in Emerging Markets",
-              "content": "Emerging market evidence is more mixed. Higher transaction costs, lower\nliquidity, and different investor behavior may diminish momentum profits.\nChui et al. (2010) find weaker momentum in Asian markets, attributing this to\ncultural differences in overconfidence."
-            },
-            {
-              "type": "text",
-              "heading": "2.3 Research Gap",
-              "content": "The existing literature lacks a comprehensive study of momentum in Indian\nmarkets that accounts for realistic transaction costs and implements practical\ntrading rules accessible to retail investors.\n```\n\nThe literature review should cite at least 5-10 relevant papers for a course project. Use Google Scholar to find papers, and use their citation format consistently."
-            },
-            {
-              "type": "text",
-              "heading": "Methodology",
-              "content": "The methodology section describes the data, the universe, the time period, and the analytical approach in precise detail. Another researcher should be able to replicate your study from this section alone.\n\n```markdown\n## 3. Methodology"
-            },
-            {
-              "type": "text",
-              "heading": "3.1 Data",
-              "content": "We use daily adjusted closing prices for all stocks in the Nifty 500 index from\nJanuary 2010 to December 2023, sourced from Yahoo Finance. Stocks with less\nthan 12 months of trading history are excluded."
-            },
-            {
-              "type": "text",
-              "heading": "3.2 Strategy",
-              "content": "The strategy follows the cross-sectional momentum approach. At the end of each\nmonth, stocks are ranked by their trailing 12-month return, skipping the most\nrecent month. The top decile is bought, the bottom decile is sold short."
-            },
-            {
-              "type": "text",
-              "heading": "3.3 Implementation",
-              "content": "We assume execution at the closing price on the rebalancing day with a\ntransaction cost of 10 basis points per trade. Positions are held for one\nmonth and then rebalanced."
+              "content": "The literature review situates your work relative to what is already known. It builds on the conceptual framework from Node 23 by showing that you understand the existing research and can position your work within it.\n\nA good literature review is not a list of summaries. It is a narrative that groups related research, identifies themes, and highlights the gap that your paper fills."
             },
             {
               "type": "code",
               "heading": "",
-              "language": "",
-              "code": "The methodology section should specify every parameter value, data source, and decision rule. Any ambiguity reduces the replicability of your research.\n\nKey elements of a quant finance methodology:\n- Data source and ticker universe\n- Sample period and frequency\n- Variable definitions\n- Strategy rules (entry, exit, position sizing)\n- Risk management (stop-losses, position limits)\n- Benchmark selection\n- Software and libraries used",
+              "language": "markdown",
+              "code": "## 2. Literature Review\n### 2.1 Momentum in Developed Markets\nThe momentum literature begins with Jegadeesh and Titman (1993), who documented\nthat buying past winners and selling past losers generated excess returns in US\nmarkets. Subsequent research confirmed momentum in Europe (Rouwenhorst, 1998),\nJapan (Liu et al., 1999), and across asset classes (Asness et al., 2013).\n\n### 2.2 Momentum in Emerging Markets\nEmerging market evidence is more mixed. Higher transaction costs, lower\nliquidity, and different investor behavior may diminish momentum profits.\nChui et al. (2010) find weaker momentum in Asian markets, attributing this to\ncultural differences in overconfidence.\n\n### 2.3 Research Gap\nThe existing literature lacks a comprehensive study of momentum in Indian\nmarkets that accounts for realistic transaction costs and implements practical\ntrading rules accessible to retail investors.",
               "output": ""
             },
             {
               "type": "text",
               "heading": "",
-              "content": "python\ndef methodology_summary():\n    \"\"\"Example methodology documentation.\"\"\"\n    return {\n        \"universe\": \"Nifty 500 constituents at each rebalance date\",\n        \"period\": \"2010-01-01 to 2023-12-31\",\n        \"frequency\": \"Monthly rebalancing\",\n        \"entry\": \"Top decile by trailing 12-month return (skip 1 month)\",\n        \"exit\": \"End of holding period or stop-loss at 2 ATR\",\n        \"costs\": \"10 bps per trade\",\n        \"benchmark\": \"Nifty 50 Total Return Index\"\n    }\n```"
+              "content": "The literature review should cite at least 5-10 relevant papers for a course project. Use Google Scholar to find papers, and use their citation format consistently."
+            },
+            {
+              "type": "text",
+              "heading": "Methodology",
+              "content": "The methodology section describes the data, the universe, the time period, and the analytical approach in precise detail. Another researcher should be able to replicate your study from this section alone."
+            },
+            {
+              "type": "code",
+              "heading": "",
+              "language": "markdown",
+              "code": "## 3. Methodology\n### 3.1 Data\nWe use daily adjusted closing prices for all stocks in the Nifty 500 index from\nJanuary 2010 to December 2023, sourced from Yahoo Finance. Stocks with less\nthan 12 months of trading history are excluded.\n\n### 3.2 Strategy\nThe strategy follows the cross-sectional momentum approach. At the end of each\nmonth, stocks are ranked by their trailing 12-month return, skipping the most\nrecent month. The top decile is bought, the bottom decile is sold short.\n### 3.3 Implementation\nWe assume execution at the closing price on the rebalancing day with a\ntransaction cost of 10 basis points per trade. Positions are held for one\nmonth and then rebalanced.",
+              "output": ""
+            },
+            {
+              "type": "text",
+              "heading": "",
+              "content": "The methodology section should specify every parameter value, data source, and decision rule. Any ambiguity reduces the replicability of your research.\n\nKey elements of a quant finance methodology:\n- Data source and ticker universe\n- Sample period and frequency\n- Variable definitions\n- Strategy rules (entry, exit, position sizing)\n- Risk management (stop-losses, position limits)\n- Benchmark selection\n- Software and libraries used"
+            },
+            {
+              "type": "code",
+              "heading": "",
+              "language": "python",
+              "code": "def methodology_summary():\n    \"\"\"Example methodology documentation.\"\"\"\n    return {\n        \"universe\": \"Nifty 500 constituents at each rebalance date\",\n        \"period\": \"2010-01-01 to 2023-12-31\",\n        \"frequency\": \"Monthly rebalancing\",\n        \"entry\": \"Top decile by trailing 12-month return (skip 1 month)\",\n        \"exit\": \"End of holding period or stop-loss at 2 ATR\",\n        \"costs\": \"10 bps per trade\",\n        \"benchmark\": \"Nifty 50 Total Return Index\"\n    }",
+              "output": ""
             },
             {
               "type": "text",
@@ -9634,17 +9630,19 @@
             {
               "type": "text",
               "heading": "Discussion",
-              "content": "The discussion section interprets what the results mean. It answers the question: given these results, what have we learned?\n\nInclude limitations and alternative explanations. Acknowledging weaknesses makes your research more credible, not less.\n\n```markdown\n## 5. Discussion\nThe results confirm that momentum strategies are viable in Indian equity\nmarkets. The outperformance is economically significant but requires careful\ncost management."
+              "content": "The discussion section interprets what the results mean. It answers the question: given these results, what have we learned?\n\nInclude limitations and alternative explanations. Acknowledging weaknesses makes your research more credible, not less."
+            },
+            {
+              "type": "code",
+              "heading": "",
+              "language": "markdown",
+              "code": "## 5. Discussion\nThe results confirm that momentum strategies are viable in Indian equity\nmarkets. The outperformance is economically significant but requires careful\ncost management.\n\n### 5.1 Limitations\nThe strategy's performance varies significantly across subperiods. During\nthe 2009 market reversal, the strategy experienced a drawdown of 22%,\nconsistent with the momentum crash literature.\n\n### 5.2 Alternative Explanations\nPart of the outperformance may be explained by the size effect, as momentum\nstrategies tend to overweight small-cap stocks. Future research should\ncontrol for size and value factors using the Fama-French framework.",
+              "output": ""
             },
             {
               "type": "text",
-              "heading": "5.1 Limitations",
-              "content": "The strategy's performance varies significantly across subperiods. During\nthe 2009 market reversal, the strategy experienced a drawdown of 22%,\nconsistent with the momentum crash literature."
-            },
-            {
-              "type": "text",
-              "heading": "5.2 Alternative Explanations",
-              "content": "Part of the outperformance may be explained by the size effect, as momentum\nstrategies tend to overweight small-cap stocks. Future research should\ncontrol for size and value factors using the Fama-French framework.\n```\n\nThe discussion is where you demonstrate critical thinking. Do not just restate results. Analyze them, question them, and contextualize them."
+              "heading": "",
+              "content": "The discussion is where you demonstrate critical thinking. Do not just restate results. Analyze them, question them, and contextualize them."
             },
             {
               "type": "text",

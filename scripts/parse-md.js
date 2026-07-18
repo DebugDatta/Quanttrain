@@ -100,6 +100,7 @@ function parseModule(lines) {
   let rbuf = []; // resources buffer
   let qbuf = []; // quiz buffer
   let sbuf = []; // section buffer
+  let inFence = false; // track fence state to avoid false heading matches inside code blocks
 
   function flush() {
     if (!n) return;
@@ -108,7 +109,7 @@ function parseModule(lines) {
     else if (phase === "resources") n.resources = parseResources(rbuf);
     else if (phase === "quiz") n.quiz = parseQuiz(qbuf);
     else if (phase === "content" && sbuf.length) { const p = parseSection(heading, sbuf); if (p) { if (Array.isArray(p)) p.forEach(s => n.sections.push(s)); else n.sections.push(p); } }
-    hubs = []; obuf = []; rbuf = []; qbuf = []; sbuf = []; heading = ""; phase = null;
+    hubs = []; obuf = []; rbuf = []; qbuf = []; sbuf = []; heading = ""; phase = null; inFence = false;
   }
 
   let i = 0;
@@ -144,11 +145,13 @@ function parseModule(lines) {
     if (is(l, /^## Node/)) { flush(); if (n && w) w.nodes.push(n); const ni = extractNode(l); n = { id: ni.id, worldId: w ? w.id : 0, title: ni.title, order: ni.id, hook: "", objectives: [], sections: [], resources: [], quiz: [] }; phase = null; continue; }
     if (!n) continue;
 
+    if (phase === "content" && /^```/.test(t)) { inFence = !inFence; }
+
     if (is(l, /^### 🎯 Hook/)) { flush(); phase = "hook"; continue; }
     if (is(l, /^### 📌 Learning Objectives/)) { flush(); phase = "objectives"; continue; }
     if (is(l, /^### 🔗 Free Resources/)) { flush(); phase = "resources"; continue; }
     if (is(l, /^### 📝 Quiz/)) { flush(); phase = "quiz"; continue; }
-    if (is(l, /^### /)) { flush(); phase = "content"; heading = t.replace(/^###\s+/, "").trim(); continue; }
+    if (!inFence && is(l, /^### /)) { flush(); phase = "content"; heading = t.replace(/^###\s+/, "").trim(); continue; }
 
     if (phase === "hook") hubs.push(l);
     else if (phase === "objectives") obuf.push(l);
