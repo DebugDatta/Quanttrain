@@ -15,12 +15,8 @@ export function render() {
 
   let html = '<div class="map-header">'
     + '<div class="map-brand">QuantTrain</div>'
-    + '<div class="map-stats">'
-    + '<span class="map-stat"><span class="map-stat-icon gold">XP</span><span>' + xp.total + ' XP</span></span>'
-    + '<span class="map-stat"><span class="map-stat-icon gold">LV</span><span>Lv' + level + '</span></span>'
-    + '<span class="map-stat"><span class="map-stat-icon patina">ST</span><span>' + streak.current + '</span></span>'
     + '<button class="map-logout-btn" id="map-logout">Logout</button>'
-    + '</div></div>'
+    + '</div>'
     + '<div class="progress-overall">'
     + '<div class="progress-overall-label"><span>Overall Progress</span><span>' + completedCount + ' / ' + totalNodes + ' nodes</span></div>'
     + '<div class="progress-overall-bar"><div class="progress-overall-fill" style="width:' + pct + '%"></div></div>'
@@ -58,6 +54,12 @@ export function render() {
     }
     html += '</div></div>';
   }
+
+  html += '<div class="map-stats">'
+    + '<span class="map-stat"><span class="map-stat-icon gold">XP</span><span>' + xp.total + ' XP</span></span>'
+    + '<span class="map-stat"><span class="map-stat-icon gold">LV</span><span>Lv' + level + '</span></span>'
+    + '<span class="map-stat"><span class="map-stat-icon patina">ST</span><span>' + streak.current + '</span></span>'
+    + '</div>';
 
   $('#map-content').innerHTML = html;
 

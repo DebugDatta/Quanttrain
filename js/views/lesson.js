@@ -92,6 +92,7 @@ export function render(nodeId) {
   html += '<div class="lesson-cta"><button class="btn btn-primary" id="lesson-quiz-btn">' + quizLabel + '</button></div>';
 
   $('#lesson-content').innerHTML = html;
+  window.scrollTo(0, 0);
 
   const fillEl = $('#lesson-progress-fill');
   function onScroll() {

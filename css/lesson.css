@@ -240,10 +240,16 @@
   text-align: center;
 }
 
+.lesson-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--space-md);
+}
 .lesson-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
+  min-width: 400px;
 }
 .lesson-table th {
   background: var(--bg-panel);
