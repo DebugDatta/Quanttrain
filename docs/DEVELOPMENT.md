@@ -58,8 +58,8 @@ The single HTML file that loads everything:
 
 ```
 ├── Loads CSS (tokens.css → style.css → view-specific CSS)
-├── Loads CDN libraries (highlight.js, mermaid.js)
 ├── Loads JS (store.js → utils.js → views/*.js → app.js)
+├── Lazy-loads CDN libs on demand (highlight.js, mermaid.js via lesson.js)
 └── Contains view containers: <div id="view-login">, <div id="view-map">, etc.
 ```
 
@@ -110,14 +110,14 @@ store.getXpForNextLevel(xp) // → { current, needed }
 
 // Writing state
 store.setIdentity({ type: "tracked", uid: "2605032", name: "Alice", year: "SY", course: "BSc" })
-store.clearIdentity()         // logout (keeps progress)
+store.resetAll()              // logout: clears identity + progress/XP/streak/badges (next login restores cloud profile)
 store.applyCloudProfile(profile)  // merge login response into store (cross-device restore)
 store.setProgress(p)          // replaces progress object (also checks streak)
 store.addXp(amount, source, nodeId)  // e.g. addXp(10, "lesson", 5)
 store.addBadge(b)
 
 // Utility
-store.resetAll()          // Clears everything (use sparingly)
+store.resetAll()          // Clears everything (called on logout)
 ```
 
 ### `js/utils.js` — Helpers
@@ -169,7 +169,7 @@ Single module for all sheet traffic:
 - `validateLogin(uid, pass)` — GET, returns the profile JSON or `{ ok: false }`
 - `track(event, nodeId)` — POST `login` / `node_enter` / `quiz_start` (no-ops for guests)
 - `pushQuiz(nodeId, responses, score, total)` — POST full attempt + progress snapshot
-- `syncProgress()` — POST XP/streak/completed snapshot (called after lesson XP award)
+- `syncProgress()` — POST XP/streak/completed snapshot (called after lesson XP award and objective toggle; includes `objectives` and `badges`)
 
 All writes are `mode: "no-cors"` fire-and-forget — silent failure is by design. `APPS_SCRIPT_URL` is defined here.
 

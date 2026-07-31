@@ -12,6 +12,8 @@ function snapshot() {
     longestStreak: s.streak.longest,
     lastActive: s.streak.lastActive || '',
     completedQuizzes: s.progress.completedQuizzes || {},
+    objectives: s.progress.objectivesChecked || {},
+    badges: s.badges || [],
     lastVisitedNode: s.progress.lastVisitedNode || null
   };
 }

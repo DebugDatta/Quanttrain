@@ -108,9 +108,12 @@ p { max-width: 75ch; color: var(--text-body); }
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.01em;
-  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 160ms var(--ease-out);
   cursor: pointer;
   white-space: nowrap;
+}
+.btn:active {
+  transform: scale(0.97);
 }
 .btn-primary {
   background: var(--gold);
@@ -170,7 +173,7 @@ p { max-width: 75ch; color: var(--text-body); }
 .view {
   display: none;
   opacity: 0;
-  transition: opacity 300ms ease;
+  transition: opacity 220ms var(--ease-out);
 }
 .view.active {
   display: block;
@@ -185,9 +188,28 @@ p { max-width: 75ch; color: var(--text-body); }
 
 /* -- Fade-in animation -- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 .fade-in {
-  animation: fadeIn 400ms ease-out;
+  animation: fadeIn 220ms var(--ease-out);
+}
+
+/* -- Reduced motion -- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .btn:active,
+  .node-circle:active,
+  .quiz-option:active,
+  .lesson-code-copy:active {
+    transform: none !important;
+  }
 }

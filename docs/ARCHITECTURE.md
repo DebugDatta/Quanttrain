@@ -285,8 +285,11 @@ Login validation:
 GET {APPS_SCRIPT_URL}?action=validateLogin&uid={uid}&pass={pass}
   → { ok: false }                                   // any invalid credentials
   → { ok: true, uid, name, year, course, xp, streak,
-      longestStreak, lastActive, completedQuizzes, lastVisitedNode }
+      longestStreak, lastActive, completedQuizzes, objectives, badges,
+      visitedNodes: [nodeId...], lastVisitedNode }
 ```
+
+`visitedNodes` is derived from the student tab's event log (`node_enter` rows). `applyCloudProfile()` unions `visitedNodes` + quiz-completed node IDs into `progress.completedNodes`, merges `objectives` per node, and unions `badges` — so node status (ticks/patina), objectives, and badges all survive logout and restore on any device.
 
 Writes (POST text/plain, no-cors; guests/unknown UIDs dropped server-side; server timestamps):
 
@@ -295,7 +298,7 @@ POST {APPS_SCRIPT_URL}
 Body: {
   action: "trackActivity" | "submitQuiz" | "syncProgress",
   uid: string,
-  ...action-specific fields (event/nodeId/responses/score/total/xp/streak/completedQuizzes)
+  ...action-specific fields (event/nodeId/responses/score/total/xp/streak/completedQuizzes/objectives/badges)
 }
 ```
 
@@ -305,7 +308,7 @@ On `{ok:true}`, `store.applyCloudProfile()` merges XP (max), streak (max), and m
 
 | Library | CDN URL | Used In |
 |---|---|---|
-| highlight.js | `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.x/highlight.min.js` | `lesson.js` — code syntax highlighting |
+| highlight.js | `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.x/highlight.min.js` (+ `styles/atom-one-dark.min.css`) | `lesson.js` — code syntax highlighting |
 | mermaid.js | `//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js` | `lesson.js` — diagram rendering |
 
-Both loaded via `<script>` tags in `index.html`. No npm, no bundler, no build step.
+Both are lazy-loaded on demand by `lesson.js` (injected only when a lesson contains code or mermaid blocks; the highlight theme CSS likewise). No `<script>` tags in `index.html` head. No npm, no bundler, no build step.

@@ -43,6 +43,32 @@ export function applyCloudProfile(profile) {
       if (!s.progress.completedQuizzes[key]) s.progress.completedQuizzes[key] = profile.completedQuizzes[key];
     }
   }
+  if (profile.visitedNodes || profile.completedQuizzes) {
+    const merged = s.progress.completedNodes.slice();
+    const seen = {};
+    merged.forEach(id => { seen[id] = true; });
+    if (profile.visitedNodes) profile.visitedNodes.forEach(function(id) {
+      const n = parseInt(id, 10);
+      if (!isNaN(n) && !seen[n]) { seen[n] = true; merged.push(n); }
+    });
+    if (profile.completedQuizzes) Object.keys(profile.completedQuizzes).forEach(function(key) {
+      const n = parseInt(key, 10);
+      if (!isNaN(n) && !seen[n]) { seen[n] = true; merged.push(n); }
+    });
+    s.progress.completedNodes = merged;
+  }
+  if (profile.objectives) {
+    for (const key of Object.keys(profile.objectives)) {
+      const cloud = profile.objectives[key] || [];
+      const local = s.progress.objectivesChecked[key] || [];
+      s.progress.objectivesChecked[key] = Array.from(new Set(local.concat(cloud)));
+    }
+  }
+  if (profile.badges) {
+    for (const b of profile.badges) {
+      if (s.badges.indexOf(b) === -1) s.badges.push(b);
+    }
+  }
   if (typeof profile.lastVisitedNode === 'number' && s.progress.lastVisitedNode === null) s.progress.lastVisitedNode = profile.lastVisitedNode;
   save(s);
 }

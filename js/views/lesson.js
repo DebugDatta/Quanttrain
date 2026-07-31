@@ -3,6 +3,7 @@ import { $, $$, show, navigate, getNode, getWorldForNode, getCurriculum, escapeH
 import { track, syncProgress } from '../sync.js';
 
 let currentNodeId = null;
+let scrollHandler = null;
 
 export function render(nodeId) {
   const node = getNode(nodeId);
@@ -13,12 +14,13 @@ export function render(nodeId) {
   const world = getWorldForNode(nodeId);
   const progress = getProgress();
   const hasXp = getAllData().xp.history.some(function(h) { return h.source === 'lesson' && h.nodeId === nodeId; });
+  const alreadyDone = hasXp || progress.completedNodes.indexOf(nodeId) !== -1;
 
   let html = ''
     + '<div class="lesson-topbar">'
     + '<div class="lesson-topbar-top">'
     + '<span class="back-link" id="lesson-back">< Back to Map</span>'
-    + '<span>Node ' + node.id + ' of ' + totalNodes() + ' - ' + (hasXp ? 'XP: +0 (done)' : 'XP: +10 available') + '</span>'
+    + '<span>Node ' + node.id + ' of ' + totalNodes() + ' - ' + (alreadyDone ? 'XP: +0 (done)' : 'XP: +10 available') + '</span>'
     + '</div>'
     + '<div class="lesson-progress-bar"><div class="lesson-progress-fill" id="lesson-progress-fill" style="width:0%"></div></div>'
     + '</div>'
@@ -96,20 +98,20 @@ export function render(nodeId) {
   $('#lesson-content').innerHTML = html;
   window.scrollTo(0, 0);
 
+  if (scrollHandler) window.removeEventListener('scroll', scrollHandler);
   const fillEl = $('#lesson-progress-fill');
   function onScroll() {
     const scrollH = document.documentElement.scrollHeight - window.innerHeight;
     const pct = scrollH > 0 ? Math.min(100, Math.round((window.scrollY / scrollH) * 100)) : 0;
     fillEl.style.width = pct + '%';
   }
+  scrollHandler = onScroll;
   window.addEventListener('scroll', onScroll);
 
-  if (!hasXp) {
+  if (!alreadyDone) {
     const p = getProgress();
-    if (p.completedNodes.indexOf(nodeId) === -1) {
-      p.completedNodes.push(nodeId);
-      setProgress(p);
-    }
+    p.completedNodes.push(nodeId);
+    setProgress(p);
     addXp(10, 'lesson', nodeId);
     syncProgress();
   }
@@ -126,6 +128,7 @@ export function render(nodeId) {
       const pos = arr.indexOf(idx);
       if (pos !== -1) arr.splice(pos, 1); else arr.push(idx);
       setProgress(p);
+      syncProgress();
       var cb = this.querySelector('.obj-checkbox');
       var txt = this.querySelector('.obj-text');
       cb.classList.toggle('checked');
@@ -142,16 +145,82 @@ export function render(nodeId) {
     });
   });
 
-  if (window.hljs) {
-    try {
-      document.querySelectorAll('#lesson-content pre code').forEach(function(block) {
-        hljs.highlightElement(block);
-      });
-    } catch (e) { /* silent */ }
+  loadLessonLibs();
+}
+
+var HLJS_SRC = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js';
+var HLJS_CSS = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css';
+var MERMAID_SRC = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+
+var hljsPromise = null;
+var mermaidPromise = null;
+
+function loadScript(src) {
+  return new Promise(function(resolve, reject) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+function ensureStyle(href, id) {
+  if (document.getElementById(id)) return;
+  var l = document.createElement('link');
+  l.id = id;
+  l.rel = 'stylesheet';
+  l.href = href;
+  document.head.appendChild(l);
+}
+
+function highlightBlocks() {
+  document.querySelectorAll('#lesson-content pre code').forEach(function(block) {
+    try { hljs.highlightElement(block); } catch (e) { /* silent */ }
+  });
+}
+
+function initMermaid() {
+  try {
+    mermaid.initialize({
+      theme: 'dark',
+      themeVariables: {
+        primaryColor: '#d4a74a',
+        secondaryColor: '#5a9e8c',
+        tertiaryColor: '#1a1a2e',
+        mainBkg: '#1c1c2e',
+        lineColor: '#d4a74a',
+        textColor: '#e8e0d4',
+        fontSize: '14px'
+      },
+      flowchart: { useMaxWidth: true }
+    });
+    mermaid.run({ nodes: document.querySelectorAll('#lesson-content .mermaid') });
+  } catch (e) { /* silent */ }
+}
+
+function loadLessonLibs() {
+  var hasCode = document.querySelectorAll('#lesson-content pre code').length > 0;
+  var hasMermaid = document.querySelectorAll('#lesson-content .mermaid').length > 0;
+
+  if (hasCode) {
+    ensureStyle(HLJS_CSS, 'highlight-theme');
+    if (window.hljs) {
+      highlightBlocks();
+    } else {
+      if (!hljsPromise) hljsPromise = loadScript(HLJS_SRC);
+      hljsPromise.then(highlightBlocks).catch(function() {});
+    }
   }
 
-  if (window.mermaid) {
-    try { mermaid.run({ nodes: document.querySelectorAll('.mermaid') }); } catch (e) { /* silent */ }
+  if (hasMermaid) {
+    if (window.mermaid) {
+      initMermaid();
+    } else {
+      if (!mermaidPromise) mermaidPromise = loadScript(MERMAID_SRC);
+      mermaidPromise.then(initMermaid).catch(function() {});
+    }
   }
 }
 

@@ -29,7 +29,7 @@ UID = username, phone number = password (plaintext — this is identity tracking
 
 ### Tab: per student (tab name = their name)
 
-Stats block (rows 1–10):
+Stats block (rows 1–12):
 
 | A | B |
 |---|---|
@@ -43,13 +43,15 @@ Stats block (rows 1–10):
 | Last Active | 2026-07-31 |
 | Completed | `{"5":{"score":8,"total":10},...}` |
 | Last Visited Node | 7 |
+| Objectives | `{"5":[0,2,3],...}` |
+| Badges | `["first_quiz",...]` |
 
-Event log (headers at row 12):
+Event log (headers at row 13):
 
 | Event | Date | Time | Node | Attempt | Q1_Ans | Q1_Correct | ... | Q10_Ans | Q10_Correct | Score | Total |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 
-Events: `login`, `node_enter`, `quiz_start`, `quiz_attempt` (per-question answers, correct flags, score, and per-node attempt number). Dates/times are server-side (`Session.getScriptTimeZone()`).
+Events: `login`, `node_enter`, `quiz_start`, `quiz_attempt` (per-question answers, correct flags, score, and per-node attempt number). Dates/times are server-side (`Session.getScriptTimeZone()`). `node_enter` rows are also read on login to reconstruct `visitedNodes` — nodes that were entered (or quiz-completed) restore as visited/patina on the map even after logout or on a different device.
 
 ## Deploying the Apps Script
 

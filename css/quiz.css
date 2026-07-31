@@ -24,8 +24,10 @@
   color: var(--gold);
   transition: color 200ms;
 }
-.quiz-topbar-top .back-link:hover {
-  color: var(--gold-pale);
+@media (hover: hover) and (pointer: fine) {
+  .quiz-topbar-top .back-link:hover {
+    color: var(--gold-pale);
+  }
 }
 
 .quiz-progress-bar {
@@ -95,13 +97,18 @@
   border: 1px solid var(--hairline);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: border-color 200ms, background 200ms;
+  transition: border-color 200ms, background 200ms, transform 160ms var(--ease-out);
   font-size: 0.95rem;
   color: var(--text-body);
 }
-.quiz-option:hover {
-  border-color: var(--hairline-gold);
-  background: var(--bg-hover);
+.quiz-option:active {
+  transform: scale(0.985);
+}
+@media (hover: hover) and (pointer: fine) {
+  .quiz-option:hover {
+    border-color: var(--hairline-gold);
+    background: var(--bg-hover);
+  }
 }
 .quiz-option.selected {
   border-color: var(--hairline-gold);

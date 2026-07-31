@@ -27,6 +27,9 @@
   .continue-btn { width: 100%; justify-content: center; }
   .progress-overall-label { flex-direction: column; gap: var(--space-xs); }
   .map-stats { gap: var(--space-sm); font-size: 0.8rem; flex-wrap: wrap; }
+  .map-header-right { gap: var(--space-sm); }
+  .account-btn { max-width: 150px; }
+  .account-popover { width: 260px; }
 }
 
 @media (max-width: 360px) {

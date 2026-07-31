@@ -124,6 +124,7 @@ All colors use OKLCH for perceptual consistency. No hex except for third-party f
 | Secondary | transparent | `--gold` | 1px `--hairline-gold` | `--bg-hover` |
 | Ghost | transparent | `--text-muted` | none | `--text-heading` |
 | Disabled | `--bg-hover` | `--text-disabled` | `--hairline` | none |
+| Press (any) | — | — | — | `transform: scale(0.97)` over 160ms `--ease-out` |
 
 Height: `48px`. Padding: `0 32px`. Radius: `--radius-xs`.
 
@@ -167,9 +168,10 @@ Height: `48px`. Padding: `0 32px`. Radius: `--radius-xs`.
 | State | Fill | Border | Extra |
 |---|---|---|---|
 | Completed | `--gold` | none | White checkmark SVG overlay |
-| In progress | `--patina-pale` | 2px `--patina` | Subtle CSS pulse animation |
+| In progress | `--patina-pale` | 2px `--patina` | Static gold dot indicator (no pulse) |
 | Not started | transparent | 2px `--text-faint` | dimmed |
-| Hover (any) | — | — | `translateY(-2px)` lift |
+| Hover (any) | — | — | `translateY(-2px)` lift (fine pointers only) |
+| Press (any) | — | — | `scale(0.96)` |
 
 ### Quiz Options
 
@@ -183,12 +185,24 @@ Height: `48px`. Padding: `0 32px`. Radius: `--radius-xs`.
 | Use | Duration | Easing | Effect |
 |---|---|---|---|
 | Node completion | 400ms | ease-out | Gold fill sweep |
-| In-progress pulse | 2s infinite | ease-in-out | Subtle patina opacity pulse |
 | Hover lift | 200ms | ease-out | `translateY(-2px)` |
-| Page transition | 300ms | ease-out | Fade in |
-| XP counter | 600ms | ease-out | Count-up with step increments |
+| Page transition | 220ms | `--ease-out` | Fade in |
+| Press feedback | 160ms | `--ease-out` | `scale(0.97)` on pressables |
+| Score count-up | 600ms | `--ease-out` | Count-up with eased increments |
 
 **No bounce, no elastic, no spring easing.** The site is professional, not playful.
+
+## Motion Tokens
+
+- `--ease-out: cubic-bezier(0.23, 1, 0.32, 1)` — enter/feedback curves (starts fast, feels responsive)
+- `--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1)` — on-screen movement and morphing
+
+Rules:
+
+- Animate only `transform` and `opacity`. Never `scale(0)` — start at `0.95–0.97` with opacity.
+- Hover effects are gated behind `@media (hover: hover) and (pointer: fine)` — no false hovers on touch.
+- `prefers-reduced-motion: reduce` collapses transform motion (opacity-only or none); content remains readable.
+- UI animations stay under 300ms; the delight budget (count-up, celebrations) may go longer.
 
 ## Iconography
 

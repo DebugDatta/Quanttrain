@@ -81,7 +81,7 @@ User opens site
 ### State: Returning Visit (identity exists in store)
 - Page auto-redirects to `#/map` on load
 - No login screen shown
-- To reset: click "Logout" in map settings → clears identity → redirects to `#/login`
+- To reset: click "Logout" in map header → clears local identity + progress → redirects to `#/login` (tracked users restore from cloud on next login)
 
 ### Validation Rules
 - UID and password must both be non-empty
@@ -92,7 +92,7 @@ User opens site
 - **Cleared localStorage**: User returns to login as if first visit
 - **Wrong credentials**: Show inline error "Wrong credentials"
 - **Network down at login**: Same "Wrong credentials" error (silent fail)
-- **Logout**: Clears identity from store, redirects to login, but preserves XP/progress (user can re-identify and keep their data)
+- **Logout**: `resetAll()` — clears identity + local progress/XP/streak/badges and the login form, redirects to login. Tracked users are restored from the cloud on next login (their sheet data is preserved), so no cross-student leakage on shared devices; guests start fresh.
 - **Cross-device**: Logging in restores cloud XP/streak/completed quizzes via `applyCloudProfile()` (local wins where newer)
 
 ---
@@ -173,7 +173,7 @@ User opens site
 | ⬛ QuantTrain logo | Refresh map (no-op if already on map) |
 | XP/Level | Expand tooltip showing progress to next level |
 | 🔥 Streak | Expand tooltip with streak calendar |
-| ⏻ Logout | Clear identity → redirect `#/login` |
+| ⏻ Logout | `resetAll()` → clear identity + local progress → redirect `#/login` (tracked users restore from cloud) |
 
 ### Edge Cases
 - **No visits yet**: All circles dimmed, "Continue" button hidden
@@ -263,7 +263,7 @@ User opens site
 
 - Each objective is a clickable checkbox row: `☐` or `☑`
 - Toggle state stored in `store.progress.objectivesChecked[nodeId]`
-- Persisted across visits
+- Persisted across visits, and synced to the sheet via `syncProgress()` on toggle (restored on login, including on other devices)
 
 ### Content Sections
 
@@ -279,8 +279,8 @@ User opens site
 
 ### XP Award
 
-- First time visiting this lesson → +10 XP (stored in `xp.history` with source `"lesson"`)
-- Subsequent visits → no XP (checked against `xp.history` entries)
+- First time completing a lesson → +10 XP (stored in `xp.history` with source `"lesson"`)
+- Award is gated by `alreadyDone` = lesson XP in history OR node already in `completedNodes` (restored from cloud after logout/other devices) — no double award, no wrong "+10 available" label
 - XP badge shown in header "XP: +10 available" or "XP: +0 (done)"
 
 ### "Take Quiz" Button
@@ -446,8 +446,8 @@ POST received by Apps Script Web App
   │                                     │
   │  Tab name = student's name          │
   │  (auto-created with stats block     │
-  │   rows 1-10 + event log header      │
-  │   at row 12)                        │
+  │   rows 1-12 + event log header      │
+  │   at row 13)                        │
   │                                     │
   └─────────────────────────────────────┘
         │
@@ -544,7 +544,7 @@ POST received by Apps Script Web App
 | Action | What Happens | How To |
 |---|---|---|
 | Clear all progress | Deletes entire store | `localStorage.removeItem("quanttrain")` in DevTools |
-| Clear identity only | Keeps XP/progress, resets to login | Click Logout in map |
+| Logout | Clears identity + local progress/XP/streak/badges, resets to login | Click Logout in map header (tracked users restore from cloud on next login) |
 | Reset single node | Remove node from completed lists | Future feature |
 | Export progress | JSON download of store | Future feature |
 

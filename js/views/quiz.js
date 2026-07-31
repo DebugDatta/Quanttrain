@@ -164,14 +164,14 @@ function showScore(node) {
   var html = ''
     + '<div class="quiz-score fade-in">'
     + '<div class="quiz-score-title">' + titleText + '</div>'
-    + '<div class="quiz-score-fraction">' + correctCount + ' / ' + total + '</div>'
+    + '<div class="quiz-score-fraction"><span id="quiz-score-count">0</span> / ' + total + '</div>'
     + '<div class="quiz-score-label">' + pct + '%</div>'
     + '<div class="quiz-score-bar"><div class="quiz-score-fill" style="width:' + pct + '%"></div></div>'
     + '<div class="quiz-score-detail">'
     + '<div class="quiz-score-detail-item"><div class="quiz-score-detail-num gold">' + correctCount + '</div><div class="quiz-score-detail-label">Correct</div></div>'
     + '<div class="quiz-score-detail-item"><div class="quiz-score-detail-num error">' + (total - correctCount) + '</div><div class="quiz-score-detail-label">Incorrect</div></div>'
     + '</div>'
-    + '<div class="quiz-score-xp">+' + totalXp + ' XP earned' + bonusText + '</div>'
+    + '<div class="quiz-score-xp">+<span id="quiz-score-xp-count">0</span> XP earned' + bonusText + '</div>'
     + '<div class="quiz-score-actions">'
     + '<button class="btn btn-secondary" id="quiz-back-map">Back to Map</button>'
     + (nextNode ? '<button class="btn btn-primary" id="quiz-next-node">Next Node ></button>' : '')
@@ -179,9 +179,26 @@ function showScore(node) {
     + '</div>';
 
   $('#quiz-content').innerHTML = html;
+  countUp($('#quiz-score-count'), correctCount, 600);
+  countUp($('#quiz-score-xp-count'), totalXp, 600);
 
   $('#quiz-back-map').onclick = function() { navigate('#/map'); };
   if (nextNode) {
     $('#quiz-next-node').onclick = function() { navigate('#/lesson/' + nextNode.id); };
   }
+}
+
+function countUp(el, to, duration) {
+  if (!el) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) { el.textContent = to; return; }
+  var start = null;
+  function frame(ts) {
+    if (start === null) start = ts;
+    var t = Math.min(1, (ts - start) / duration);
+    var eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(eased * to);
+    if (t < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 }

@@ -24,8 +24,10 @@
   color: var(--gold);
   transition: color 200ms;
 }
-.lesson-topbar-top .back-link:hover {
-  color: var(--gold-pale);
+@media (hover: hover) and (pointer: fine) {
+  .lesson-topbar-top .back-link:hover {
+    color: var(--gold-pale);
+  }
 }
 
 .lesson-progress-bar {
@@ -147,8 +149,10 @@
   font-size: 0.95rem;
   transition: color 200ms;
 }
-.obj-row:hover {
-  color: var(--text-heading);
+@media (hover: hover) and (pointer: fine) {
+  .obj-row:hover {
+    color: var(--text-heading);
+  }
 }
 .obj-checkbox {
   width: 18px;
@@ -225,11 +229,16 @@
   border: 1px solid var(--hairline);
   border-radius: var(--radius-xs);
   cursor: pointer;
-  transition: color 200ms, border-color 200ms;
+  transition: color 200ms, border-color 200ms, transform 160ms var(--ease-out);
 }
-.lesson-code-copy:hover {
-  color: var(--gold);
-  border-color: var(--hairline-gold);
+.lesson-code-copy:active {
+  transform: scale(0.96);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lesson-code-copy:hover {
+    color: var(--gold);
+    border-color: var(--hairline-gold);
+  }
 }
 
 .lesson-mermaid {
@@ -299,8 +308,10 @@
   font-size: 0.95rem;
   transition: color 200ms;
 }
-.lesson-resources a:hover {
-  color: var(--gold-pale);
+@media (hover: hover) and (pointer: fine) {
+  .lesson-resources a:hover {
+    color: var(--gold-pale);
+  }
 }
 
 /* -- CTA -- */

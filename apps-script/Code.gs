@@ -1,6 +1,6 @@
 const SPREADSHEET_ID = '1SlEkPvIiGFKej2XnSgfwi-jdj1KKnZVYB7ND9wBmfgA';
 const USERS_TAB = 'Users';
-const LOG_HEADER_ROW = 12;
+const LOG_HEADER_ROW = 13;
 const MAX_QUESTIONS = 10;
 
 const LOG_HEADERS = [
@@ -33,6 +33,9 @@ function doGet(e) {
         longestStreak: s.longestStreak,
         lastActive: s.lastActive,
         completedQuizzes: s.completedQuizzes,
+        objectives: s.objectives,
+        badges: s.badges,
+        visitedNodes: visitedNodeIds(tab),
         lastVisitedNode: s.lastVisitedNode
       });
     }
@@ -73,7 +76,9 @@ function doPost(e) {
         longestStreak: parseInt(data.longestStreak, 10) || 0,
         lastActive: String(data.lastActive || ''),
         completedQuizzes: completed,
-        lastVisitedNode: nodeId
+        lastVisitedNode: nodeId,
+        objectives: data.objectives || null,
+        badges: data.badges || null
       });
     } else if (action === 'trackActivity') {
       const ev = String(data.event || '');
@@ -87,7 +92,9 @@ function doPost(e) {
         longestStreak: parseInt(data.longestStreak, 10) || 0,
         lastActive: String(data.lastActive || ''),
         completedQuizzes: data.completedQuizzes && typeof data.completedQuizzes === 'object' ? data.completedQuizzes : null,
-        lastVisitedNode: data.lastVisitedNode ? parseInt(data.lastVisitedNode, 10) : null
+        lastVisitedNode: data.lastVisitedNode ? parseInt(data.lastVisitedNode, 10) : null,
+        objectives: data.objectives || null,
+        badges: data.badges || null
       });
     }
   } catch (err) {
@@ -157,7 +164,7 @@ function getOrCreateUserTab(user) {
   let sheet = ss.getSheetByName(tabName);
   if (sheet) return sheet;
   sheet = ss.insertSheet(tabName);
-  sheet.getRange('A1:B10').setValues([
+  sheet.getRange('A1:B12').setValues([
     ['UID', user.uid],
     ['Name', user.name],
     ['Year', user.year],
@@ -167,16 +174,22 @@ function getOrCreateUserTab(user) {
     ['Longest Streak', 0],
     ['Last Active', ''],
     ['Completed', '{}'],
-    ['Last Visited Node', '']
+    ['Last Visited Node', ''],
+    ['Objectives', '{}'],
+    ['Badges', '[]']
   ]);
   sheet.getRange(LOG_HEADER_ROW, 1, 1, LOG_HEADERS.length).setValues([LOG_HEADERS]);
   return sheet;
 }
 
 function readStats(sheet) {
-  const values = sheet.getRange('B1:B10').getValues().map(row => row[0]);
+  const values = sheet.getRange('B1:B12').getValues().map(row => row[0]);
   let completed = {};
   try { completed = JSON.parse(String(values[8] || '{}')) || {}; } catch (err) { completed = {}; }
+  let objectives = {};
+  try { objectives = JSON.parse(String(values[10] || '{}')) || {}; } catch (err) { objectives = {}; }
+  let badges = [];
+  try { badges = JSON.parse(String(values[11] || '[]')) || []; } catch (err) { badges = []; }
   const lastVisited = String(values[9] || '').trim();
   return {
     xp: parseInt(values[4], 10) || 0,
@@ -184,6 +197,8 @@ function readStats(sheet) {
     longestStreak: parseInt(values[6], 10) || 0,
     lastActive: String(values[7] || ''),
     completedQuizzes: completed,
+    objectives: objectives,
+    badges: badges,
     lastVisitedNode: lastVisited ? parseInt(lastVisited, 10) : null
   };
 }
@@ -195,6 +210,8 @@ function writeStats(sheet, s) {
   if (s.lastActive !== undefined && s.lastActive !== null) sheet.getRange('B8').setValue(s.lastActive);
   if (s.completedQuizzes) sheet.getRange('B9').setValue(JSON.stringify(s.completedQuizzes));
   if (s.lastVisitedNode !== undefined && s.lastVisitedNode !== null) sheet.getRange('B10').setValue(s.lastVisitedNode);
+  if (s.objectives) sheet.getRange('B11').setValue(JSON.stringify(s.objectives));
+  if (s.badges) sheet.getRange('B12').setValue(JSON.stringify(s.badges));
 }
 
 function attemptCount(sheet, nodeId) {
@@ -206,6 +223,20 @@ function attemptCount(sheet, nodeId) {
     if (String(row[0]) === 'quiz_attempt' && parseInt(row[3], 10) === nodeId) count++;
   }
   return count;
+}
+
+function visitedNodeIds(sheet) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= LOG_HEADER_ROW) return [];
+  const data = sheet.getRange(LOG_HEADER_ROW, 1, lastRow - LOG_HEADER_ROW + 1, 4).getValues();
+  const seen = {};
+  for (const row of data) {
+    if (String(row[0]) === 'node_enter') {
+      const id = parseInt(row[3], 10);
+      if (!isNaN(id)) seen[id] = true;
+    }
+  }
+  return Object.keys(seen).map(Number);
 }
 
 function logEvent(sheet, event, info) {

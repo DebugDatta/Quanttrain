@@ -64,18 +64,21 @@ Login validation:
 GET {APPS_SCRIPT_URL}?action=validateLogin&uid={uid}&pass={pass}
   → { ok: false }                                   // any invalid credentials
   → { ok: true, uid, name, year, course, xp, streak, longestStreak,
-      lastActive, completedQuizzes, lastVisitedNode }
+      lastActive, completedQuizzes, objectives, badges,
+      visitedNodes: [nodeId...], lastVisitedNode }
 ```
 
-On success, `applyCloudProfile()` in `js/store.js` merges the profile into localStorage (cross-device restore). Guests skip all writes.
+On success, `applyCloudProfile()` in `js/store.js` merges the profile into localStorage (cross-device restore): it unions `visitedNodes` + quiz-completed node IDs into `progress.completedNodes` (map ticks/patina + counts), merges `objectives`, and unions `badges`. Guests skip all writes.
 
 Writes (POST text/plain, no-cors, fire-and-forget; timestamps are server-side):
 
 ```js
 { action: "trackActivity", uid, event: "login" | "node_enter" | "quiz_start", nodeId }
-{ action: "submitQuiz", uid, nodeId, responses: [{ question, selected, correct }], score, total, xp, streak, longestStreak, lastActive, completedQuizzes }
-{ action: "syncProgress", uid, xp, streak, longestStreak, lastActive, completedQuizzes, lastVisitedNode }
+{ action: "submitQuiz", uid, nodeId, responses: [{ question, selected, correct }], score, total, xp, streak, longestStreak, lastActive, completedQuizzes, objectives, badges }
+{ action: "syncProgress", uid, xp, streak, longestStreak, lastActive, completedQuizzes, objectives, badges, lastVisitedNode }
 ```
+
+Objective toggles and lesson XP awards call `syncProgress()`, so `objectives`/`badges`/`completedQuizzes` are persisted server-side.
 
 No emails are sent. See `GOOGLE_SHEETS.md` for sheet structure and deployment steps.
 

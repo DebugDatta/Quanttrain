@@ -1,5 +1,7 @@
-import { getProgress, setProgress, getXp, getLevel, getStreak, clearIdentity } from '../store.js';
-import { $, $$, show, navigate, getCurriculum, getNode } from '../utils.js';
+import { getProgress, setProgress, getXp, getLevel, getStreak, getIdentity, resetAll } from '../store.js';
+import { $, $$, show, navigate, getCurriculum, getNode, escapeHtml } from '../utils.js';
+
+let popoverBound = false;
 
 export function render() {
   show('map-view');
@@ -13,9 +15,31 @@ export function render() {
   const completedCount = progress.completedNodes.length;
   const pct = totalNodes ? Math.round((completedCount / totalNodes) * 100) : 0;
 
+  const identity = getIdentity();
+  const isTracked = !!(identity && identity.type !== 'guest');
+
+  let headerRight = '<div class="map-header-right">';
+  if (isTracked) {
+    headerRight += '<div class="account-wrap">'
+      + '<button class="account-btn" id="account-btn" aria-haspopup="true" aria-expanded="false">'
+      + '<span class="account-name">' + escapeHtml(identity.name || identity.uid || '') + '</span>'
+      + '</button>'
+      + '<div class="account-popover" id="account-popover" role="dialog" aria-label="Account details">'
+      + '<div class="popover-name">' + escapeHtml(identity.name || '') + '</div>'
+      + '<dl class="popover-grid">'
+      + '<dt>UID</dt><dd>' + escapeHtml(identity.uid || '') + '</dd>'
+      + '<dt>Name</dt><dd>' + escapeHtml(identity.name || '') + '</dd>'
+      + '<dt>Year</dt><dd>' + escapeHtml(identity.year || '') + '</dd>'
+      + '<dt>Course</dt><dd>' + escapeHtml(identity.course || '') + '</dd>'
+      + '</dl>'
+      + '</div>'
+      + '</div>';
+  }
+  headerRight += '<button class="map-logout-btn" id="map-logout">Logout</button></div>';
+
   let html = '<div class="map-header">'
     + '<div class="map-brand">QuantTrain</div>'
-    + '<button class="map-logout-btn" id="map-logout">Logout</button>'
+    + headerRight
     + '</div>'
     + '<div class="progress-overall">'
     + '<div class="progress-overall-label"><span>Overall Progress</span><span>' + completedCount + ' / ' + totalNodes + ' nodes</span></div>'
@@ -74,5 +98,57 @@ export function render() {
     navigate('#/' + this.dataset.view + '/' + this.dataset.node);
   });
 
-  $('#map-logout').onclick = function() { clearIdentity(); navigate('#/login'); };
+  $('#map-logout').onclick = function() { resetAll(); navigate('#/login'); };
+
+  if (isTracked) {
+    setupAccountPopover();
+    bindPopoverGlobals();
+  }
+}
+
+function setupAccountPopover() {
+  const btn = $('#account-btn');
+  const popover = $('#account-popover');
+  if (!btn || !popover) return;
+  btn.addEventListener('click', function() {
+    const isOpen = popover.classList.contains('open');
+    if (isOpen) closePopover(btn, popover);
+    else openPopover(btn, popover);
+  });
+}
+
+function bindPopoverGlobals() {
+  if (popoverBound) return;
+  popoverBound = true;
+
+  document.addEventListener('click', function(e) {
+    const popover = $('#account-popover');
+    if (!popover || !popover.classList.contains('open')) return;
+    const wrap = $('.account-wrap');
+    if (wrap && wrap.contains(e.target)) return;
+    closePopover($('#account-btn'), popover);
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    const popover = $('#account-popover');
+    if (!popover || !popover.classList.contains('open')) return;
+    closePopover($('#account-btn'), popover);
+    const btn = $('#account-btn');
+    if (btn) btn.focus();
+  });
+}
+
+function openPopover(btn, popover) {
+  popover.classList.add('open');
+  btn.classList.add('open');
+  btn.setAttribute('aria-expanded', 'true');
+}
+
+function closePopover(btn, popover) {
+  if (btn) {
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  if (popover) popover.classList.remove('open');
 }
