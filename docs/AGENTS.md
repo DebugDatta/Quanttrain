@@ -6,12 +6,12 @@
 - **Routing**: Hash-based SPA (`hashchange` event) — `#/login`, `#/map`, `#/lesson/{n}`, `#/quiz/{n}`
 - **State**: All user data in `localStorage` via `js/store.js`
 - **Content**: `data/curriculum.json` (auto-generated from `module.md` via `scripts/parse-md.js`)
-- **Deployment**: Static site on Netlify (no server, no backend)
+- **Deployment**: Static site on Netlify (frontend only); data backend = Google Apps Script web app + Google Sheets
 
 ## Critical Rules (DO NOT VIOLATE)
 
 - NEVER add a build step, bundler, npm dependency, or framework
-- NEVER add authentication or access control — content is fully open, no locked nodes
+- NEVER add access control — login is optional identity tracking only; content stays fully open, no locked nodes
 - NEVER add "locked" states to any node or world — all clickable at any time
 - NEVER use purple gradients, glassmorphism (`backdrop-filter: blur`), or bounce animations
 - NEVER use pure black (`#000`) or pure white (`#fff`)
@@ -31,16 +31,18 @@
 | `css/world-map.css` | Skill tree layout |
 | `css/lesson.css` | Lesson content styles |
 | `css/quiz.css` | Quiz styles |
+| `css/responsive.css` | Mobile/responsive breakpoints |
 | `js/app.js` | Router + app init |
 | `js/store.js` | localStorageschema — read before reading/writing state |
 | `js/utils.js` | DOM helpers, date formatting, scoring |
+| `js/sync.js` | Apps Script client: login validation (GET) + tracking/writes (POST) |
 | `js/views/login.js` | Login/guest gate view |
 | `js/views/worldMap.js` | World map renderer |
 | `js/views/lesson.js` | Lesson renderer |
 | `js/views/quiz.js` | Quiz renderer + submission |
-| `data/curriculum.json` | All 41 nodes parsed from module.md |
+| `data/curriculum.json` | All 42 nodes parsed from module.md |
 | `scripts/parse-md.js` | Parser script to generate curriculum.json |
-| `apps-script/Code.gs` | Google Apps Script for Sheets + email |
+| `apps-script/Code.gs` | Apps Script backend: login validation + per-user tracking in Sheets |
 
 ## Color Usage Rules
 
@@ -50,29 +52,37 @@
 - **Text hierarchy**: `--text-heading` > `--text-body` > `--text-muted` > `--text-faint`
 - **Surfaces**: `--bg-primary` (page), `--bg-panel` (cards/panels), `--bg-deep` (inset areas)
 
-## Quiz Data Submission
+## Identity, Tracking & Data Submission
 
-All quiz submissions go to a Google Apps Script Web App via `fetch()` with `mode: "no-cors"`. Schema:
+Login is **identity tracking only** — never access control. A tracked user is anyone whose UID + phone-number password match the `Users` tab of the sheet; everyone else (guests, unknown UIDs) can browse freely but their actions are **never written to the sheet**.
 
-```js
-{
-  action: "submitQuiz",
-  nodeId: 5,
-  name: "Alice" | "Guest",
-  email: "a@b.com" | "guest@anonymous",
-  timestamp: "2026-07-17T14:30:00.000Z",
-  responses: [{ question: 1, selected: "B", correct: true }, ...],
-  score: 7,
-  total: 10
-}
+Writes go to the Apps Script web app via `fetch()` with `mode: "no-cors"` — silent failure, never block the user. Reads use GET (Apps Script sends `Access-Control-Allow-Origin: *`, readable JSON).
+
+Login validation:
+
+```
+GET {APPS_SCRIPT_URL}?action=validateLogin&uid={uid}&pass={pass}
+  → { ok: false }                                   // any invalid credentials
+  → { ok: true, uid, name, year, course, xp, streak, longestStreak,
+      lastActive, completedQuizzes, lastVisitedNode }
 ```
 
-Failure must be silent — never block the user if the sheet is unreachable.
+On success, `applyCloudProfile()` in `js/store.js` merges the profile into localStorage (cross-device restore). Guests skip all writes.
+
+Writes (POST text/plain, no-cors, fire-and-forget; timestamps are server-side):
+
+```js
+{ action: "trackActivity", uid, event: "login" | "node_enter" | "quiz_start", nodeId }
+{ action: "submitQuiz", uid, nodeId, responses: [{ question, selected, correct }], score, total, xp, streak, longestStreak, lastActive, completedQuizzes }
+{ action: "syncProgress", uid, xp, streak, longestStreak, lastActive, completedQuizzes, lastVisitedNode }
+```
+
+No emails are sent. See `GOOGLE_SHEETS.md` for sheet structure and deployment steps.
 
 ## Navigation Rules
 
 - `#/login` → default route if no identity in store
 - `#/map` → main hub after login
-- `#/lesson/{n}` → lesson for node n (1-41)
-- `#/quiz/{n}` → quiz for node n (1-41)
+- `#/lesson/{n}` → lesson for node n (1-42)
+- `#/quiz/{n}` → quiz for node n (1-42)
 - Redirect unknown routes to `#/map`

@@ -2,7 +2,7 @@
 
 ## Source of Truth
 
-The full curriculum content lives in **`module.md`** (3,756 lines, 41 nodes across 12 Worlds + Orientation).
+The full curriculum content lives in **`module.md`** (42 nodes across 12 Worlds + Orientation).
 
 **Do not edit `CURRICULUM.md` for content changes.** All content lives in `module.md`. Run `node scripts/parse-md.js` after editing `module.md` to regenerate `data/curriculum.json`.
 
@@ -93,13 +93,14 @@ The full curriculum content lives in **`module.md`** (3,756 lines, 41 nodes acro
 |---|---|
 | 37 | Interactive Dashboards (Streamlit) |
 
-### WORLD 12 — Professional Quant Research (4 nodes)
+### WORLD 12 — Professional Quant Research (5 nodes)
 | Node | Title |
 |---|---|
 | 38 | Scientific Visualization |
 | 39 | Research Papers |
 | 40 | Research Communication |
-| 41 | Capstone I — Tier 1 Readiness |
+| 41 | LaTeX for Quantitative Writing |
+| 42 | Capstone I — Tier 1 Readiness |
 
 ## World Summary
 
@@ -117,7 +118,7 @@ The full curriculum content lives in **`module.md`** (3,756 lines, 41 nodes acro
 | 9 | Backtesting | 3 | Backtesting engine, bias/robustness, simulation |
 | 10 | Portfolio & Performance | 2 | Construction, evaluation metrics |
 | 11 | Dashboards & Tooling | 1 | Streamlit dashboards |
-| 12 | Professional Research | 4 | Visualization, papers, communication, capstone |
+| 12 | Professional Research | 5 | Visualization, papers, LaTeX, communication, capstone |
 
 ## Data Structure
 
@@ -145,7 +146,7 @@ Each node in `module.md` follows a consistent structure that `scripts/parse-md.j
 ## Validation
 
 After editing `module.md`, verify:
-- All 41 nodes are present (numbered 1-41)
+- All 42 nodes are present (numbered 1-42)
 - No duplicate node IDs
 - Each quiz has at least one correct answer marked with ✅
 - All resource URLs are valid

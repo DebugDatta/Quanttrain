@@ -31,6 +31,21 @@ function save(state) {
 export function getIdentity() { return load().identity; }
 export function setIdentity(id) { const s = load(); s.identity = id; save(s); }
 export function clearIdentity() { const s = load(); s.identity = null; save(s); }
+export function applyCloudProfile(profile) {
+  const s = load();
+  s.identity = { type: 'tracked', uid: profile.uid, name: profile.name, year: profile.year, course: profile.course };
+  if (typeof profile.xp === 'number' && profile.xp > s.xp.total) s.xp.total = profile.xp;
+  if (typeof profile.streak === 'number' && profile.streak > s.streak.current) s.streak.current = profile.streak;
+  if (typeof profile.longestStreak === 'number' && profile.longestStreak > s.streak.longest) s.streak.longest = profile.longestStreak;
+  if (profile.lastActive) s.streak.lastActive = profile.lastActive;
+  if (profile.completedQuizzes) {
+    for (const key of Object.keys(profile.completedQuizzes)) {
+      if (!s.progress.completedQuizzes[key]) s.progress.completedQuizzes[key] = profile.completedQuizzes[key];
+    }
+  }
+  if (typeof profile.lastVisitedNode === 'number' && s.progress.lastVisitedNode === null) s.progress.lastVisitedNode = profile.lastVisitedNode;
+  save(s);
+}
 export function getProgress() { return load().progress; }
 export function setProgress(p) { const s = load(); s.progress = p; checkStreak(s); save(s); }
 export function getXp() { return load().xp; }

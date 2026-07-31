@@ -1,5 +1,6 @@
 import { getProgress, setProgress, addXp, getAllData } from '../store.js';
-import { $, $$, show, navigate, getNode, getWorldForNode, escapeHtml } from '../utils.js';
+import { $, $$, show, navigate, getNode, getWorldForNode, getCurriculum, escapeHtml } from '../utils.js';
+import { track, syncProgress } from '../sync.js';
 
 let currentNodeId = null;
 
@@ -8,6 +9,7 @@ export function render(nodeId) {
   if (!node) { navigate('#/map'); return; }
   currentNodeId = nodeId;
   show('lesson-view');
+  track('node_enter', nodeId);
   const world = getWorldForNode(nodeId);
   const progress = getProgress();
   const hasXp = getAllData().xp.history.some(function(h) { return h.source === 'lesson' && h.nodeId === nodeId; });
@@ -16,7 +18,7 @@ export function render(nodeId) {
     + '<div class="lesson-topbar">'
     + '<div class="lesson-topbar-top">'
     + '<span class="back-link" id="lesson-back">< Back to Map</span>'
-    + '<span>Node ' + node.id + ' of 41 - ' + (hasXp ? 'XP: +0 (done)' : 'XP: +10 available') + '</span>'
+    + '<span>Node ' + node.id + ' of ' + totalNodes() + ' - ' + (hasXp ? 'XP: +0 (done)' : 'XP: +10 available') + '</span>'
     + '</div>'
     + '<div class="lesson-progress-bar"><div class="lesson-progress-fill" id="lesson-progress-fill" style="width:0%"></div></div>'
     + '</div>'
@@ -109,6 +111,7 @@ export function render(nodeId) {
       setProgress(p);
     }
     addXp(10, 'lesson', nodeId);
+    syncProgress();
   }
 
   $('#lesson-back').onclick = function() { navigate('#/map'); };
@@ -139,6 +142,14 @@ export function render(nodeId) {
     });
   });
 
+  if (window.hljs) {
+    try {
+      document.querySelectorAll('#lesson-content pre code').forEach(function(block) {
+        hljs.highlightElement(block);
+      });
+    } catch (e) { /* silent */ }
+  }
+
   if (window.mermaid) {
     try { mermaid.run({ nodes: document.querySelectorAll('.mermaid') }); } catch (e) { /* silent */ }
   }
@@ -147,6 +158,12 @@ export function render(nodeId) {
 function attrEsc(str) {
   if (!str) return '';
   return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function totalNodes() {
+  const data = getCurriculum();
+  if (!data) return 42;
+  return data.worlds.reduce(function(a, w) { return a + w.nodes.length; }, 0);
 }
 
 var TEXT_ENTITY_MAP = {

@@ -16,15 +16,19 @@ User opens site
     ▼                 ▼
   Guest           Tracked User
   ─────           ────────────
-  Click           Enter name +
-  "Guest          email, click
-  Access"         "Enter the Lab"
+  Click           Enter UID +
+  "Guest          phone-number
+  Access"         password, click
+                  "Enter the Lab"
     │                 │
     ▼                 ▼
-  store.js          store.js
-  { type:           { type: "tracked",
-    "guest" }         name: "Alice",
-                      email: "a@c.com" }
+  store.js          js/sync.js
+  { type:           GET ?action=validateLogin
+    "guest" }       ├─ {ok:false} → "Wrong credentials"
+                    └─ {ok:true} → applyCloudProfile()
+                        store.js
+                        { type: "tracked", uid, name,
+                          year, course }
     │                 │
     └────────┬────────┘
              ▼
@@ -53,16 +57,17 @@ User opens site
 │    Quantitative Research Learning Path        │
 │                                              │
 │  ┌──────────────────────────────────────┐    │
-│  │  Full Name      [______________]     │    │
-│  │  Email Address  [______________]     │    │
+│  │  UID (Username)    [______________]  │    │
+│  │  Password          [______________]  │    │
 │  │                                      │    │
 │  │  [  Enter the Lab  ──────▶  ]       │    │
 │  │  ───────── or ─────────              │    │
 │  │  [  Guest Access  ]                 │    │
 │  └──────────────────────────────────────┘    │
 │                                              │
-│  ℹ️  Name & email are for tracking your      │
-│     progress — not required to browse.      │
+│  ℹ️  Login with your UID & phone-number     │
+│     password to sync progress across        │
+│     devices — not required to browse.       │
 └──────────────────────────────────────────────┘
 ```
 
@@ -70,8 +75,8 @@ User opens site
 
 | Action | Trigger | What Happens | localStorage | Next Route |
 |---|---|---|---|---|
-| Enter the Lab | Click button | Validate email format (basic regex) | `{ type: "tracked", name, email }` | `#/map` |
-| Guest Access | Click button | No validation | `{ type: "guest" }` | `#/map` |
+| Enter the Lab | Click button | Async GET `validateLogin` → on `{ok:true}` apply cloud profile (XP/streak/completed restored) | `{ type: "tracked", uid, name, year, course }` | `#/map` |
+| Guest Access | Click button | No validation, no cloud sync | `{ type: "guest" }` | `#/map` |
 
 ### State: Returning Visit (identity exists in store)
 - Page auto-redirects to `#/map` on load
@@ -79,14 +84,16 @@ User opens site
 - To reset: click "Logout" in map settings → clears identity → redirects to `#/login`
 
 ### Validation Rules
-- Email must contain `@` and a domain (basic regex, not a full RFC check)
-- Name must not be empty if "Enter the Lab" is clicked
+- UID and password must both be non-empty
+- Any invalid credentials (wrong UID, wrong password, sheet unreachable) → inline error **"Wrong credentials"** — never says which one was wrong
 - Guest Access skips all validation
 
 ### Edge Cases
 - **Cleared localStorage**: User returns to login as if first visit
-- **Invalid email**: Show inline error "Please enter a valid email address"
+- **Wrong credentials**: Show inline error "Wrong credentials"
+- **Network down at login**: Same "Wrong credentials" error (silent fail)
 - **Logout**: Clears identity from store, redirects to login, but preserves XP/progress (user can re-identify and keep their data)
+- **Cross-device**: Logging in restores cloud XP/streak/completed quizzes via `applyCloudProfile()` (local wins where newer)
 
 ---
 
@@ -99,8 +106,8 @@ User opens site
 │  ⬛ QuantTrain    [XP: 1,240]  Lv4    🔥 7-day streak    [⏻]  │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  Overall Progress  [████████████░░░░░░░░░░]  12 / 41 nodes     │
-│                                     3 / 12 worlds               │
+│  Overall Progress  [████████████░░░░░░░░░░]  12 / 42 nodes     │
+│                                     3 / 13 worlds               │
 │                                                                  │
 │  Continue where you left off:  [Node 5 — Descriptive Stats]     │
 │                                                                  │
@@ -141,7 +148,7 @@ User opens site
 |---|---|---|
 | XP counter | `store.xp.total` | Shows current total + level badge |
 | Streak flame | `store.streak.current` | Shows days count + flame icon |
-| Overall progress | `store.progress.completedNodes.length / 41` | Gold fill bar |
+| Overall progress | `store.progress.completedNodes.length / 42` | Gold fill bar |
 | Continue button | `store.progress.lastVisitedNode` | Shows last visited node, clickable |
 | World rows | `curriculum.worlds[]` | Worlds ordered by ID |
 | World progress bar | `completedInWorld / totalInWorld` | Patina fill, percentage shown |
@@ -181,7 +188,7 @@ User opens site
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│  ← Back to Map                 Node 5 of 41    [XP: +10 avail]  │
+│  ← Back to Map                 Node 5 of 42    [XP: +10 avail]  │
 │  [████████████████░░░░░░░░░░░░░░░░░░░░░░░░░]  32% read          │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
@@ -397,39 +404,26 @@ START ──► Show Q1 + options
 - Three buttons:
   - **Review Answers**: Goes back through questions showing correct answers
   - **Back to Map**: `#/map`
-  - **Next Node**: `#/lesson/{n+1}` (if n < 41)
+  - **Next Node**: `#/lesson/{n+1}` (if n < 42)
 
 ### Google Sheets Submission (Async)
 
 ```javascript
 // Triggered automatically on score screen
 // Non-blocking — user can navigate away immediately
+// Guests and unknown UIDs are dropped server-side
 
-const payload = {
-  action: "submitQuiz",
-  nodeId: 5,
-  name: identity.name || "Guest",
-  email: identity.email || "guest@anonymous",
-  timestamp: new Date().toISOString(),
-  responses: [
-    { question: 1, selected: "B", correct: true },
-    { question: 2, selected: "A", correct: false },
-    { question: 3, selected: "C", correct: true },
-    // ...
-  ],
-  score: 7,
-  total: 10
-};
+import { pushQuiz, track } from "../sync.js";
 
-fetch(APPS_SCRIPT_URL, {
-  method: "POST",
-  mode: "no-cors",  // Required for Google Apps Script
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(payload)
-}).catch(err => {
-  // Silent failure — never block the user
-  console.warn("Quiz submission to sheet failed:", err.message);
-});
+track("quiz_start", node.id);        // fired when the quiz opens
+pushQuiz(
+  node.id,
+  responses.map(r => ({ question: r.question, selected: r.selected, correct: r.correct })),
+  correctCount,
+  total
+);
+// pushQuiz attaches uid, XP, streak, and completed-quizzes snapshot
+// POST text/plain, mode: "no-cors" — silent failure, never blocks the user
 ```
 
 ### What Happens in Google Sheets (Server-Side)
@@ -438,106 +432,73 @@ fetch(APPS_SCRIPT_URL, {
 POST received by Apps Script Web App
         │
         ▼
-  Parse JSON payload
+  Parse JSON payload { action, uid, ... }
+        │
+        ▼
+  Look up uid in "Users" tab
+  ├── Not found / no uid → drop silently (guests are never recorded)
+  └── Found
         │
         ▼
   ┌─────────────────────────────────────┐
-  │  STEP 1: Write to Node_{n} tab     │
+  │  STEP 1: Get/create student tab     │
   ├─────────────────────────────────────┤
   │                                     │
-  │  Check if tab "Node_05" exists      │
-  │  ├── No → Create it with headers:   │
-  │  │   Timestamp | Date | Time | Name │
-  │  │   | Email | Q1_Ans | Q1_Correct │
-  │  │   | Q2_Ans | Q2_Correct | ...   │
-  │  │   | Score | Total               │
-  │  │                                  │
-  │  ├── Yes → Use existing tab        │
+  │  Tab name = student's name          │
+  │  (auto-created with stats block     │
+  │   rows 1-10 + event log header      │
+  │   at row 12)                        │
   │                                     │
-  │  Append row:                        │
-  │  [2026-07-17T14:30:00,              │
-  │   2026-07-17, 14:30,                │
-  │   "Alice Sharma",                   │
-  │   "alice@college.edu",              │
-  │   "B", true,                        │
-  │   "A", false,                       │
-  │   ...,                              │
+  └─────────────────────────────────────┘
+        │
+        ▼
+  ┌─────────────────────────────────────┐
+  │  STEP 2: Append event row           │
+  ├─────────────────────────────────────┤
+  │                                     │
+  │  [quiz_attempt, 2026-07-17, 14:30,  │
+  │   05, 2,                            │
+  │   "B", "Yes", "A", "No", ...,       │
   │   7, 10]                            │
   │                                     │
-  └─────────────────────────────────────┘
-        │
-        ▼
-  ┌─────────────────────────────────────┐
-  │  STEP 2: Update Tracker tab        │
-  ├─────────────────────────────────────┤
-  │                                     │
-  │  Find row by email (case-insensitive)│
-  │                                     │
-  │  ├── Found → Update Node_05 column │
-  │  │   Set value to "7/10"           │
-  │  │                                 │
-  │  ├── Not found → Append new row:   │
-  │  │   ["Alice Sharma",              │
-  │  │    "alice@college.edu",         │
-  │  │    "7/10",                      │
-  │  │    ..., "—", ...]               │
-  │                                     │
-  │  Recalculate:                       │
-  │  - Quizzes Taken = count of         │
-  │    non-blank score columns          │
-  │  - Avg Score = average of all       │
-  │    score values                     │
+  │  Server-side timestamps             │
+  │  Attempt # = per-node attempt count │
   │                                     │
   └─────────────────────────────────────┘
         │
         ▼
   ┌─────────────────────────────────────┐
-  │  STEP 3: Send Email Notification   │
+  │  STEP 3: Update stats block         │
   ├─────────────────────────────────────┤
   │                                     │
-  │  To: advisor@college.edu           │
-  │  CC: (configured 2nd email)        │
-  │                                     │
-  │  Subject:                           │
-  │  "QuantTrain Quiz: Node 05 —       │
-  │   Alice Sharma scored 7/10"        │
-  │                                     │
-  │  Body:                              │
-  │  ┌─────────────────────────────┐   │
-  │  │ Quiz:    Node 05           │   │
-  │  │ Name:    Alice Sharma      │   │
-  │  │ Email:   alice@college.edu │   │
-  │  │ Date:    2026-07-17        │   │
-  │  │ Score:   7 / 10 (70%)      │   │
-  │  │                           │   │
-  │  │ Responses:                │   │
-  │  │ Q1: Answered B → Correct  │   │
-  │  │ Q2: Answered A → Wrong    │   │
-  │  │ ...                       │   │
-  │  └─────────────────────────────┘   │
+  │  XP, Streak, Longest Streak,        │
+  │  Last Active, Completed (JSON map   │
+  │  of node → {score, total}),         │
+  │  Last Visited Node                  │
   │                                     │
   └─────────────────────────────────────┘
+        │
+        ▼
+  (No email is sent)
 ```
 
-### Guest vs Tracked User Differences
+### Tracked vs Guest User Differences
 
 | Aspect | Tracked User | Guest User |
 |---|---|---|
-| Name submitted | Their actual name | "Guest" |
-| Email submitted | Their actual email | "guest@anonymous" |
-| Tracker tab | Row updates for this email | All guests aggregate under "Guest" row |
-| Email notification | Full notification sent | May be skipped or tagged as "Guest" |
+| Sheet writes | Full event log + stats on their own tab | None — dropped silently |
+| Cloud restore on login | XP/streak/completed pulled from sheet | Not applicable |
 | localStorage progress | Yes, saved normally | Yes, saved normally |
 
 ### Edge Cases
 
 | Scenario | Behavior |
 |---|---|
-| **Retake quiz** | Previous score overwritten in store. Sheet appends new row (duplicate). Tracker tab shows latest score. |
+| **Retake quiz** | Store keeps latest score; sheet appends a new `quiz_attempt` row (attempt # increments per node) |
 | **Network failure on submit** | Silent catch. User sees their score on screen. No retry logic (data loss acceptable for college use). |
 | **User navigates away mid-quiz** | Progress not saved. Must restart quiz from Q1. |
 | **All questions answered correctly** | Perfect score bonus +10 XP. Special score screen message "🎉 Perfect score!" |
-| **Guest only quiz** | No identifiable data in sheet. Useful for demos. |
+| **Guest only quiz** | Nothing reaches the sheet. Useful for demos. |
 
 ---
 
@@ -589,10 +550,11 @@ POST received by Apps Script Web App
 
 ## Identity is Not Security
 
-The name/email system is purely for **tracking and analytics** in Google Sheets. It is not authentication:
-- There is no password
-- There is no server-side validation
-- Anyone can claim any email
+The UID/password system is purely **identity tracking and analytics** in Google Sheets. It is not access control:
+- Passwords are phone numbers stored in plaintext in the sheet
+- Validation happens in the Apps Script web app, but the sheet is only as private as its Google sharing settings
+- Anyone with the roster could log in as any student
 - Guest users can access all content with no identity at all
+- The UI never distinguishes "wrong UID" from "wrong password" — always "Wrong credentials"
 
-This is intentional. The site is fully open. The gate just provides optional attribution for quiz submissions.
+This is intentional. The site is fully open. The gate just provides optional attribution and cross-device progress sync for quiz submissions.

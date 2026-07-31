@@ -38,7 +38,10 @@ function parseQuiz(raw) {
     const qm = l.match(/^(\d+)\.\s+\*\*(.+?)\*\*(?:\s*\((.+?)\))?$/);
     if (qm) {
       if (cur) out.push(cur);
-      cur = { question: qm[2].trim(), type: ((qm[3]||"").toLowerCase().includes("multi") ? "multi" : "single"), options: [] };
+      let qtext = qm[2].trim();
+      const multiMatch = qtext.match(/^\(([^)]*multi[^)]*)\)\s*/i) || (qm[3] || "").toLowerCase().includes("multi");
+      if (multiMatch) qtext = qtext.replace(/^\([^)]*multi[^)]*\)\s*/i, "");
+      cur = { question: qtext, type: (multiMatch ? "multi" : "single"), options: [] };
       continue;
     }
     const om = l.match(/^\s*-\s+([A-Z])\)\s+(.+?)(\s*✅\s*)?$/);
@@ -181,7 +184,7 @@ function validate(worlds) {
       for (const q of n.quiz) { if (!q.options.some(o => o.correct)) errors.push(`Node ${n.id}: Q "${q.question.slice(0,50)}..." has no ✅`); }
     }
   }
-  if (total !== 41) errors.push(`Expected 41 nodes, got ${total}`);
+  if (total !== 42) errors.push(`Expected 42 nodes, got ${total}`);
   return errors;
 }
 

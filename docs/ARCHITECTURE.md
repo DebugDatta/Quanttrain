@@ -6,36 +6,36 @@
 C:\Users\PRAMIT\Downloads\QuantTrain\
 │
 ├── index.html                 # SPA shell — loads all CSS + JS
-├── netlify.toml               # Netlify redirect rules
-├── AGENTS.md                  # AI agent instructions (read this first)
-├── ARCHITECTURE.md            # This file — technical architecture
-├── CURRICULUM.md              # Original curriculum content (module.md)
-├── DESIGN.md                  # Design system & visual language
-├── GOOGLE_SHEETS.md           # Sheets integration guide
-│
-├── module.md                  # Source of truth for all content (3756 lines, 41 nodes)
+├── module.md                  # Source of truth for all content (42 nodes)
+├── netlify.toml               # Netlify config
+├── README.md                  # Project overview
+├── .gitignore
 │
 ├── scripts/
-│   └── parse-md.js            # Node.js script: reads module.md → writes data/curriculum.json
+│   ├── parse-md.js            # Node.js script: reads module.md → writes data/curriculum.json
+│   └── sync-html.js           # Node.js script: syncs curriculum.json into index.html
 │
 ├── data/
-│   └── curriculum.json        # Auto-generated — all 41 nodes in structured JSON
+│   ├── curriculum.json        # Auto-generated — all 42 nodes in structured JSON
+│   └── roster.csv             # 21-student roster (UID, password, name, year, course) — paste into the Users tab
 │
 ├── css/
 │   ├── tokens.css             # Design tokens (colors, typography, spacing, radii)
 │   ├── style.css              # Base reset, typography, layout, utilities
 │   ├── login.css              # Login/guest gate styles
-│   ├── world-map.css          # Skill tree layout for 12 worlds
+│   ├── world-map.css          # Skill tree layout for 13 worlds
 │   ├── lesson.css             # Lesson content, reading progress bar
-│   └── quiz.css               # Quiz questions, feedback states
+│   ├── quiz.css               # Quiz questions, feedback states
+│   └── responsive.css         # Mobile/responsive breakpoints
 │
 ├── js/
 │   ├── app.js                 # Hash router + application initialization
 │   ├── store.js               # localStorage wrapper (identity, progress, XP, streaks, badges)
+│   ├── sync.js                # Apps Script client: login validation (GET) + no-cors writes
 │   ├── utils.js               # DOM helpers, date formatting, scoring, event utilities
 │   │
 │   └── views/
-│       ├── login.js           # Login/guest gate view
+│       ├── login.js           # Login/guest gate view (UID + password)
 │       ├── worldMap.js        # World map with skill tree
 │       ├── lesson.js          # Lesson content renderer
 │       └── quiz.js            # Quiz renderer with submission
@@ -43,8 +43,17 @@ C:\Users\PRAMIT\Downloads\QuantTrain\
 ├── assets/
 │   └── icons/                 # SVG icons (logo mark, checkmark, flame, star, etc.)
 │
+├── docs/                      # All documentation
+│   ├── AGENTS.md              # AI agent instructions (read this first)
+│   ├── ARCHITECTURE.md        # This file — technical architecture
+│   ├── APP_FLOW.md            # Application flow & user journeys
+│   ├── CURRICULUM.md          # Curriculum content guide
+│   ├── DESIGN.md              # Design system & visual language
+│   ├── DEVELOPMENT.md         # Developer guide
+│   └── GOOGLE_SHEETS.md       # Sheets integration guide
+│
 └── apps-script/
-    └── Code.gs                # Google Apps Script — copy into Google Sheet
+    └── Code.gs                # Apps Script backend — copy into Google Sheet (see GOOGLE_SHEETS.md)
 ```
 
 ## Routing
@@ -54,9 +63,9 @@ Hash-based SPA using the `hashchange` event on `window`.
 | Hash | View | File | Description |
 |---|---|---|---|
 | `#/login` | Login / Guest Gate | `js/views/login.js` | Default route if no identity in store |
-| `#/map` | World Map | `js/views/worldMap.js` | Main hub — skill tree with all 12 worlds |
-| `#/lesson/{n}` | Lesson | `js/views/lesson.js` | Node content page (n = 1-41) |
-| `#/quiz/{n}` | Quiz | `js/views/quiz.js` | Interactive quiz (n = 1-41) |
+| `#/map` | World Map | `js/views/worldMap.js` | Main hub — skill tree with all 13 worlds |
+| `#/lesson/{n}` | Lesson | `js/views/lesson.js` | Node content page (n = 1-42) |
+| `#/quiz/{n}` | Quiz | `js/views/quiz.js` | Interactive quiz (n = 1-42) |
 
 **Router logic** (`js/app.js`):
 1. Listen for `hashchange` and on initial `DOMContentLoaded`
@@ -73,7 +82,7 @@ Hash-based SPA using the `hashchange` event on `window`.
 module.md  (source of truth)
     │
     ▼  (run: node scripts/parse-md.js)
-data/curriculum.json  (all 41 nodes structured)
+data/curriculum.json  (all 42 nodes structured)
     │
     ▼  (loaded via <script> tag or fetch in app.js)
 JavaScript Objects: worlds → nodes → sections → quiz questions
@@ -84,6 +93,14 @@ JavaScript Objects: worlds → nodes → sections → quiz questions
     │
     ▼
 store.js  (localStorage interface)
+    │
+    ▼
+js/sync.js  (Apps Script client)
+    ├── GET  validateLogin → applyCloudProfile() merges cloud progress into store
+    └── POST trackActivity / submitQuiz / syncProgress (no-cors, silent)
+    │
+    ▼
+Google Apps Script web app (Code.gs) → Google Sheet (Users tab + per-student tabs)
 ```
 
 ## Store Schema (`js/store.js`)
@@ -94,8 +111,10 @@ All state is in `localStorage` under the key `"quanttrain"`. The store module pr
 // Identity
 identity: {
   type: "tracked" | "guest",
-  name: "Alice Sharma" | null,    // only if tracked
-  email: "alice@college.edu" | null  // only if tracked
+  uid: "2605032" | null,        // only if tracked
+  name: "Alice Sharma" | null,  // only if tracked
+  year: "SY" | null,            // only if tracked
+  course: "BSc" | null          // only if tracked
 }
 
 // Progress
@@ -256,26 +275,31 @@ darkMode: true
 | `single` | Radio buttons | Select one correct answer |
 | `multi` | Checkboxes | Select all that apply |
 
-## Google Sheets Submission
+## Google Sheets Sync (js/sync.js → Code.gs)
 
-Quiz results POST to a Google Apps Script Web App:
+Identity is **tracking only, never access control**. Reads use GET (CORS `*`), writes use POST `mode: "no-cors"` fire-and-forget (silent failure).
+
+Login validation:
+
+```
+GET {APPS_SCRIPT_URL}?action=validateLogin&uid={uid}&pass={pass}
+  → { ok: false }                                   // any invalid credentials
+  → { ok: true, uid, name, year, course, xp, streak,
+      longestStreak, lastActive, completedQuizzes, lastVisitedNode }
+```
+
+Writes (POST text/plain, no-cors; guests/unknown UIDs dropped server-side; server timestamps):
 
 ```
 POST {APPS_SCRIPT_URL}
-Content-Type: application/json
 Body: {
-  action: "submitQuiz",
-  nodeId: 5,
-  name: string,
-  email: string,
-  timestamp: string (ISO 8601),
-  responses: [{ question: number, selected: string, correct: boolean }],
-  score: number,
-  total: number
+  action: "trackActivity" | "submitQuiz" | "syncProgress",
+  uid: string,
+  ...action-specific fields (event/nodeId/responses/score/total/xp/streak/completedQuizzes)
 }
 ```
 
-See `GOOGLE_SHEETS.md` for setup instructions.
+On `{ok:true}`, `store.applyCloudProfile()` merges XP (max), streak (max), and missing completed quizzes into localStorage — cross-device restore. See `GOOGLE_SHEETS.md` for setup and sheet structure.
 
 ## External Libraries (CDN)
 

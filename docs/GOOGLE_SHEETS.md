@@ -2,127 +2,101 @@
 
 ## Purpose
 
-Quiz submissions are sent to a Google Sheet for tracking analyst performance. The system stores:
+The site is fully static on Netlify. All persistent tracking lives in a Google Sheet, accessed through an Apps Script web app deployed on **datadebug0@gmail.com**. Login (UID + phone-number password) validates against the `Users` tab; every tracked action is appended to that student's own tab with server-side timestamps. Guests and unknown UIDs are silently ignored. **No emails are sent.**
 
-1. **Per-node raw submissions** (each node gets its own tab with time-stamped rows)
-2. **Master tracker** (one row per analyst, columns per node showing scores)
-3. **Email notifications** (configurable, sent on each quiz submission)
+## Current Configuration (hardcoded)
+
+| Item | Value |
+|---|---|
+| Spreadsheet ID | `1SlEkPvIiGFKej2XnSgfwi-jdj1KKnZVYB7ND9wBmfgA` |
+| Web app URL | `https://script.google.com/macros/s/AKfycbz1D7CU-CAplXvSzkD7Osc476nc0-wLGJQE7_eA0DCeRCeVGr2dgKJC3a3FYQC64lfZ/exec` |
+| Owner account | datadebug0@gmail.com (keep the sheet private to it) |
+
+`SPREADSHEET_ID` lives in `apps-script/Code.gs`; `APPS_SCRIPT_URL` lives in `js/sync.js`.
 
 ## Sheet Structure
 
-### Tab: `Tracker`
+### Tab: `Users`
 
-Master roll-up — one row per analyst, one column per node.
+Auto-created by the script if missing. One row per student:
 
-| Name | Email | Node_01 | Node_02 | Node_03 | ... | Quizzes Taken | Avg Score |
-|---|---|---|---|---|---|---|---|
-| Alice Sharma | alice@college.edu | 9/10 | 7/10 | — | — | 2 | 80% |
-| Bob Patel | bob@college.edu | 8/10 | — | 6/10 | — | 2 | 70% |
-| Demo User | demo@demo.com | — | 5/10 | — | — | 1 | 50% |
+| UID | Password | Name | Year | Course |
+|---|---|---|---|---|
+| 2605032 | 8521414230 | Aditya Ishaan Singh | FY | BSc IT |
+| ... | ... | ... | ... | ... |
 
-- `—` means the analyst hasn't attempted that node's quiz
-- `Quizzes Taken` = count of non-empty score columns
-- `Avg Score` = average of all scores (ignoring `—`)
+UID = username, phone number = password (plaintext — this is identity tracking, not security). Paste the roster CSV under the header row.
 
-### Tab: `Node_01`, `Node_02`, ..., `Node_41`
+### Tab: per student (tab name = their name)
 
-Raw submission log for each node. Auto-created by the Apps Script when the first submission arrives.
+Stats block (rows 1–10):
 
-| Timestamp | Date | Time | Name | Email | Q1_Answer | Q1_Correct | Q2_Answer | Q2_Correct | ... | Score | Total |
+| A | B |
+|---|---|
+| UID | 2605032 |
+| Name | Aditya Ishaan Singh |
+| Year | FY |
+| Course | BSc IT |
+| XP | 245 |
+| Streak | 3 |
+| Longest Streak | 5 |
+| Last Active | 2026-07-31 |
+| Completed | `{"5":{"score":8,"total":10},...}` |
+| Last Visited Node | 7 |
+
+Event log (headers at row 12):
+
+| Event | Date | Time | Node | Attempt | Q1_Ans | Q1_Correct | ... | Q10_Ans | Q10_Correct | Score | Total |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 
-## Apps Script Setup
+Events: `login`, `node_enter`, `quiz_start`, `quiz_attempt` (per-question answers, correct flags, score, and per-node attempt number). Dates/times are server-side (`Session.getScriptTimeZone()`).
 
-### Step 1: Create the Google Sheet
+## Deploying the Apps Script
 
-1. Go to [sheets.new](https://sheets.new)
-2. Rename the default sheet to `QuantTrain Responses`
-3. Note the spreadsheet ID from the URL: `https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/edit`
+1. Sheet + script live under datadebug0@gmail.com (script project is bound to the spreadsheet)
+2. **Extensions → Apps Script** → replace all code with `apps-script/Code.gs`
+3. **Deploy → New deployment → Web app**: Execute as **Me**, Who has access **Anyone**
+4. The URL above is already hardcoded in `js/sync.js` — only update it if you redeploy to a new URL
+5. After changing `Code.gs`: **Deploy → Manage deployments → Edit → New version** — the URL stays the same
 
-### Step 2: Add the Script
+## Roster
 
-1. In the sheet, go to **Extensions → Apps Script**
-2. Delete any placeholder code
-3. Paste the contents of `apps-script/Code.gs`
-4. Configure the constants at the top of the file:
-
-```js
-const CONFIG = {
-  SPREADSHEET_ID: 'YOUR_SPREADSHEET_ID_HERE',
-  NOTIFICATION_EMAILS: ['you@example.com', 'advisor@college.edu'],
-  TRACKER_TAB_NAME: 'Tracker'
-};
-```
-
-### Step 3: Deploy as Web App
-
-1. Click **Deploy → New deployment**
-2. Choose type: **Web app**
-3. Execute as: **Me** (uses your Google account permissions)
-4. Who has access: **Anyone** (needed for anonymous POSTs from the site)
-5. Click **Deploy**
-6. Copy the **Web app URL** — it looks like:
-   `https://script.google.com/macros/s/abcdef123456/exec`
-
-### Step 4: Configure the Website
-
-1. Open `js/views/quiz.js`
-2. Find the `APPS_SCRIPT_URL` constant at the top
-3. Replace with your deployed URL:
-
-```js
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/abcdef123456/exec';
-```
+21 students, 5 columns: `UID,Password,Name,Year,Course`. The ready-to-paste CSV (header included) is at `data/roster.csv` — copy all 22 lines into cell A1 of the `Users` tab.
 
 ## Testing
 
-1. Open the website in a browser
-2. Complete any quiz
-3. Check the Google Sheet — a new tab for that node should appear with the submission
-4. Check the Tracker tab — a row for that user should update
-5. Check email — notification should arrive at configured addresses
+1. **Wrong credentials** (expect `{"ok":false}`):
+   `https://script.google.com/macros/s/AKfycbz1D7CU-CAplXvSzkD7Osc476nc0-wLGJQE7_eA0DCeRCeVGr2dgKJC3a3FYQC64lfZ/exec?action=validateLogin&uid=000000&pass=0`
+2. **Valid credentials** (expect `{"ok":true,...}` + a tab named after the student):
+   `...?action=validateLogin&uid=2605032&pass=8521414230`
+3. Complete a lesson + quiz in the browser → event rows and XP appear in that student's tab
+4. Clear `localStorage` → log in again → progress restored (cross-device sync)
 
 ## How It Works (Flow)
 
 ```
-User submits quiz
-        │
-        ▼
-js/views/quiz.js
-  └─ fetch(POST → APPS_SCRIPT_URL)
-        │
-        ▼
-Google Apps Script (Code.gs)
-  ├─ Parses JSON: { nodeId, name, email, timestamp, responses, score, total }
-  ├─ Tracks email quota (50/day for free Gmail)
-  ├─ Opens the Google Sheet by ID
-  ├─ Gets or creates tab "Node_{nodeId}"
-  ├─ Appends raw row [timestamp, date, time, name, email, Q&A pairs..., score, total]
-  ├─ Gets or creates tab "Tracker"
-  ├─ Finds user row by email:
-  │   ├─ Found → update the Node_{nodeId} column cell
-  │   └─ Not found → append new row
-  ├─ Recalculates Quizzes Taken and Avg Score for that user
-  └─ Sends email to NOTIFICATION_EMAILS:
-       Subject: "QuantTrain Quiz: Node {n} — {name} scored {score}/{total}"
-       Body: Summary of responses
+Browser (Netlify)
+  ├─ GET  ?action=validateLogin  (CORS *, readable JSON) → profile merged into localStorage
+  ├─ POST trackActivity (no-cors, silent) → login / node_enter / quiz_start rows
+  ├─ POST submitQuiz    (no-cors, silent) → quiz_attempt row + stats block update
+  └─ POST syncProgress  (no-cors, silent) → XP/streak/completed snapshot
+
+Apps Script (Code.gs)
+  ├─ doGet  → look up Users tab → { ok: false } | full profile
+  ├─ doPost → ignore guests / unknown UIDs
+  └─ writes server-timestamped event rows + stats block
 ```
 
-## Limitations (Free Tier)
+## Why GET for Reads, POST for Writes
 
-| Resource | Limit | Notes |
-|---|---|---|
-| Email/day | 100 (Gmail) / 1500 (Google Workspace) | Per script execution |
-| Sheet writes | ~20 MB/day | Far more than needed for a college society |
-| Execution time | 6 minutes per trigger | More than enough |
-| Concurrent users | No hard limit | Requests queue if overwhelmed |
+Apps Script web apps reject browser preflight on readable JSON POSTs (CORS). GET responses carry `Access-Control-Allow-Origin: *`, so the browser can read login results. Writes use `mode: "no-cors"` fire-and-forget — they always "succeed" client-side and are never read back.
 
 ## Troubleshooting
 
 | Symptom | Likely Cause | Fix |
 |---|---|---|
-| No data in sheet | Wrong Apps Script URL in quiz.js | Check the deployed URL |
-| Tracker tab not updating | Email mismatch (case, extra spaces) | The script trims and lowercases emails |
-| Email not sending | Daily quota exceeded or wrong config | Check NOTIFICATION_EMAILS in Code.gs |
-| "Script function not found" | Deployment expired | Re-deploy as new version |
-| CORS error in console | Expected — `no-cors` mode is used | Data still reaches the sheet |
+| Login always "Wrong credentials" | Deployment still on old code version (no `doGet`) | Deploy → Manage deployments → New version |
+| Valid login, but no writes | UID not in `Users` tab, or guest session | Paste roster into `Users`; log in with a roster UID |
+| Writes go to the wrong sheet | `SPREADSHEET_ID` stale in Code.gs | Update constant, redeploy new version |
+| 403 on login GET | Web app access not "Anyone" | Deploy → edit access → Anyone |
+| CORS warning on POST | Expected — `no-cors` mode | Data still reaches the sheet |

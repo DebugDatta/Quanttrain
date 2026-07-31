@@ -1,7 +1,7 @@
-import { getProgress, setProgress, getIdentity, addXp } from '../store.js';
+import { getProgress, setProgress, addXp } from '../store.js';
 import { $, $$, show, navigate, getNode, getWorldForNode, getNextNode, escapeHtml } from '../utils.js';
+import { pushQuiz, track } from '../sync.js';
 
-var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4bVa41qIp34T0uRzgXh-sVsvfaZ9ZkoH4Q4zoUL0cDtbYR3gAPCx53ejMBu6JzZMM9w/exec';
 var LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 var currentNodeId = null, currentQuestion = 0, responses = [], answered = false;
 
@@ -10,6 +10,7 @@ export function render(nodeId) {
   if (!node || !node.quiz || !node.quiz.length) { navigate('#/map'); return; }
   currentNodeId = nodeId; currentQuestion = 0; responses = []; answered = false;
   show('quiz-view');
+  track('quiz_start', nodeId);
   renderQuestion(node, getWorldForNode(nodeId));
 }
 
@@ -151,7 +152,9 @@ function showScore(node) {
   p.lastVisitedNode = node.id; p.lastVisitedView = 'quiz';
   setProgress(p);
 
-  submitToSheet(node, responses, correctCount, total);
+  pushQuiz(node.id, responses.map(function(r) {
+    return { question: r.question, selected: r.selected, correct: r.correct };
+  }), correctCount, total);
 
   var nextNode = getNextNode(node.id);
 
@@ -181,27 +184,4 @@ function showScore(node) {
   if (nextNode) {
     $('#quiz-next-node').onclick = function() { navigate('#/lesson/' + nextNode.id); };
   }
-}
-
-function submitToSheet(node, responses, score, total) {
-  try {
-    var id = getIdentity();
-    var payload = {
-      action: 'submitQuiz',
-      nodeId: node.id,
-      name: id ? (id.name || 'Guest') : 'Guest',
-      email: id ? (id.email || 'guest@anonymous') : 'guest@anonymous',
-      timestamp: new Date().toISOString(),
-      responses: responses.map(function(r) {
-        return { question: r.question, selected: r.selected, correct: r.correct };
-      }),
-      score: score,
-      total: total
-    };
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify(payload)
-    }).then(function() {}).catch(function() {});
-  } catch(e) {}
 }

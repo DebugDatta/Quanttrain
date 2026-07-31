@@ -156,22 +156,22 @@ The common entry ticket for all of them is a portfolio of well-documented, hones
 
 ### 📝 Quiz
 1. **What best distinguishes a quant researcher's job from a trader's?**
-   - A) Researchers use computers, traders don't
-   - B) Researchers validate ideas before capital is risked; traders execute and manage live positions ✅
-   - C) Traders don't use data
-   - D) There's no meaningful difference
+   - A) Researchers validate the idea; traders execute it in markets ✅
+   - B) Researchers use computers, while traders never touch them
+   - C) Traders work with data, but researchers do not at all
+   - D) There is no meaningful difference between the two roles
 
 2. **In the workflow Idea to Data to Hypothesis to Backtest to Report, what typically happens after Report?**
-   - A) Nothing, the project ends
-   - B) It loops back to refine the Idea ✅
-   - C) It skips straight to live trading
-   - D) It goes back to Data collection only
+   - A) The project simply ends, nothing follows at all
+   - B) It loops back to refine and improve the Idea ✅
+   - C) It skips directly to live trading instead
+   - D) It goes back to collect more data only
 
 3. **Why is separating signal from noise central to quant research?**
-   - A) Because markets have no noise
-   - B) Because a strategy can look good over a short period purely by chance, and research exists to check if the edge is real ✅
-   - C) Because noise only appears in crypto markets
-   - D) It isn't important, more data always fixes it
+   - A) Markets contain no noise at all, only genuine and real patterns
+   - B) Noise only appears in crypto markets, never in equity market data
+   - C) It is not important, because more data always fixes everything
+   - D) A strategy can look good by chance, so research checks if the edge is real ✅
 
 4. **(Multi-select) Which of these are typical quant research team roles?**
    - A) Quant Researcher ✅
@@ -180,16 +180,40 @@ The common entry ticket for all of them is a portfolio of well-documented, hones
    - D) Head Chef
 
 5. **A strategy shows 55% winning trades over 3 months. What should a quant do first?**
-   - A) Invest all available capital immediately
-   - B) Check if the result is statistically significant using hypothesis testing ✅
-   - C) Tell all their friends about it
-   - D) Double the sample size until the result looks better
+   - A) Invest all available capital in the strategy immediately
+   - B) Inform all of their friends about the great new result
+   - C) Check statistical significance with hypothesis testing ✅
+   - D) Double the sample size until the result looks better each time
 
 6. **Which statement best describes the relationship between research and trading?**
-   - A) Research is only needed at large banks, not small firms
-   - B) Research builds and validates strategies; trading executes them in live markets ✅
+   - A) Research builds and validates strategies; trading executes them live ✅
+   - B) Research is only needed at large banks, not small firms
    - C) Research and trading are the same job with different titles
    - D) Trading happens first, then research explains the results
+
+7. **A model predicts correctly on 120 of 200 trades. What is the hit rate?**
+   - A) 50%: exactly half of the predictions were right
+   - B) 60%: 120 out of 200 trades were winners ✅
+   - C) 65%: slightly more than half were right
+   - D) 40%: fewer than half of the trades won
+
+8. **Investor B finds the stock bounced 40 of the last 50 times after a 5% drop. What is the empirical bounce rate?**
+   - A) 5%: the drop size itself sets the baseline
+   - B) 50%: half of the observations were bounces
+   - C) 80%: 40 of 50 past events bounced back ✅
+   - D) 90%: almost every single event bounced
+
+9. **A quant says their signal was right 100% of the time because every predicted rally happened. Why might this be worthless?**
+   - A) They predicted rallies every day, never predicting any decline ✅
+   - B) The market went up often, so the predictions were lucky
+   - C) Because the signal never mentioned specific prices
+   - D) Because rallies happen less than half of the trading days
+
+10. **Which test best distinguishes a real edge from plain luck?**
+    - A) Repeating the backtest until the result looks good
+    - B) Comparing performance on the best month only
+    - C) Adding more indicators until the Sharpe improves
+    - D) Testing the strategy out of sample on unseen data ✅
 
 ---
 ---
@@ -356,22 +380,22 @@ You will expand this universe concept into a full research database in World 4, 
 
 ### 📝 Quiz
 1. **A company selling new shares in an IPO is an example of a transaction in the:**
-   - A) Secondary market
-   - B) Primary market ✅
-   - C) OTC derivatives market
-   - D) Commodities market
+   - A) The primary market, where securities are first issued ✅
+   - B) The secondary market, where old shares trade
+   - C) The OTC derivatives market, negotiated between banks
+   - D) The commodities futures market, traded on exchanges
 
 2. **NIFTY 50 is weighted by:**
-   - A) Equal weight across all 50 stocks
-   - B) Free-float market capitalization ✅
-   - C) Stock price only
-   - D) Trading volume only
+   - A) Equal weight across all 50 constituent stocks
+   - B) Free-float market capitalization of constituents ✅
+   - C) Stock price only, ignoring the share counts
+   - D) Trading volume only over the past calendar year
 
 3. **Which statement about short selling is correct?**
    - A) Maximum loss is capped at 100% of capital, same as going long
-   - B) Maximum gain is unlimited, maximum loss is capped
-   - C) Maximum gain is capped at 100%, maximum loss is theoretically unlimited ✅
-   - D) Short selling has no risk if done on an exchange
+   - B) Maximum gain is unlimited, maximum loss is capped at 100%
+   - C) Maximum gain is capped at 100%, loss is theoretically unlimited ✅
+   - D) Short selling has no risk if it is done on an exchange
 
 4. **(Multi-select) Which of these are OTC-type characteristics rather than exchange characteristics?**
    - A) Bilateral negotiation ✅
@@ -380,10 +404,40 @@ You will expand this universe concept into a full research database in World 4, 
    - D) Lower price transparency ✅
 
 5. **Why do quant researchers mostly use secondary market data?**
-   - A) Primary market data doesn't exist
-   - B) Secondary market trading is continuous and liquid, giving enough history for statistical analysis ✅
-   - C) Secondary markets are less regulated
-   - D) It's a legal requirement
+   - A) Primary market data does not exist in any form whatsoever
+   - B) Secondary markets are less regulated by the authorities
+   - C) The law requires using secondary market data by default
+   - D) Secondary market trading is continuous and liquid with deep history ✅
+
+6. **An arbitrageur sees NIFTY futures priced above the fair value implied by stocks. What do they do?**
+   - A) Buy the stocks and sell the overpriced futures ✅
+   - B) Buy the futures and sell the underpriced stocks
+   - C) Do nothing because markets are always fair
+   - D) Sell both the stocks and the futures at once
+
+7. **A trader shorts a stock at Rs 100 and covers at Rs 60. What is the profit per share?**
+   - A) Rs 60, because the price dropped by sixty rupees
+   - B) Rs 40, the gain is the price fall from 100 to 60 ✅
+   - C) Rs 160, which is the sum of the two price levels
+   - D) Rs 100, the price level at which it was shorted
+
+8. **A market maker quotes a bid of Rs 99.90 and an ask of Rs 100.00. What is the spread?**
+   - A) Rs 0.00, since there is no spread at all
+   - B) Rs 99.95, the midpoint of the two quotes
+   - C) Rs 0.10, which is the ask price minus the bid ✅
+   - D) Rs 100.00, which is the ask side of the quote
+
+9. **A trader buys a stock for Rs 50, it doubles, then falls 50%. What happened?**
+   - A) The trader is back at the starting Rs 50 price ✅
+   - B) The trader lost half of the initial capital
+   - C) The trader doubled the original capital
+   - D) The trader broke even at Rs 75 exactly
+
+10. **A strategy returns 15% while the NIFTY 50 returns 18%. What does this mean?**
+    - A) The strategy beat the passive benchmark clearly
+    - B) The strategy matched the market return exactly instead
+    - C) The strategy outperformed on a risk-adjusted basis
+    - D) The strategy destroyed value relative to passive investing ✅
 
 ---
 
@@ -556,34 +610,64 @@ The students who succeed in this course are not the ones who already know advanc
 
 ### 📝 Quiz
 1. **$\sum_{i=1}^{3} i^2$ equals:**
-   - A) 6
-   - B) 14 ✅
-   - C) 9
-   - D) 36
+   - A) 14, since 1 + 4 + 9 sums to fourteen exactly ✅
+   - B) 6, the sum of the numbers one, two, three
+   - C) 9, the square of the largest term three
+   - D) 36, the product of all three terms times two
 
 2. **Why is the natural log preferred for financial returns over simple exponents?**
-   - A) It's required by regulation
-   - B) Log returns are additive across time, simplifying multi-period math ✅
-   - C) Logs are always positive
-   - D) There's no real advantage
+   - A) It is required by financial regulation in every market
+   - B) Log returns add across time, simplifying multi-period math ✅
+   - C) Logs are always positive for any price level observed
+   - D) There is no real advantage to using them at all
 
 3. **A quantity growing by a constant percentage each period follows a:**
-   - A) Arithmetic progression
-   - B) Geometric progression ✅
-   - C) Linear function only
-   - D) Random walk always
+   - A) Arithmetic progression with a fixed difference
+   - B) Linear function only, with a constant slope
+   - C) Geometric progression with a fixed common ratio ✅
+   - D) Random walk behavior, always without any exception
 
-4. **If you invest Rs 50,000 at 8% annual return and want to know the value after 5 years, which formula gives the answer?**
-   - A) $A = P(1 + rt)$ with simple interest
-   - B) $A = P(1 + r/m)^{mt}$ with compound interest ✅
-   - C) $A = P + r \times n$
-   - D) $A = P / (1 + r)^n$
+4. **If you invest Rs 50,000 at 8% annual return compounded for 5 years, the value is about:**
+   - A) Rs 70,000, using simple interest on the capital
+   - B) Rs 54,000, adding eight percent of the principal only
+   - C) Rs 73,466, compounding eight percent over the five years ✅
+   - D) Rs 60,000, the principal plus forty percent exactly
 
 5. **The expression $\prod_{i=1}^{3}(1 + r_i)$ where $r = [0.05, -0.02, 0.03]$ equals:**
-   - A) 0.06
-   - B) 1.0609 ✅
-   - C) 0.98
-   - D) 1.00
+   - A) 0.06, the simple sum of all of the three rates
+   - B) 0.98, subtracting the negative rate from one
+   - C) 1.00, rounding the product to two decimals
+   - D) 1.0609, the product of 1.05, 0.98, and 1.03 ✅
+
+6. **Which quantity is the number of elements in the intersection of two sets?**
+   - A) The count of items present in both sets at once ✅
+   - B) The count of items in either set combined
+   - C) The count of items in the larger set only
+   - D) The count of items missing from both sets
+
+7. **You need Rs 150,000 from Rs 100,000 in 5 years. What annual return is required?**
+   - A) About 5.0%, since 50% spread over ten half-years
+   - B) About 8.4%, solving 1.5^(1/5) minus one here ✅
+   - C) About 10.0%, dividing fifty percent by five years
+   - D) About 12.2%, compounding at a higher assumed rate
+
+8. **Why does a 10% gain followed by a 10% loss produce a net loss?**
+   - A) Because gains and losses are computed on different bases
+   - B) Because the loss is always larger than the gain
+   - C) Because 1.10 times 0.90 equals 0.99, giving a net loss ✅
+   - D) Because markets always drift downward over time
+
+9. **Which of these is NOT a geometric progression?**
+   - A) 100, 110, 121, 133.1, multiplying by 1.10 each time
+   - B) 3, 6, 9, 12, adding three each time instead ✅
+   - C) 5, 25, 125, 625, multiplying by five each time
+   - D) 10, 20, 40, 80, multiplying by two each time
+
+10. **What does $|A|$ denote for a set?**
+    - A) The union of the set with itself as usual
+    - B) The intersection of the set with another
+    - C) The complement of the set in the universe
+    - D) The number of elements contained in the set itself ✅
 
 ---
 ---
@@ -844,34 +928,64 @@ Organizing imports this way is a Python convention that makes your code easier t
 
 ### 📝 Quiz
 1. **What will `annualize_return(0.01, 12)` approximately return?**
-   - A) 0.12
-   - B) ~0.1268 ✅
-   - C) 1.0
-   - D) 0.01
+   - A) 0.1200, simply multiplying the rate by twelve
+   - B) 0.0100, taking the monthly rate as the annual one
+   - C) 0.1268, compounding one percent across twelve periods ✅
+   - D) 1.0000, assuming the rate doubles each month
 
 2. **Why wrap risky operations in try/except in research code?**
-   - A) It makes code run faster
-   - B) It prevents a single bad data point from crashing an entire backtest ✅
-   - C) It's required Python syntax
-   - D) It has no real benefit
+   - A) It makes the code run much faster in general
+   - B) It stops one bad data point from crashing the backtest ✅
+   - C) It is required Python syntax in every function
+   - D) It has no real benefit in practice at all ever
 
 3. **In OOP, a `Position` class with a `pnl()` method is an example of:**
-   - A) A function with no purpose
-   - B) Encapsulating data (ticker, shares, price) with behavior (pnl calculation) together ✅
-   - C) A control flow structure
-   - D) A Git command
+   - A) A function that serves no purpose whatsoever
+   - B) A control flow structure, like a loop or branch
+   - C) A Git command that is used for version control
+   - D) Encapsulating data with behavior, like pnl calculation ✅
 
 4. **What does the list comprehension `[r for r in returns if r > 0]` do?**
-   - A) Returns all values greater than zero ✅
-   - B) Doubles each value
-   - C) Removes all values
-   - D) Returns the first positive value only
+   - A) All of the values that are greater than zero ✅
+   - B) Every value doubled in the original list
+   - C) No values, removing everything from the list
+   - D) Only the first positive value in the list
 
 5. **Why should every quant research project use Git from day one?**
-   - A) It makes the code run faster
-   - B) It allows you to track changes and revert broken experiments ✅
-   - C) It's only needed for team projects
-   - D) Git automatically fixes bugs
+   - A) It makes the code run faster in production use
+   - B) It is only needed for large team projects today
+   - C) It allows tracking changes and reverting experiments ✅
+   - D) Git automatically fixes bugs found in the code
+
+6. **What is the output of `type(3.0)` in Python?**
+   - A) int, since it is written without a decimal point
+   - B) str, because numbers are stored as text here
+   - C) bool, since the value is a fixed constant
+   - D) float, because the value contains a decimal point ✅
+
+7. **With prices = [100, 110, 105], what is the max drawdown from the peak?**
+   - A) 0.0%, since the peak is never exceeded
+   - B) 10.0%, the first day gain shown in the list
+   - C) 4.55%, the fall from 110 to 105 versus peak ✅
+   - D) 5.0%, the simple drop from 110 down to 105
+
+8. **A backtest returns strange results. What is the best debugging step first?**
+   - A) Rewrite the entire script from scratch again
+   - B) Change all parameters to random new values
+   - C) Delete the data and start the download over
+   - D) Print intermediate values to isolate the failure ✅
+
+9. **Running `"I hold " + shares` when shares = 3.5 raises what kind of error?**
+   - A) A value error, because strings cannot be added
+   - B) A type error, since str and float cannot combine ✅
+   - C) A syntax error, because plus is not allowed
+   - D) An index error, since it is out of range
+
+10. **Which habit makes research code reproducible for others?**
+    - A) Committing every change with Git from the start ✅
+    - B) Running the analysis once and saving screenshots
+    - C) Keeping all experiments in one unnamed file
+    - D) Sharing only the final charts and numbers
 
 ### Debugging Tips for Quant Code
 When your backtest produces strange results, resist the urge to rewrite everything. Isolate the problem by printing intermediate values at each step of your logic. Check that your data types are what you expect, especially after arithmetic operations. Verify edge cases: what happens when an asset has zero volume? What happens when a date range has no data? A systematic debugging workflow saves hours of frustration. These practices separate productive quants from those who chase random changes without understanding their code.
@@ -1070,34 +1184,64 @@ This single script computes the same set of numbers that a quant researcher migh
 
 ### 📝 Quiz
 1. **Why is the median more robust to outliers than the mean?**
-   - A) Median ignores half the data
-   - B) Median depends only on the middle value's rank, not on the magnitude of extreme values ✅
-   - C) Mean is always larger than median
-   - D) They're equally robust
+   - A) Median depends on rank order, not on extreme values ✅
+   - B) Median ignores half of the data by design here
+   - C) Mean is always larger than the median value
+   - D) They are equally robust in all cases always
 
 2. **In finance, "volatility" most commonly refers to:**
-   - A) Mean absolute deviation
-   - B) Standard deviation of returns ✅
-   - C) The range of prices only
-   - D) The IQR only
+   - A) Mean absolute deviation of the return series
+   - B) The range of prices over the entire period
+   - C) The interquartile range of the returns only
+   - D) The standard deviation of the returns series ✅
 
 3. **A Z-score of 3.5 for a daily return suggests:**
-   - A) A completely normal trading day
-   - B) A potential outlier worth investigating ✅
-   - C) The stock has zero volatility
-   - D) Nothing meaningful
+   - A) A potential outlier that is worth investigating ✅
+   - B) A completely normal and typical trading day
+   - C) That the stock has zero volatility today
+   - D) Nothing meaningful about the data at all
 
 4. **You have 60% in Asset A (return 8%) and 40% in Asset B (return 3%). The portfolio return is:**
-   - A) 5.5%
-   - B) 6.0% ✅
-   - C) 11.0%
-   - D) 4.5%
+   - A) 5.5%, the simple average of the two returns
+   - B) 6.0%, the weighted mean of the two assets here ✅
+   - C) 11.0%, the sum of both returns combined
+   - D) 4.5%, the difference between the two returns
 
 5. **What does the interquartile range (IQR) measure?**
-   - A) The spread of the entire dataset
-   - B) The spread of the middle 50% of data ✅
-   - C) The average deviation from the mean
-   - D) The number of outliers in the data
+   - A) The spread of the entire dataset from min to max
+   - B) The average deviation from the mean value
+   - C) The spread of the middle fifty percent of data ✅
+   - D) The number of outliers found in the data
+
+6. **Why does sample variance divide by n-1 instead of n?**
+   - A) The sample mean is further from the data in practice
+   - B) Dividing by n gives the same value always here
+   - C) There is no particular reason for making this choice
+   - D) The sample mean is closer to the data than the true mean ✅
+
+7. **Stock A has mean 10% and std 20%; Bond B has mean 3% and std 5%. Which is true about their CVs?**
+   - A) The stock has a lower coefficient of variation
+   - B) Both assets have the same coefficient of variation
+   - C) The bond has the lower coefficient of variation ✅
+   - D) Coefficients of variation cannot be compared
+
+8. **A year of daily returns has 95% VaR of -2.5%. What does this mean?**
+   - A) All of the days in the year lose at least 2.5%
+   - B) About five percent of days lose at least 2.5% ✅
+   - C) Exactly 95 days out of every 100 gain 2.5%
+   - D) The worst single day of the year lost exactly 2.5%
+
+9. **Returns are 1%, -2%, 1.5%, 3%, and -10%. Which statement about median vs mean is true?**
+   - A) The median is higher; the outlier drags down the mean ✅
+   - B) The mean is higher, since gains outweigh the losses
+   - C) The median and mean are equal in this sample here
+   - D) Both the mean and the median are negative in this sample
+
+10. **Why is the standard deviation of prices a poor risk measure?**
+    - A) Prices always move randomly without any pattern
+    - B) Price volatility equals return volatility always
+    - C) Price levels are all the same across different stocks
+    - D) It depends on price level, not on the actual return risk ✅
 
 ---
 ---
@@ -1309,22 +1453,64 @@ This single report uses every concept from this node: simple returns for daily c
 
 ### 📝 Quiz
 1. **Why are log returns preferred for multi-period statistical analysis?**
-   - A) They're always positive
-   - B) They are additive across time periods ✅
-   - C) They're easier to compute by hand
-   - D) Simple returns are illegal to use
+   - A) They are additive across the time periods ✅
+   - B) They are always positive numbers in practice
+   - C) They are easier to compute by hand always
+   - D) Simple returns are illegal to use in research
 
 2. **Annualized volatility from daily std dev is computed by:**
-   - A) Multiplying by 365
-   - B) Multiplying by sqrt(252) ✅
-   - C) Multiplying by 12
-   - D) Dividing by 252
+   - A) Multiplying the daily value by 365 exactly
+   - B) Multiplying the daily value by sqrt(252) ✅
+   - C) Multiplying the daily value by twelve months
+   - D) Dividing the daily value by the number 252
 
 3. **CAGR answers which question?**
-   - A) What was the return on the single best day?
-   - B) What constant annual growth rate would produce the same total return over the period? ✅
-   - C) What is today's return?
-   - D) What is the standard deviation of returns?
+   - A) What was the return on the single best trading day
+   - B) What is the standard deviation of the returns
+   - C) What constant annual rate produces the same total return ✅
+   - D) What is today's return on the current position now
+
+4. **A strategy returned 15% over 6 months. What is the correct annualized return?**
+   - A) 30.0%, by simply multiplying the return by two
+   - B) 15.0%, returns never annualize over short periods
+   - C) 7.5%, by dividing the return in half exactly
+   - D) 32.25%, compounding the return with the exponent of two ✅
+
+5. **Rs 100 grows at 12% for 20 years; another Rs 100 grows at 10%. Roughly how much more does the first end with?**
+   - A) About Rs 200, the gap between the two rates
+   - B) About Rs 100, exactly the initial capital
+   - C) About Rs 292, the compounding gap after 20 years ✅
+   - D) About Rs 869, the entire final value at 12%
+
+6. **Why does variance add linearly across time while std dev does not?**
+   - A) Because returns are always perfectly correlated with each other
+   - B) Because variance of a sum is the sum of variances under independence ✅
+   - C) Because standard deviation adds linearly instead of this
+   - D) Because prices, not returns, are independent in markets
+
+7. **A strategy returns 8% nominal with 6% inflation. Why is the real return about 1.9% and not 2%?**
+   - A) Real return is (1.08)/(1.06) minus one, not a simple difference ✅
+   - B) Because inflation always overstates the nominal return
+   - C) Because real returns are computed on post-tax income instead
+   - D) Because the risk-free rate is always subtracted first
+
+8. **Why is a fund's "average annual return of 15%" often lower than it sounds?**
+   - A) It ignores the risk-free rate of return fully
+   - B) It always overstates the real volatility
+   - C) It is harder to compute than the CAGR value
+   - D) It ignores volatility drag, so the CAGR is lower ✅
+
+9. **A stock rises 10% one day and falls 10% the next. What is the net result?**
+   - A) Break even, since the returns cancel exactly
+   - B) A 1% loss, since 1.10 times 0.90 is 0.99 ✅
+   - C) A 1% gain, since the order does not matter
+   - D) A 10% loss, from the second day's decline
+
+10. **What is the pitfall of computing volatility from prices instead of returns?**
+    - A) Price series are stationary, so the measure is stable
+    - B) Price volatility is the same as return volatility always
+    - C) Prices have no trends and are not persistent over time
+    - D) Price series are non-stationary, so the measure is level-dependent ✅
 
 ---
 ---
@@ -1595,22 +1781,64 @@ Not every operation needs NumPy. For simple calculations on small datasets, pure
 
 ### 📝 Quiz
 1. **What is "broadcasting" in NumPy?**
-   - A) Sending data over a network
-   - B) Applying operations between arrays of different but compatible shapes without explicit loops ✅
-   - C) A plotting function
-   - D) A type of random number generator
+   - A) Applying operations between arrays of compatible shapes ✅
+   - B) Sending data over a network to another machine
+   - C) A plotting function for creating charts quickly
+   - D) A type of random number generator inside NumPy
 
 2. **Why is vectorized code preferred over Python for-loops for large datasets?**
-   - A) It uses less memory always
-   - B) It's dramatically faster due to optimized, compiled operations ✅
-   - C) For-loops don't work in NumPy at all
-   - D) There's no real difference
+   - A) It uses less memory in every possible case
+   - B) It is faster due to optimized compiled operations ✅
+   - C) For-loops do not work inside NumPy at all
+   - D) There is no real difference between the two at all
 
 3. **`np.random.seed(42)` is used to:**
-   - A) Make random numbers larger
-   - B) Ensure reproducibility of "random" results across runs ✅
-   - C) Speed up computation
-   - D) Remove randomness entirely
+   - A) Make the random numbers much larger in scale
+   - B) Speed up the computation of the arrays
+   - C) Ensure reproducible random results across runs ✅
+   - D) Remove randomness from the results entirely
+
+4. **With prices = [100, 102, 98, 105, 110], what does prices[prices > 100] return?**
+   - A) An array containing 100, 98, and the value 110
+   - B) A boolean array marking every day above 100
+   - C) The count of the elements that exceed 100
+   - D) An array containing the values 102, 105, and 110 ✅
+
+5. **What does (large_prices[1:] - large_prices[:-1]) / large_prices[:-1] compute?**
+   - A) The cumulative product of the price series
+   - B) The element-wise returns of the price series here ✅
+   - C) The maximum drawdown of the price series
+   - D) The log returns of the price series data
+
+6. **What does np.random.normal(0.0005, 0.012, 252) return?**
+   - A) 252 values drawn from a normal distribution ✅
+   - B) 0.0005 returns with standard deviation 252
+   - C) 252 random integers between zero and 0.012
+   - D) A single normal value scaled by the number 252
+
+7. **Why set a seed before running a simulation?**
+   - A) To make the results faster to compute always
+   - B) So experiments reproduce exactly the same results ✅
+   - C) To make the random numbers even more random
+   - D) To increase the scale of the randomness used
+
+8. **The expression weights @ cov @ weights computes:**
+   - A) The covariance matrix of the assets held
+   - B) The correlation matrix of the assets held
+   - C) The portfolio variance, a quadratic form ✅
+   - D) The mean return of the whole portfolio
+
+9. **arr = np.array([[1],[2],[3]]) and arr + np.array([10, 20, 30]) produces:**
+   - A) A three by three matrix via broadcasting ✅
+   - B) An error, since the shapes do not match
+   - C) A one dimensional array of three values
+   - D) A scalar sum of all of the elements
+
+10. **When is pure Python faster than NumPy?**
+    - A) When the arrays contain millions of rows
+    - B) When heavy linear algebra operations are required
+    - C) When doing large matrix multiplication tasks
+    - D) On tiny datasets, where array overhead dominates ✅
 
 ---
 ---
@@ -1947,22 +2175,64 @@ This workflow touches on almost every Pandas concept in this node: DataFrame cre
 
 ### 📝 Quiz
 1. **What's the risk of using `fillna(0)` on a price column?**
-   - A) No risk, it's always safe
-   - B) A zero price will make every return calculation involving that row wildly (and wrongly) extreme ✅
-   - C) It only affects volume, not price
-   - D) Pandas doesn't allow this operation
+   - A) A zero price makes return calculations wildly wrong ✅
+   - B) It is always completely safe to use it here
+   - C) It only affects the volume column, not price
+   - D) Pandas does not allow this operation at all
 
 2. **Pivoting long-format stock data to wide-format is most useful for:**
-   - A) Reducing file size only
-   - B) Enabling cross-sectional comparisons across stocks on the same date ✅
-   - C) It has no practical use
+   - A) Reducing the file size of the data only here
+   - B) Cross-sectional stock comparison on the same date ✅
+   - C) It has no practical use in any analysis at all
    - D) Only for visualization, never for analysis
 
 3. **`df.groupby("ticker")["close"].mean()` computes:**
-   - A) The mean close price across the whole dataset, ignoring ticker
-   - B) The mean close price separately for each ticker ✅
-   - C) The maximum close price per ticker
-   - D) A sorted list of tickers
+   - A) The mean close price across the whole dataset
+   - B) The maximum close price for every ticker
+   - C) The mean close price separately for every ticker ✅
+   - D) A sorted list of the tickers present here
+
+4. **What does `df.loc["2024-01-01":"2024-01-05"]` do?**
+   - A) Selects rows by integer positions zero to five
+   - B) Returns the first five columns of the frame
+   - C) Filters rows where close is above the start date
+   - D) Selects rows by label, inclusive of the end date ✅
+
+5. **After `df["returns"] = df["close"].pct_change()`, what is the first row's value?**
+   - A) NaN, since there is no prior close to compare ✅
+   - B) Zero, because the first change is always zero
+   - C) The first close price itself, exactly as is
+   - D) One, since the first return is one hundred percent
+
+6. **`df.merge(prices_df, sector_df, on="date")` combines the frames by:**
+   - A) Stacking the rows vertically in sequence
+   - B) Matching the common date key, like a SQL join ✅
+   - C) Multiplying the two tables element-wise
+   - D) Replacing all null values in both of them
+
+7. **Why call `shift(1)` before computing returns?**
+   - A) To access tomorrow's price for today's return
+   - B) To remove the first row of the data frame first
+   - C) To align each price with the previous day's price value ✅
+   - D) To sort the index in ascending order of dates
+
+8. **Your merged data has duplicate dates. What should you check first?**
+   - A) Drop duplicates and accept the result silently
+   - B) Average the duplicates without any check
+   - C) Sort by date and move on quickly today
+   - D) Investigate why the duplicates appeared first ✅
+
+9. **`df[df["volume"] > 15000]` produces:**
+   - A) A boolean mask of all the volume rows
+   - B) The total volume above the threshold
+   - C) Rows where the volume condition is true ✅
+   - D) The mean volume of the entire data frame
+
+10. **A column has 30% missing values. What is the first question to ask?**
+    - A) Why the values are missing before deciding ✅
+    - B) Which fill value gives the best backtest
+    - C) Whether forward fill is the fastest to run
+    - D) Whether the column can simply be deleted
 
 ---
 ---
@@ -2164,22 +2434,64 @@ The practical implication: when you compute the average return of a strategy ove
 
 ### 📝 Quiz
 1. **Bayes' Theorem is most useful for:**
-   - A) Computing simple averages
-   - B) Updating the probability of a hypothesis given new evidence ✅
-   - C) Sorting data
-   - D) Calculating standard deviation
+   - A) Updating a hypothesis probability given new evidence ✅
+   - B) Computing simple averages of large samples
+   - C) Sorting data into ordered categories quickly
+   - D) Calculating the standard deviation of data
 
 2. **The Central Limit Theorem states that:**
-   - A) All individual data must be normally distributed
-   - B) Sums/averages of many independent random variables tend toward a normal distribution regardless of the original distribution ✅
-   - C) Larger samples always have higher variance
-   - D) Probability is always 50/50
+   - A) All individual data must be normally distributed first always
+   - B) Sums of many independent variables approach a normal distribution ✅
+   - C) Larger samples always have higher variance than small ones
+   - D) Probability of any event is always exactly fifty-fifty forever
 
-3. **If a rare-event signal fires with 80% accuracy but the event itself is rare (5% base rate), the true probability given a signal fire is usually:**
-   - A) Still 80%
-   - B) Lower than 80%, often much lower ✅
-   - C) Exactly 5%
-   - D) 100%
+3. **A rare-event signal is 80% accurate, but the event has a 5% base rate. The true probability given a signal is:**
+   - A) Still 80%, regardless of the base rate value
+   - B) Exactly 5%, equal to the base rate itself
+   - C) Lower than 80%, often much lower in practice ✅
+   - D) 100%, since the signal has already fired
+
+4. **A fair coin is flipped 3 times. What is the probability of exactly 2 heads?**
+   - A) 3/8, since the outcomes are HHT, HTH, and THH ✅
+   - B) 1/2, since heads appear in half of the flips
+   - C) 2/3, since there are three coin flips in total
+   - D) 1/8, the probability of all heads in a row
+
+5. **For independent events A and B, P(A and B) equals:**
+   - A) P(A) plus P(B), using the sum rule of two
+   - B) P(A) times P(B), the product rule for independence ✅
+   - C) P(A) minus P(B), the difference rule of the two
+   - D) P(A) divided by P(B), the ratio of the two
+
+6. **A signal fires on 2% of days and the market is up on 55% of days. P(up given signal)?**
+   - A) 100%, the signal always predicts correctly
+   - B) 55%, equal to the market's unconditional up rate
+   - C) 2%, equal to the signal's firing rate itself
+   - D) Unknown: the full conditional structure is needed ✅
+
+7. **Two fair dice are rolled. What is the probability that the sum is 7?**
+   - A) 1/36, since there are 36 possible outcomes
+   - B) 1/12, counting three favorable outcomes only
+   - C) 6/36, since six of the outcomes sum to seven ✅
+   - D) 7/36, since seven is the average of the sums
+
+8. **A stock doubles or halves daily with equal probability. After 2 days, what happens to its expected value?**
+   - A) It grows to about 1.56 times the original value ✅
+   - B) Stays the same, since gains and losses cancel
+   - C) Falls to half, since the losses come twice
+   - D) Doubles, since the gains always come last here
+
+9. **Two models backtest the same strategy. Model A uses 5 years of data, Model B uses 6 months. Which is more trustworthy?**
+   - A) Model B, since recent data matters more than old
+   - B) Neither, since both use the same strategy
+   - C) Model A, since longer samples reduce sampling error ✅
+   - D) Model A, only if its backtest looks prettier now
+
+10. **You test 200 strategies and find 12 with p < 0.05. What should you conclude?**
+    - A) All 12 are real edges worth trading immediately
+    - B) The 12 are all false positives without exception
+    - C) You should report only the best three results
+    - D) Expect about 10 false positives by chance at p = 0.05 ✅
 
 ---
 ---
@@ -2426,22 +2738,64 @@ The behavior of the t-distribution highlights why the choice of distribution is 
 
 ### 📝 Quiz
 1. **Which distribution best models the number of winning trades out of a fixed number of independent trades?**
-   - A) Poisson
-   - B) Binomial ✅
-   - C) Exponential
-   - D) Normal
+   - A) Binomial, counting successes in fixed trials ✅
+   - B) Poisson, for rare events in a large space
+   - C) Exponential, for waiting times between events
+   - D) Normal, for symmetric continuous outcomes
 
 2. **"Fat tails" in financial returns mean:**
-   - A) Extreme events are less frequent than a normal distribution predicts
-   - B) Extreme events are more frequent than a normal distribution predicts ✅
-   - C) Returns are perfectly normal
-   - D) There's no relevant meaning
+   - A) Extreme events are less frequent than normal predicts
+   - B) Extreme events happen more often than the normal predicts ✅
+   - C) Returns are perfectly normal in every single way here
+   - D) There is no relevant meaning at all in this context
 
 3. **Negative skewness in a strategy's return distribution typically implies:**
-   - A) Frequent large gains, rare small losses
-   - B) Frequent small gains, occasional large losses ✅
-   - C) Perfectly symmetric returns
-   - D) Zero risk
+   - A) Frequent large gains and rare small losses
+   - B) Perfectly symmetric returns around the mean value
+   - C) Frequent small gains and occasional large losses ✅
+   - D) Zero risk, with no variability at all here
+
+4. **A return distribution has high kurtosis. Risk models built on normality will:**
+   - A) Overstate the true tail risk of the portfolio
+   - B) Be exactly right in all market conditions
+   - C) Perfectly capture the behavior of the tails
+   - D) Understate tail risk, giving false safety ✅
+
+5. **X follows a Binomial(n=20, p=0.55) distribution. What is the expected number of wins?**
+   - A) 20, since the number of trials is twenty
+   - B) 11, since the expectation equals n times p ✅
+   - C) 0.55, since that is the success probability
+   - D) 10, since the distribution is symmetric here
+
+6. **Daily returns follow N(0.0005, 0.015). Roughly where do 95% of returns fall?**
+   - A) Plus or minus one standard deviation of the mean
+   - B) Plus or minus three standard deviations of the mean
+   - C) About two standard deviations, roughly plus or minus 3% ✅
+   - D) Exactly zero, since the mean is positive here
+
+7. **Why is Student's t with low degrees of freedom useful for modeling returns?**
+   - A) It forces all returns to be perfectly normal
+   - B) It captures fatter tails than the normal distribution ✅
+   - C) It removes all of the skewness from the data
+   - D) It guarantees positive returns on every day
+
+8. **A casino game pays 2x on 40% of plays and 0 on 60%. Expected return per rupee wagered?**
+   - A) -0.2 rupees: 0.4 times 2 plus 0.6 times 0 minus 1 ✅
+   - B) +0.4 rupees: the average of the two payoffs
+   - C) 0 rupees: the game is perfectly fair in total
+   - D) +1 rupee: the player always wins eventually
+
+9. **VaR computed under normality underestimates risk. Which approach helps fix this?**
+   - A) Ignoring tail events entirely in the risk model
+   - B) Assuming returns are always normally distributed
+   - C) Using fat-tailed distributions or empirical percentiles ✅
+   - D) Using a shorter sample to lower the estimate
+
+10. **A strategy's daily P&L is right-skewed. What is the best interpretation?**
+    - A) It produces frequent large losses and rare big gains
+    - B) Its median return exceeds its mean return always
+    - C) The distribution is perfectly symmetric about zero
+    - D) It produces frequent small losses and rare big gains ✅
 
 ---
 ---
@@ -2646,22 +3000,64 @@ In quant research, the problem is worse because strategies are not independent: 
 
 ### 📝 Quiz
 1. **A p-value of 0.03 means:**
-   - A) There's a 3% chance H0 is true
-   - B) If H0 were true, there'd be a 3% chance of observing data this extreme or more ✅
-   - C) The strategy has a 97% chance of working
-   - D) Nothing meaningful
+   - A) If H0 were true, data this extreme has a 3% chance ✅
+   - B) There is a 3% chance that the null is true
+   - C) The strategy then has a 97% chance of working
+   - D) Nothing meaningful can be said about the data
 
 2. **A Type I error is:**
-   - A) Failing to detect a real effect
-   - B) Incorrectly rejecting a true null hypothesis (false positive) ✅
-   - C) A computational bug
-   - D) Always worse than a Type II error
+   - A) Failing to detect a real effect in the data
+   - B) A computational bug in the research code
+   - C) Rejecting a true null hypothesis, a false positive ✅
+   - D) Always worse than a Type II error in practice
 
 3. **Running 100 backtests and only reporting the 5 that show "significant" results at p<0.05 is problematic because:**
-   - A) It's not — significance is significance
-   - B) By chance alone, ~5 out of 100 tests would show significance even with no real effect (data snooping) ✅
-   - C) It requires too much computing power
-   - D) p-values don't apply to backtests
+   - A) It is fine, since significance is significance
+   - B) By chance alone, about 5 in 100 tests appear significant ✅
+   - C) It requires too much computing power to do properly today
+   - D) P-values do not apply to backtests in any way at all
+
+4. **A 95% CI for mean daily return is [-0.1%, +0.4%]. What does the interval mean?**
+   - A) The sample mean is outside the interval for sure
+   - B) 95% of the daily returns fall inside this range
+   - C) The procedure captures the true mean in 95% of samples ✅
+   - D) The true mean is 0% with 95% confidence exactly
+
+5. **Strategy A has p=0.04 with n=63; Strategy B has p=0.04 with n=504. Which is stronger evidence?**
+   - A) Strategy A, since the p-value is identical for both
+   - B) Both are equally strong, no matter what happens
+   - C) Strategy A, because shorter samples are sharper
+   - D) Strategy B, since more data gives more evidence at same p ✅
+
+6. **A t-test treats the sample mean of returns as approximately normal. Why is this justified?**
+   - A) The Central Limit Theorem justifies it for large samples ✅
+   - B) The t-test never makes any assumptions at all
+   - C) Because returns are always exactly normal here
+   - D) Because outliers are impossible in the markets
+
+7. **The power of a statistical test is the probability of:**
+   - A) Rejecting the null when it is actually true
+   - B) Detecting a real effect, rejecting a false null ✅
+   - C) Making a Type I error during the test itself
+   - D) Observing the data under the null hypothesis
+
+8. **A backtest runs on 252 days with zero real edge. Which p-value is most likely?**
+   - A) p = 0.001, from the best tested parameter set
+   - B) p = 0.049, just below the usual threshold
+   - C) p = 0.50, exactly the middle of the range here
+   - D) Any p-value, uniform across the range from 0 to 1 ✅
+
+9. **How can you increase power without changing the effect size?**
+   - A) Decrease the sample size of the backtest
+   - B) Increase the significance level threshold value
+   - C) Increase the sample size used in the backtest ✅
+   - D) Remove all of the outliers from the data
+
+10. **What is the most defensible response to testing many strategies at once?**
+    - A) Report only the strategy with the best Sharpe
+    - B) Test fewer parameters to save time overall
+    - C) Raise the sample size until results look good
+    - D) Adjust significance thresholds for multiple testing ✅
 
 ---
 ---
@@ -2883,22 +3279,64 @@ Regularization is particularly useful in factor research where you test dozens o
 
 ### 📝 Quiz
 1. **In a market-model regression, the slope coefficient on market return represents:**
-   - A) Alpha
-   - B) Beta ✅
-   - C) R²
-   - D) The p-value
+   - A) Beta, the stock's sensitivity to the market ✅
+   - B) Alpha, the excess return of the stock
+   - C) R-squared, the fit of the regression model
+   - D) The p-value of the regression coefficient
 
 2. **A residual plot showing a clear funnel (widening spread) suggests a violation of:**
-   - A) Linearity only
-   - B) Homoskedasticity (constant variance) ✅
-   - C) Nothing, this is expected
-   - D) Independence only
+   - A) Linearity only, nothing else at all here
+   - B) Homoskedasticity, meaning non-constant variance ✅
+   - C) Nothing, this pattern is expected always here
+   - D) Independence only, not any other assumption
 
 3. **A very high R² in a financial backtest model should be treated as:**
-   - A) Unambiguously good news
-   - B) A potential red flag for overfitting, worth investigating further ✅
-   - C) Proof the strategy will work live
-   - D) Irrelevant to model quality
+   - A) Unambiguously good news for the strategy
+   - B) Proof the strategy will work live trading
+   - C) Irrelevant to the model quality in any way at all
+   - D) A potential overfitting red flag to investigate ✅
+
+4. **You regress returns on two highly correlated predictors. What is the main concern?**
+   - A) Always gives the exact same coefficients
+   - B) Never has any multicollinearity issues at all
+   - C) May yield unstable, inflated coefficient estimates ✅
+   - D) Is impossible to estimate in any software
+
+5. **A stock has beta 1.2 and the market returns +5%. What is the expected stock return?**
+   - A) +6%, since beta times the market return ✅
+   - B) +5%, since beta does not change anything
+   - C) +1.2%, since beta is the expected return
+   - D) +4%, since five percent divided by 1.2
+
+6. **A regression has R² = 0.64. What does this mean?**
+   - A) 64% of the residuals are exactly zero here
+   - B) The model explains 64% of the intercept value
+   - C) 36% of the variance is explained by the model
+   - D) 64% of the variance is explained by the model ✅
+
+7. **Residuals that are correlated over time suggest:**
+   - A) The model is perfectly well specified always
+   - B) Autocorrelation, which can bias standard errors ✅
+   - C) That the R-squared must be exactly zero here
+   - D) Nothing is wrong with the model in any way
+
+8. **A model uses 200 predictors to fit 200 data points perfectly. What is the true situation?**
+   - A) It generalizes perfectly to new data always
+   - B) It has the lowest possible bias in testing
+   - C) It likely memorized the data, failing out of sample ✅
+   - D) It proves the predictors are all real signals
+
+9. **Which check best detects overfitting before trusting a strategy?**
+   - A) Testing the model out of sample on unseen data ✅
+   - B) Increasing the number of predictors used
+   - C) Maximizing R-squared on the training data
+   - D) Removing the worst months from the sample
+
+10. **A regression has one very large residual. What is the best response?**
+    - A) Delete the day from the sample silently
+    - B) Ignore it, residuals do not matter at all
+    - C) Set the residual to zero to improve the fit
+    - D) Investigate the cause: data error or real event ✅
 
 ---
 ---
@@ -3144,22 +3582,64 @@ Negative correlation produces the lowest portfolio volatility. This is the mathe
 
 ### 📝 Quiz
 1. **A determinant of zero for a covariance matrix suggests:**
-   - A) Perfect diversification
-   - B) Perfectly collinear (redundant) assets in the matrix ✅
-   - C) All assets are uncorrelated
-   - D) Nothing meaningful
+   - A) Perfectly collinear, redundant assets in the matrix ✅
+   - B) Perfect diversification of the whole portfolio
+   - C) All of the assets are entirely uncorrelated
+   - D) Nothing meaningful about the data at all here
 
 2. **In `Av = λv`, λ is called the:**
-   - A) Determinant
-   - B) Eigenvalue ✅
-   - C) Inverse
-   - D) Identity element
+   - A) Determinant of the square matrix A here
+   - B) Eigenvalue of the matrix A, the scaling factor ✅
+   - C) Inverse of the matrix A, the reciprocal
+   - D) Identity element of the matrix A as usual
 
 3. **What does the off-diagonal of a covariance matrix represent?**
-   - A) Each asset's own volatility
-   - B) How pairs of assets move together ✅
-   - C) The mean return of each asset
-   - D) Nothing, it's always zero
+   - A) Each asset's own volatility value alone
+   - B) The mean return of each asset in the matrix
+   - C) How pairs of assets move together jointly ✅
+   - D) Nothing, since it is always zero here
+
+4. **Why is the inverse of the covariance matrix used in portfolio optimization?**
+   - A) Because covariance matrices are always singular here
+   - B) Because it is the cheapest way to perform the inversion
+   - C) Because it removes the need for any math at all here
+   - D) It appears in the optimal weights formula, reweighting by risk ✅
+
+5. **For the vector v = [3, 4], what is the L2 norm?**
+   - A) 7, the plain sum of the two components
+   - B) 5, the square root of nine plus sixteen ✅
+   - C) 12, the product of the two components
+   - D) 25, the sum of the squares of the parts
+
+6. **A matrix A has shape (3, 5). What shape does A.T have?**
+   - A) (3, 5), the transpose keeps the same shape
+   - B) (3, 3), since rows become rows again
+   - C) (8, 0), the sum of the dimensions here
+   - D) (5, 3), rows and columns are swapped ✅
+
+7. **Two assets are perfectly correlated (ρ = 1). What happens to diversification?**
+   - A) Diversification works perfectly and completely
+   - B) No diversification benefit, variance adds like one asset ✅
+   - C) The portfolio variance becomes negative always
+   - D) The covariance matrix becomes the identity matrix
+
+8. **A 2x2 covariance matrix has determinant zero. What does this imply about the assets?**
+   - A) One asset is a linear combination of the other ✅
+   - B) Both assets are completely independent
+   - C) Both assets have zero variance entirely here
+   - D) The matrix cannot represent any portfolio
+
+9. **Why use matrix operations instead of Python loops for portfolio math?**
+   - A) Matrices are easier to read than numbers
+   - B) Loops are forbidden in all research code
+   - C) Matrix operations vectorize the heavy computation ✅
+   - D) Matrices always give exact closed answers
+
+10. **A singular covariance matrix appears in your optimization. What is the best response?**
+    - A) Ignore it, the math still gives valid weights
+    - B) Invert it using a bigger matrix library
+    - C) Assume all assets are perfectly independent
+    - D) Remove redundant assets or regularize the matrix ✅
 
 ---
 ---
@@ -3371,22 +3851,64 @@ The minimum of this function is at (0, 0) where f = 0. Gradient descent finds it
 
 ### 📝 Quiz
 1. **A partial derivative measures:**
-   - A) The total change in a multivariable function
-   - B) The rate of change with respect to one variable, holding others fixed ✅
-   - C) The maximum value of a function
-   - D) A random value
+   - A) The rate of change in one variable, holding others fixed ✅
+   - B) The total change in a multivariable function here
+   - C) The maximum value of the entire function at once
+   - D) A random value with no real meaning at all here
 
 2. **Why is convexity desirable in optimization problems?**
-   - A) It makes computation slower
-   - B) Any local minimum is guaranteed to be the global minimum ✅
-   - C) It guarantees zero risk
-   - D) It's not actually desirable
+   - A) It makes the computation run slower always
+   - B) Any local minimum is guaranteed the global minimum ✅
+   - C) It guarantees zero risk in the portfolio here
+   - D) It is not actually desirable in any way at all
 
 3. **The gradient of a multivariable function is:**
-   - A) A single number
-   - B) A vector of all partial derivatives, pointing toward steepest increase ✅
-   - C) The same as the determinant
-   - D) Always zero
+   - A) A single number produced as the final output
+   - B) The same as the determinant of that matrix
+   - C) A vector of partial derivatives for steepest ascent ✅
+   - D) Always zero in every single case possible here
+
+4. **Why is the chain rule essential in financial modeling?**
+   - A) Most functions depend on a single variable only
+   - B) Derivatives are forbidden in portfolio math here
+   - C) It is required by the Python syntax itself here
+   - D) Functions are nested, like option prices of many inputs ✅
+
+5. **For f(x) = x^2, what is the derivative at x = 3?**
+   - A) 9, the value of the function itself
+   - B) 6, from the power rule: two times three ✅
+   - C) 3, the value of the input at that point
+   - D) 2, the exponent of the polynomial here
+
+6. **A strategy's P&L function is concave. What does this imply for optimization?**
+   - A) Local maxima are not guaranteed to be the global one ✅
+   - B) Any local maximum is guaranteed to be global
+   - C) The function has no maximum at all here now
+   - D) Optimization is impossible in this case ever
+
+7. **Why do quants maximize log-likelihood instead of raw likelihood?**
+   - A) Log is always easier to type than the raw
+   - B) Products become sums, which are numerically stable ✅
+   - C) The raw likelihood is always exactly zero now
+   - D) Because regulation requires using logarithms
+
+8. **For a concave P&L curve, where is the optimal position size found?**
+   - A) Where the derivative equals zero, the flat point ✅
+   - B) Where the derivative is the largest possible
+   - C) Where the second derivative is the largest
+   - D) At the boundary of the feasible region only
+
+9. **A function has many local minima. What does this mean for optimization?**
+   - A) The global minimum is guaranteed by any algorithm
+   - B) Every local minimum found is the true answer
+   - C) Gradient methods may get stuck in a local minimum ✅
+   - D) The problem has no solution at all here ever
+
+10. **Why does the square root of time rule hold for volatility?**
+    - A) Returns compound multiplicatively over long periods
+    - B) Standard deviation adds linearly across the days
+    - C) Prices are lognormally distributed by definition
+    - D) Variance adds linearly; std dev scales with the square root ✅
 
 ---
 ---
@@ -3619,22 +4141,64 @@ These automated checks run silently in the background of any serious quant resea
 
 ### 📝 Quiz
 1. **Why should you use adjusted close instead of raw close for return calculations?**
-   - A) It doesn't matter which you use
-   - B) Raw close contains artificial jumps from splits/dividends that distort return calculations ✅
-   - C) Adjusted close is always higher
-   - D) Raw close is illegal to use
+   - A) Raw close shows jumps from splits and dividends ✅
+   - B) It does not matter which one you use here
+   - C) Adjusted close is always higher in value
+   - D) Raw close is illegal to use in any research
 
 2. **A 1:2 stock split means:**
-   - A) The company's value doubles
-   - B) Share count doubles and price roughly halves, with no change in company value ✅
-   - C) The stock is delisted
-   - D) Dividends double
+   - A) Share count doubles, price halves, value unchanged ✅
+   - B) The company's total value doubles at once here
+   - C) The stock is delisted from the exchange now
+   - D) Dividends double automatically for holders
 
 3. **Which of these is a valid automated data quality check for OHLC data?**
-   - A) High should always equal Low
-   - B) Low should never exceed High ✅
-   - C) Volume should always be zero
-   - D) Close should always equal Open
+   - A) High should always equal the Low value
+   - B) Volume should always be exactly zero here
+   - C) Low should never exceed the High price value ✅
+   - D) Close should always equal the Open value
+
+4. **Why does a dividend payment make the raw close look like a loss?**
+   - A) Dividends are always paid as cash to their lenders
+   - B) The exchange stops trading on that date entirely now
+   - C) The company's fundamentals change overnight for sure
+   - D) Price drops by about the dividend while the holder gets cash ✅
+
+5. **A stock closes at 100 and splits 2-for-1 overnight. What happens to the prior adjusted close?**
+   - A) About half the prior price, keeping returns continuous ✅
+   - B) The same raw price, since splits do not matter
+   - C) Double the prior raw price, to keep the level
+   - D) Zero, since the old price is meaningless now
+
+6. **Your dataset has 3 days of missing prices in a row for one ticker. Best handling?**
+   - A) Forward fill them silently without any check
+   - B) Fill with zeros, the safest possible choice
+   - C) Investigate the cause, then fill or drop as needed ✅
+   - D) Delete the entire ticker from the universe
+
+7. **Why are point-in-time constituents important for backtesting?**
+   - A) They make the data file smaller overall now
+   - B) They avoid survivorship bias from current lists ✅
+   - C) They are required by the exchange rules here
+   - D) They guarantee the returns will be positive
+
+8. **A stock appears to drop 90% on a date with no news. What is the most likely cause?**
+   - A) The market crashed on that single day itself
+   - B) A corporate action the data was not adjusted for ✅
+   - C) The ticker was delisted on that same day
+   - D) The stock hit its lower circuit limit there
+
+9. **Why is relying on a single data source risky?**
+   - A) It always provides the best possible quality
+   - B) It makes the pipeline much faster overall
+   - C) Cross-checking vendors catches data errors ✅
+   - D) It is the only legal way to obtain data
+
+10. **An OHLC row has low > high. What should the pipeline do?**
+    - A) Accept it and continue running silently
+    - B) Swap the two values and move on quickly
+    - C) Assume it is fine and ignore it entirely
+    - D) Flag the row for review and do not guess ✅
 
 ---
 ---
@@ -3868,22 +4432,64 @@ The shift(1) before the rolling window ensures that today's signal uses only dat
 
 ### 📝 Quiz
 1. **The difference between a rolling window and an expanding window is:**
-   - A) They are identical
-   - B) Rolling always uses the last N observations; expanding uses all data from the start ✅
-   - C) Expanding is always smaller than rolling
-   - D) Rolling only works on monthly data
+   - A) Rolling uses the last N points; expanding uses all data ✅
+   - B) They are identical in every single possible way here
+   - C) Expanding is always smaller than the rolling window
+   - D) Rolling only works on monthly data always here
 
 2. **`prices.shift(1)` produces:**
-   - A) Tomorrow's price aligned to today
-   - B) Yesterday's price aligned to today's row ✅
-   - C) A random shuffle of prices
-   - D) The rolling mean
+   - A) Tomorrow's price aligned to today's row
+   - B) Yesterday's price aligned to today's row value ✅
+   - C) A random shuffle of all of the prices
+   - D) The rolling mean of all of the prices
 
 3. **Rolling volatility (vs a single static standard deviation) is more useful because:**
-   - A) It's easier to compute
-   - B) It captures how risk changes over time rather than assuming it's constant ✅
-   - C) It's always lower
-   - D) There's no real difference
+   - A) It is easier to compute in practice always here
+   - B) It is always lower than the static one here
+   - C) It captures changing risk instead of constant risk ✅
+   - D) There is no real difference between the two here
+
+4. **Why convert all timestamps to a common time zone?**
+   - A) To make the data files smaller in size overall
+   - B) Because IST is always better than UTC time
+   - C) So that the charts display in local format
+   - D) To align observations from different exchanges ✅
+
+5. **A 5-day rolling standard deviation uses:**
+   - A) All data since the start of the series here
+   - B) The last 5 observations only, sliding forward ✅
+   - C) The first five observations of the series
+   - D) Every fifth observation in the series now
+
+6. **Your dataset has NSE timestamps in IST and NYSE timestamps in ET. Correct practice?**
+   - A) Keep both in their local time zones here
+   - B) Convert only the dates, never the times
+   - C) Convert everything to one common time zone ✅
+   - D) Drop the timestamps from both datasets
+
+7. **Expanding window statistics differ from rolling because:**
+   - A) They use fewer and fewer observations
+   - B) The window grows as new data arrives here ✅
+   - C) They ignore the newest data entirely now
+   - D) They only work on daily frequencies
+
+8. **A trade at 9:30 AM NYSE time is recorded as 9:30 IST. What is the issue?**
+   - A) The timestamps mark different moments ✅
+   - B) The trade is duplicated in the dataset
+   - C) The price is wrong by the time shift
+   - D) There is no issue at all in this case here
+
+9. **Why prefer a 252-day rolling window over a 5-day one for risk estimates?**
+   - A) It reacts faster to sudden market moves now
+   - B) It needs less data to compute overall here
+   - C) It estimates long-run risk with more stability ✅
+   - D) It ignores the most recent observations
+
+10. **You see volatility spikes on ex-dividend dates. What is the most likely cause?**
+    - A) Markets panic on every dividend date here
+    - B) The window is too long for the data now
+    - C) Volume always rises on those dates exactly now
+    - D) Returns on unadjusted prices create the spike ✅
 
 ---
 ---
@@ -4122,22 +4728,64 @@ Every element on a chart should serve a purpose. If you are unsure whether an el
 
 ### 📝 Quiz
 1. **A candlestick's "wick" represents:**
-   - A) The open and close prices only
-   - B) The high and low price extremes for the period ✅
-   - C) Trading volume
-   - D) Nothing meaningful
+   - A) The high and low price extremes for the period ✅
+   - B) The open and close prices of the period
+   - C) The trading volume for the period itself
+   - D) Nothing meaningful at all in this case
 
 2. **A correlation heatmap is most useful for:**
-   - A) Showing price trends over time
+   - A) Showing the price trends over time clearly
    - B) Quickly identifying which assets move together ✅
-   - C) Computing exact p-values
-   - D) Only for aesthetic purposes
+   - C) Computing the exact p-values of the tests
+   - D) Making the dashboard look more colorful
 
 3. **Why should a financial dashboard always show a benchmark alongside strategy performance?**
-   - A) It's a regulatory requirement
-   - B) Raw returns are meaningless without context on whether they beat a passive alternative ✅
-   - C) It makes the chart more colorful
-   - D) It's not necessary
+   - A) It is a regulatory requirement in all cases
+   - B) It makes the chart more colorful to view
+   - C) It is not actually necessary in any way
+   - D) Raw returns need context from a benchmark ✅
+
+4. **Why use a log scale for long equity curves?**
+   - A) It hides all of the drawdowns completely here
+   - B) It makes small moves look much larger on the chart
+   - C) Equal percentage moves get equal visual distances ✅
+   - D) It always flattens the curve into a line
+
+5. **In a bar chart of daily returns, what does the height of each bar represent?**
+   - A) The magnitude of that day's return value ✅
+   - B) The price level of the stock that day
+   - C) The number of trades executed that day
+   - D) The volatility of the entire year shown
+
+6. **The same returns plotted with 40 bins vs 5 bins in a histogram:**
+   - A) The 5-bin version shows more detail always
+   - B) The 40-bin version hides the shape always here
+   - C) Both are identical in every single possible way
+   - D) The 40-bin version shows finer detail but more noise ✅
+
+7. **Why annotate drawdowns on the equity curve?**
+   - A) It makes the chart harder to interpret now
+   - B) It links visible declines to their causes and dates ✅
+   - C) It replaces the need for the curve itself
+   - D) It is purely decorative in its nature here
+
+8. **A scatter plot of returns vs volume shows a vertical stripe on one date. Likely cause?**
+   - A) The chart is perfectly normal in shape here
+   - B) Volume was constant on that single day
+   - C) A data error or missing values on that date ✅
+   - D) The returns were exactly zero on that date
+
+9. **A dashboard hides all losing months to "tell a better story." What is the right approach?**
+   - A) This is fine, stories matter more than data
+   - B) Keep it, since the client prefers good news
+   - C) Show only the best performing calendar year
+   - D) Show the full history including the losing months ✅
+
+10. **Why does a time series plot mislead when x-axis dates are unevenly spaced?**
+    - A) The y-axis will always be wrong in its actual value
+    - B) The colors change their meaning with the spacing
+    - C) Equal distances imply equal time gaps, distorting trends ✅
+    - D) The chart becomes impossible to read properly
 
 ---
 ---
@@ -4417,22 +5065,64 @@ Every time you run a backtest, call this function. Over weeks and months, you wi
 
 ### 📝 Quiz
 1. **Why separate configuration (parameters) from code logic?**
-   - A) It makes the code run faster
-   - B) It lets you re-run experiments with new parameters without touching logic code ✅
-   - C) It's required by Python syntax
-   - D) It has no practical benefit
+   - A) It lets you rerun with new parameters, logic untouched ✅
+   - B) It makes the research code run faster in every possible case
+   - C) It is required by the Python syntax in all cases here
+   - D) It has no practical benefit at all in practice ever here
 
 2. **What's the main advantage of structured logging over scattered print statements?**
-   - A) Logging is always faster
-   - B) It provides a timestamped, filterable, persistent record useful for debugging ✅
-   - C) print() doesn't work in research code
-   - D) There's no real advantage
+   - A) Logging is always faster than print statements
+   - B) It gives a timestamped, filterable record for debugging ✅
+   - C) Print does not work in research code at all now
+   - D) There is no real advantage at all in practice
 
 3. **Fixing a random seed in a research pipeline is important because:**
-   - A) It makes the code run faster
-   - B) It ensures the "random" results are reproducible across runs ✅
-   - C) It removes all randomness from real markets
-   - D) It's not actually important
+   - A) It makes the code run faster in practice now
+   - B) It removes all randomness from real markets
+   - C) It ensures the random results reproduce across runs ✅
+   - D) It is not actually important at all in practice
+
+4. **Why are small, focused functions better than one giant script?**
+   - A) They make the code harder to test overall
+   - B) They always run slower than the big script
+   - C) They require more memory in every single case
+   - D) Each piece is testable and reusable separately ✅
+
+5. **A pipeline fails at step 5 of 10. What does logging help you identify?**
+   - A) The exact step and timestamp of the failure ✅
+   - B) The final output of the whole pipeline
+   - C) The market data of the previous month
+   - D) The password of the data provider here
+
+6. **Two runs of a pipeline with the same seed produce:**
+   - A) Different random numbers each and every time
+   - B) Faster code execution in every single case
+   - C) Identical results, but only by coincidence
+   - D) Identical results, by construction of the seed ✅
+
+7. **Why add type hints to research functions?**
+   - A) They make Python run much faster overall now
+   - B) They document expected inputs and catch errors early ✅
+   - C) They replace the need for any testing at all
+   - D) They are mandatory in every Python version
+
+8. **A config file sets lookback to 45, but the backtest output is identical to lookback 30. Why?**
+   - A) The code may hardcode the value instead of reading config ✅
+   - B) The config file was updated correctly this time
+   - C) The backtest always ignores all of the parameters
+   - D) The lookback value is not used at all in this case
+
+9. **A colleague's script produces different results on their machine. What is the first suspect?**
+   - A) The weather is different on their machine now
+   - B) Their screen shows the colors differently
+   - C) Different package versions or environment state ✅
+   - D) The results are never reproducible at all
+
+10. **Why wrap data downloads in retries with logging?**
+    - A) Retries make the code much more complex overall
+    - B) Logging slows the pipeline down far too much
+    - C) Network calls never fail in practice at all ever
+    - D) Transient network failures are logged and retried ✅
 
 ---
 ---
@@ -4608,23 +5298,65 @@ Filter out assets that are too illiquid for your strategy. If your average posit
 - [QuantStart — Market Microstructure Basics](https://www.quantstart.com/) — free articles
 
 ### 📝 Quiz
-1. **The bid-ask spread represents:**
-   - A) The total daily trading volume
-   - B) The cost of trading immediately rather than waiting for a better price ✅
-   - C) The tick size of the instrument
-   - D) A regulatory fee
+1. **What does the bid-ask spread represent?**
+   - A) The cost of trading immediately at the current prices ✅
+   - B) The minimum price increment set by the exchange
+   - C) The total number of shares traded during one day
+   - D) The fee charged by the broker on every single order
 
-2. **A market order guarantees:**
-   - A) A specific price
-   - B) Execution, but not a specific price ✅
-   - C) Zero slippage
-   - D) Nothing at all
+2. **Which of these does a market order guarantee?**
+   - A) A specific price for the order that you submit
+   - B) Execution, but not a specific guaranteed price ✅
+   - C) Zero slippage on every fill that you receive
+   - D) A better price than any limit order ever offers
 
-3. **Why is ignoring slippage in a backtest dangerous?**
-   - A) It isn't, slippage is negligible
-   - B) It can make an unprofitable strategy appear profitable on paper ✅
-   - C) It only affects options trading
-   - D) Slippage only occurs in illiquid crypto markets
+3. **On the NSE, what is the tick size for most stocks?**
+   - A) One rupee for every stock that is listed
+   - B) Fifty paise for every stock on the market
+   - C) Ten paise for liquid stocks and more
+   - D) Five paise, though some stocks use one paisa ✅
+
+4. **The best bid is 100.00 and the best ask is 100.20. What is the spread in basis points of the mid price?**
+   - A) About 10 basis points of the mid price
+   - B) About 15 basis points of the mid price
+   - C) About 20 basis points of the mid price ✅
+   - D) About 25 basis points of the mid price
+
+5. **A strategy's position size is 8% of the stock's average daily volume, but the backtest rule says to stay below 5%. What does the rule suggest?**
+   - A) The position is safe and needs no change at all
+   - B) The position is too large and may move the market ✅
+   - C) The position is too small to be worth trading
+   - D) The rule only applies to intraday strategies
+
+6. **The best bid is 101.05 for 400 shares, the next bid is 101.00 for 600 shares, and the ask is 101.10. You market-sell 600 shares. What is your average fill price?**
+   - A) Rs 101.05, since your order fills at the best bid first
+   - B) Rs 101.10, since you pay the ask on market sells
+   - C) Rs 101.03, the average of the two bid levels ✅
+   - D) Rs 101.00, since you get the worst price possible
+
+7. **A trader posts a large resting buy limit order below the current price. How does this affect the market?**
+   - A) It adds depth, making large sells easier to absorb ✅
+   - B) It forces the exchange to widen the spread
+   - C) It guarantees a profitable fill for the trader
+   - D) It reduces the tick size for all market orders
+
+8. **What is a stop order?**
+   - A) An order that only fills during the closing auction
+   - B) An order that executes at a fixed price or better
+   - C) An order that becomes a market order once triggered ✅
+   - D) An order that expires if unfilled within a session
+
+9. **A strategy earns 10 basis points per trade, but slippage costs 15 basis points per round trip. What is the net result per trade?**
+   - A) About +25 bps, since costs add to returns
+   - B) About -5 bps, so the strategy loses money ✅
+   - C) About -15 bps, since only the spread counts
+   - D) About 0 bps, since the costs offset exactly
+
+10. **Which statement about backtest capacity analysis is correct?**
+    - A) Capacity only matters for institutional sized funds
+    - B) A high Sharpe strategy always beats lower capacity
+    - C) Capacity is irrelevant once slippage is included
+    - D) Small positions relative to volume keep impact low ✅
 
 ---
 ---
@@ -4844,23 +5576,65 @@ The fundamental principle: higher expected returns come with higher risk. Any st
 - [PyPortfolioOpt — Documentation](https://pyportfolioopt.readthedocs.io/) — free, covers VaR/risk in practice
 
 ### 📝 Quiz
-1. **Diversification reduces which type of risk?**
-   - A) Systematic risk
-   - B) Unsystematic risk ✅
-   - C) Both equally
-   - D) Neither
+1. **How do you annualize a daily volatility estimate?**
+   - A) Take the square root of the daily standard deviation
+   - B) Multiply the daily standard deviation by 252 exactly
+   - C) Divide the daily standard deviation by 252 days
+   - D) Multiply daily volatility by the square root of 252 ✅
 
 2. **A stock with beta = 1.5 tends to:**
-   - A) Move independently of the market
-   - B) Move roughly 50% more than the market in the same direction ✅
-   - C) Always outperform the market
-   - D) Have zero volatility
+   - A) Move independently of the market's direction
+   - B) Move roughly 50% more than the market's direction ✅
+   - C) Always outperform the market over the long run
+   - D) Have zero volatility in its daily return series
 
 3. **Expected Shortfall differs from VaR in that it:**
-   - A) Is always a smaller number than VaR
-   - B) Measures the average loss beyond the VaR threshold, capturing tail severity ✅
-   - C) Ignores tail risk entirely
-   - D) Is unrelated to VaR
+   - A) Is always a smaller number than the VaR figure
+   - B) Measures average losses beyond the VaR threshold ✅
+   - C) Ignores tail risk entirely and only looks at median
+   - D) Is unrelated to VaR in every possible way
+
+4. **A portfolio holds two assets equally, with volatilities of 20% and 30% and correlation exactly 1. What is the portfolio volatility?**
+   - A) 25%, the average of the two volatilities ✅
+   - B) 20%, the lower of the two volatilities
+   - C) 30%, the higher of the two volatilities
+   - D) 50%, the sum of the two volatilities
+
+5. **A 1-day 95% VaR of Rs 50,000 means:**
+   - A) There is a 95% chance of losing Rs 50,000 today
+   - B) The maximum possible daily loss is always Rs 50,000
+   - C) The portfolio cannot gain more than Rs 50,000 today
+   - D) There is a 5% chance of losing over Rs 50,000 in one day ✅
+
+6. **A strategy has a daily volatility of 1.5%. What is its approximate annualized volatility?**
+   - A) About 15% for the full year
+   - B) About 19% for the full year
+   - C) About 24% for the full year ✅
+   - D) About 28% for the full year
+
+7. **Which type of risk cannot be reduced by diversification?**
+   - A) Unsystematic risk of a single company
+   - B) Idiosyncratic risk of a sector's firms
+   - C) Systematic risk that affects the entire market ✅
+   - D) Firm specific risk such as a factory fire
+
+8. **Why does parametric VaR tend to underestimate true VaR for real financial returns?**
+   - A) The historical method uses too little data
+   - B) Real returns are always perfectly normal in shape
+   - C) Real returns have fatter tails than normal models ✅
+   - D) Parametric VaR assumes zero volatility over time
+
+9. **What is maximum drawdown?**
+   - A) The largest peak-to-trough decline in the history ✅
+   - B) The average daily loss across the whole period
+   - C) The total profit divided by the total risk taken
+   - D) The longest streak of consecutive losing days
+
+10. **A strategy earns high returns but suffers a 50% drawdown. What should an investor consider?**
+    - A) Whether they can tolerate losing half of their capital ✅
+    - B) Whether the strategy trades on more liquid assets
+    - C) Whether the Sharpe ratio exceeds one point five
+    - D) Whether the strategy uses the historical VaR method
 
 ---
 ---
@@ -5123,23 +5897,65 @@ A good forecast should beat a naive baseline. If your ARIMA model cannot beat si
 - [IBM Technology — What is Time Series Analysis? (YouTube)](https://www.youtube.com/watch?v=GE3JOFwTWVM) — free
 
 ### 📝 Quiz
-1. **Why do quant models typically work on returns rather than raw prices?**
-   - A) Prices are always negative
-   - B) Returns are typically much closer to stationary, which most statistical models require ✅
-   - C) Raw prices can't be plotted
-   - D) There's no real reason
+1. **Why do quant models typically use returns rather than raw prices?**
+   - A) Returns are much closer to being stationary ✅
+   - B) Raw prices contain no information at all
+   - C) Returns are easier to compute by hand
+   - D) Prices cannot be plotted on a chart
 
 2. **The Augmented Dickey-Fuller test checks for:**
-   - A) Normality of returns
+   - A) Whether returns follow a normal distribution
    - B) The presence of a unit root (non-stationarity) ✅
-   - C) Correlation between two assets
-   - D) Outliers only
+   - C) Whether two asset series are correlated
+   - D) The presence of unusual outliers in the data
 
 3. **An ARIMA(1,1,1) model means:**
-   - A) No differencing was applied
-   - B) The series was differenced once, with 1 AR term and 1 MA term ✅
-   - C) It's purely a moving average model
-   - D) It requires no historical data
+   - A) One differencing, one AR and one MA term ✅
+   - B) A purely moving average model was fitted
+   - C) The series was never differenced at all
+   - D) The model requires no historical data
+
+4. **An AR(1) model with phi_1 = -0.6 implies that high values:**
+   - A) Tend to be followed by even higher values
+   - B) Tend to be followed by lower values, mean reversion ✅
+   - C) Have no effect whatsoever on the following values
+   - D) Cause the series to become non-stationary
+
+5. **Which time series component repeats at fixed intervals?**
+   - A) Trend, which drifts slowly over the long run
+   - B) Noise, which is completely unpredictable
+   - C) Seasonality, such as day-of-week effects ✅
+   - D) All of the components repeat at fixed intervals
+
+6. **An ADF test on a series returns a p-value of 0.001. What do you conclude?**
+   - A) The series has a unit root and is non-stationary
+   - B) The test failed due to insufficient data here
+   - C) The series is stationary at the 5% level now ✅
+   - D) The series must be differenced twice at once
+
+7. **The ACF of a series decays gradually while the PACF cuts off after lag 1. Which model fits best?**
+   - A) An MA(1) model with one moving average term
+   - B) An AR(1) model with one autoregressive term ✅
+   - C) A pure random walk with no structure at all
+   - D) An ARIMA model with seasonal differencing
+
+8. **What does the Ljung-Box test check after fitting a model?**
+   - A) Whether the fitted coefficients are significant
+   - B) Whether the residuals follow a normal distribution
+   - C) Whether the forecast errors grow over time
+   - D) Whether the residuals are independent white noise ✅
+
+9. **How does the BIC differ from the AIC in model selection?**
+   - A) The BIC never penalizes model complexity
+   - B) The BIC prefers more complex models always
+   - C) The BIC penalizes complexity more heavily ✅
+   - D) The BIC ignores the likelihood function
+
+10. **AIC selects a complex ARIMA order while BIC selects a simpler one. What is the best practical approach?**
+    - A) Always trust the BIC and ignore the AIC result
+    - B) Pick the most complex model to maximize fit
+    - C) Use the AIC model only for longer horizons
+    - D) Validate both candidates out of sample and choose ✅
 
 ---
 ---
@@ -5361,22 +6177,64 @@ Seasonal effects in financial data tend to be small and unstable over time. They
 
 ### 📝 Quiz
 1. **Heteroskedasticity refers to:**
-   - A) Constant residual variance across observations
-   - B) Non-constant residual variance across observations ✅
-   - C) Perfectly correlated predictors
-   - D) A type of stationarity
+   - A) A special type of non-stationary time series
+   - B) Constant residual variance across all observations
+   - C) Perfectly correlated predictor variables in the model
+   - D) Non-constant residual variance across observations ✅
 
 2. **A VIF (Variance Inflation Factor) above ~10 for a predictor suggests:**
-   - A) The model is perfect
-   - B) Problematic multicollinearity with other predictors ✅
-   - C) The predictor should be doubled
-   - D) Nothing concerning
+   - A) The regression model is perfect with no issues
+   - B) Severe multicollinearity with other predictors ✅
+   - C) The predictor should be multiplied by ten
+   - D) Nothing concerning about the model at all
 
-3. **Robust (HAC) standard errors are used to:**
-   - A) Increase R² artificially
-   - B) Keep hypothesis tests valid despite heteroskedasticity/autocorrelation in residuals ✅
-   - C) Remove the need for any data
-   - D) Replace the need for a regression entirely
+3. **What do HAC standard errors correct for?**
+   - A) Heteroskedasticity and autocorrelation together ✅
+   - B) Only for multicollinearity between predictors
+   - C) Measurement error in the dependent variable
+   - D) Outliers in the independent variable data
+
+4. **A Durbin-Watson statistic of 2.0 indicates:**
+   - A) Strong positive autocorrelation in the residuals
+   - B) Strong negative autocorrelation in the residuals
+   - C) The regression is likely misspecified badly
+   - D) No first-order autocorrelation in the residuals ✅
+
+5. **Two series are cointegrated when:**
+   - A) A linear combination of them is stationary ✅
+   - B) Their correlation is exactly equal to one
+   - C) Both series follow the same random walk
+   - D) One series is always twice the other
+
+6. **The Chow test is used to detect:**
+   - A) Whether residuals follow a normal distribution
+   - B) Whether two stocks have different betas
+   - C) Structural breaks in regression coefficients ✅
+   - D) Seasonal patterns in daily return data
+
+7. **X Granger-causes Y when:**
+   - A) X and Y have the same mean and variance
+   - B) Past values of X help predict Y beyond Y alone ✅
+   - C) X and Y are always perfectly correlated
+   - D) X is larger than Y in every single period
+
+8. **The Breusch-Pagan test returns p = 0.002. What do you conclude?**
+   - A) Residuals are homoskedastic and perfectly fine
+   - B) The model has severe multicollinearity present
+   - C) The residuals are not autocorrelated at all
+   - D) Heteroskedasticity is present in the residuals ✅
+
+9. **Using both a 10-day and a 20-day moving average as predictors in one regression often causes:**
+   - A) Autocorrelation, so HAC errors are required
+   - B) Heteroskedasticity, so weights should change
+   - C) Multicollinearity, so drop one or combine them ✅
+   - D) Stationarity, so differencing is no longer needed
+
+10. **In financial regressions, what is the recommended default for standard errors?**
+    - A) At least HC errors, since assumptions often fail ✅
+    - B) Standard OLS errors, since they are the easiest
+    - C) No standard errors are needed whatsoever
+    - D) Only bootstrap errors ever work in finance
 
 ---
 ---
@@ -5571,22 +6429,64 @@ Following this workflow for every research project ensures consistency and credi
 
 ### 📝 Quiz
 1. **Why conduct a literature review before starting quant research?**
-   - A) It's a formality with no real value
-   - B) It prevents "rediscovering" a well-known effect and mistaking it for a novel edge ✅
-   - C) It replaces the need for a backtest
-   - D) It's only relevant for academic papers
+   - A) It prevents rediscovering a known effect as new ✅
+   - B) It is just a formality with no real value at all
+   - C) It replaces the need for running a backtest
+   - D) It matters only for academic paper writing
 
 2. **Selecting variables only after seeing which ones produce significant results is problematic because:**
-   - A) It's actually the correct approach
-   - B) It's a form of data snooping that inflates false-positive risk ✅
-   - C) It saves time with no downside
-   - D) It has no effect on validity
+   - A) It is actually considered the correct approach
+   - B) It is data snooping that inflates false positive risk ✅
+   - C) It saves a lot of time but has no downside at all
+   - D) It has no effect on the validity whatsoever
 
 3. **Good research ethics in quant finance includes:**
-   - A) Reporting only strategies that worked
-   - B) Honestly disclosing null/negative results and known data limitations ✅
-   - C) Avoiding literature review to stay "original"
+   - A) Reporting only the strategies that worked well
+   - B) Avoiding literature review to stay more original
+   - C) Disclosing null results and known data limitations ✅
    - D) Reusing licensed data freely without restriction
+
+4. **What does pre-registration of a research plan mean?**
+   - A) Publishing results before collecting any data at all
+   - B) Documenting the hypothesis before examining the data ✅
+   - C) Asking reviewers to approve your code first
+   - D) Running the backtest on the full historical dataset
+
+5. **Survivorship bias occurs when a dataset:**
+   - A) Includes only stocks that are currently still listed ✅
+   - B) Contains every stock that ever traded in history
+   - C) Has adjusted prices with all dividends added
+   - D) Includes delisted stocks with zero returns
+
+6. **A good research question must be:**
+   - A) Broad enough to cover every possible strategy
+   - B) Open-ended so results can go either way
+   - C) Specific, testable, and falsifiable in nature ✅
+   - D) Simple enough to answer without any data
+
+7. **Why is "does momentum work?" a vague research question?**
+   - A) It has already been answered by every textbook
+   - B) It uses too many technical statistics in it
+   - C) It is impossible to backtest under any setup
+   - D) It does not define the universe, period, or measure ✅
+
+8. **For strategy robustness, the sample period should ideally:**
+   - A) Cover only recent bull market conditions
+   - B) Be as short as possible to save time
+   - C) Use only out-of-sample future data
+   - D) Include both bull and bear market regimes ✅
+
+9. **Why is reporting null results valuable?**
+   - A) It makes the researcher look more experienced
+   - B) It guarantees funding for future research
+   - C) It saves other researchers time and effort ✅
+   - D) It proves the data was collected properly
+
+10. **A strategy shows significance in 9 of 10 independent test periods. What should you conclude?**
+    - A) It is more credible than one significant in 2 of 10 ✅
+    - B) It is definitely fraud, since 10 of 10 is expected
+    - C) It should only be tested on one long period
+    - D) Statistical significance is irrelevant in finance
 
 ---
 ---
@@ -5773,22 +6673,64 @@ The key takeaway from this node is not any specific pattern or indicator. It is 
 
 ### 📝 Quiz
 1. **In an uptrend, market structure is characterized by:**
-   - A) Lower highs and lower lows
-   - B) Higher highs and higher lows ✅
-   - C) Flat prices only
-   - D) Random price movement
+   - A) Higher highs and higher lows in sequence ✅
+   - B) Lower highs and lower lows in sequence
+   - C) A flat price with no directional structure
+   - D) Random price movement with no pattern
 
 2. **When resistance is broken decisively, it often becomes:**
-   - A) Irrelevant
-   - B) New support ✅
-   - C) A new resistance level at a higher price only
-   - D) A stop-loss trigger automatically
+   - A) A brand new resistance at a higher level
+   - B) A new support level due to role reversal ✅
+   - C) A completely irrelevant price level now
+   - D) A stop-loss trigger set automatically
 
 3. **The most defensible approach to technical analysis is:**
-   - A) Memorizing all chart patterns
-   - B) Testing patterns statistically before using them ✅
-   - C) Relying on intuition only
-   - D) Using only Japanese candlestick patterns
+   - A) Memorizing all known chart patterns in detail
+   - B) Relying purely on intuition and experience
+   - C) Testing patterns statistically before using them ✅
+   - D) Using only Japanese candlestick patterns here
+
+4. **What does a doji candlestick indicate?**
+   - A) Strong buying pressure from the market
+   - B) A guaranteed reversal of the trend
+   - C) Very high volume with a large range
+   - D) Indecision between buyers and sellers ✅
+
+5. **Rising prices on decreasing volume suggest:**
+   - A) The move may be running out of momentum ✅
+   - B) Genuine and strong buying pressure exists
+   - C) The uptrend will continue indefinitely
+   - D) Institutional investors are buying heavily
+
+6. **What does VWAP stand for and represent?**
+   - A) A simple average of all daily closing prices
+   - B) The highest price traded during the day
+   - C) A price average weighted by traded volume ✅
+   - D) The total value of shares bought in a day
+
+7. **A head and shoulders pattern that forms after an uptrend is considered:**
+   - A) A continuation signal confirming the trend
+   - B) A potential bearish reversal signal pattern ✅
+   - C) A bullish signal when volume is rising
+   - D) A neutral pattern with no implications
+
+8. **What is a bullish engulfing pattern?**
+   - A) A small red candle followed by a bigger red candle
+   - B) A large green candle following a smaller red one ✅
+   - C) A doji candle appearing right after a hammer
+   - D) Three consecutive green candles in a row
+
+9. **In Market Profile, the Value Area represents:**
+   - A) The price range where about 70% of trading occurred ✅
+   - B) The single most traded price of the entire day
+   - C) The range between the day's high and low prices
+   - D) The price level where volume was the lowest
+
+10. **What is the key takeaway of this node for quant researchers?**
+    - A) Avoid technical analysis in all strategies
+    - B) Memorize every candlestick pattern perfectly
+    - C) Trust visual patterns without any validation
+    - D) Treat patterns as hypotheses that must be tested ✅
 
 ---
 ---
@@ -5991,22 +6933,64 @@ No single indicator works in all market conditions. The skill is in matching the
 
 ### 📝 Quiz
 1. **Why does EMA react faster to recent price changes than SMA?**
-   - A) EMA uses fewer data points
-   - B) EMA weights recent observations exponentially more than older ones ✅
-   - C) There's no real difference
-   - D) EMA ignores old data entirely by design flaw
+   - A) It weights recent data exponentially higher ✅
+   - B) It uses a smaller number of data points in it
+   - C) There is no real difference between the two
+   - D) It ignores old data entirely by design
 
 2. **A high ADX value (e.g., above 25) suggests:**
-   - A) The market is ranging/flat
-   - B) A strong trend (in either direction) is present ✅
-   - C) The asset is overbought
-   - D) A reversal is imminent
+   - A) The market is ranging sideways and flat
+   - B) A strong trend in either direction exists ✅
+   - C) The asset is overbought at this level
+   - D) A trend reversal is imminent right now
 
 3. **The MACD histogram represents:**
-   - A) Trading volume
-   - B) The distance between the MACD line and its signal line ✅
-   - C) The raw price
-   - D) Support and resistance levels
+   - A) The trading volume of the asset today
+   - B) The raw price level of the asset itself
+   - C) The gap between the MACD and signal lines ✅
+   - D) The support and resistance levels
+
+4. **What is a golden cross?**
+   - A) The short SMA crossing above the long SMA ✅
+   - B) The long SMA crossing above the short SMA
+   - C) Price crossing above the 200 day SMA
+   - D) MACD crossing below its signal line
+
+5. **The last five closing prices are 10, 12, 14, 16, and 18. What is the 5-period SMA?**
+   - A) 16, the midpoint of the five prices
+   - B) 18, since the most recent price dominates
+   - C) 12, the average of the first four prices
+   - D) 14, the average of all five closing prices ✅
+
+6. **A bullish MACD divergence occurs when:**
+   - A) Price makes a higher high but MACD makes a lower high
+   - B) Price and MACD both make new identical highs
+   - C) Price makes a lower low but MACD makes a higher low ✅
+   - D) MACD stays completely flat while price falls
+
+7. **An ADX below 20 typically suggests:**
+   - A) A strong trend that should be followed
+   - B) A weak market where mean reversion works ✅
+   - C) A market crash is about to happen
+   - D) The asset is guaranteed to go higher
+
+8. **What key limitation of the SMA does the EMA address?**
+   - A) The SMA produces too many signals in trends
+   - B) The SMA is too complex to compute by hand
+   - C) The SMA ignores the closing price entirely
+   - D) Old prices vanish abruptly when leaving the window ✅
+
+9. **In the Ichimoku system, what does the Kumo (cloud) show?**
+   - A) The area between the two Senkou Spans ✅
+   - B) The lagging price shifted back 26 periods
+   - C) The highest high over the past 52 periods
+   - D) The average of the highest high and lowest low
+
+10. **In a choppy, sideways market, what typically happens to trend indicators?**
+    - A) They stop computing entirely by themselves
+    - B) They perform better than in trending markets
+    - C) They always identify the trend correctly
+    - D) They produce many false signals repeatedly ✅
 
 ---
 ---
@@ -6208,22 +7192,64 @@ Each momentum indicator has its own strengths and weaknesses; the key is choosin
 
 ### 📝 Quiz
 1. **A common (though not infallible) RSI interpretation is that a reading above 70 suggests:**
-   - A) Oversold conditions
-   - B) Potentially overbought conditions ✅
-   - C) The market is closed
-   - D) Zero volatility
+   - A) A potentially overbought market state ✅
+   - B) A potentially oversold market state
+   - C) The market is completely closed today
+   - D) Volatility is currently at exactly zero
 
 2. **The Stochastic Oscillator compares current price to:**
-   - A) Its own value 14 days ago only
-   - B) Its recent high-low trading range ✅
-   - C) The market index only
-   - D) Nothing, it's a random indicator
+   - A) Its own value from exactly 14 days ago
+   - B) Its recent high and low trading range ✅
+   - C) The level of the market index only
+   - D) Nothing, since it is a random signal
 
-3. **Why can RSI extremes persist longer than expected during strong trends?**
-   - A) RSI is broken during trends
-   - B) Strong sustained buying/selling pressure can keep RSI at extreme levels despite the "overbought/oversold" label ✅
-   - C) RSI resets automatically every 14 days
-   - D) It cannot happen; RSI always reverses at 70/30
+3. **Why can RSI extremes persist during strong trends?**
+   - A) RSI stops working correctly during trends
+   - B) RSI automatically resets every 14 days here
+   - C) Sustained buying or selling keeps RSI extreme ✅
+   - D) It never happens; RSI always reverses at extremes
+
+4. **How does raw momentum differ from ROC?**
+   - A) Raw momentum ignores the closing price
+   - B) ROC is always expressed as a negative number
+   - C) The two are completely identical in every way
+   - D) Raw momentum is an absolute price difference ✅
+
+5. **Price was 120 twelve periods ago and is 100 now. What is the 12-period ROC?**
+   - A) About -17%, since price fell by 20 points ✅
+   - B) About +20%, since price fell by 20 points
+   - C) About +17%, since price fell by 20 points
+   - D) About -20%, since price fell by 20 points
+
+6. **A bearish RSI divergence occurs when:**
+   - A) Price makes a lower low but RSI a higher low
+   - B) Price and RSI both make equal new highs
+   - C) Price makes a higher high, RSI a lower high ✅
+   - D) RSI stays flat while price falls sharply
+
+7. **In Williams %R, readings above -20 suggest:**
+   - A) Oversold conditions are present
+   - B) Possible overbought conditions ✅
+   - C) The market is perfectly balanced
+   - D) Zero momentum in the asset
+
+8. **A CCI reading above +100 suggests:**
+   - A) Price is unusually low relative to its average
+   - B) The market is in a perfect downtrend right now
+   - C) The trading volume has fallen to near zero
+   - D) Price is unusually high relative to its average ✅
+
+9. **Why are momentum indicators considered lagging?**
+   - A) They predict price far into the future
+   - B) They only work on weekly time frames
+   - C) They react to price rather than anticipate it ✅
+   - D) They require too much historical data
+
+10. **In an uptrend, the trend-plus-momentum approach says to take longs when:**
+    - A) Oversold conditions appear within the uptrend ✅
+    - B) Overbought conditions appear in the uptrend
+    - C) The price breaks below the 200 day average
+    - D) Momentum crosses below the zero line
 
 ---
 ---
@@ -6422,22 +7448,64 @@ There is no single best volatility or volume indicator. The best approach is to 
 
 ### 📝 Quiz
 1. **Bollinger Bands widen when:**
-   - A) Volatility decreases
-   - B) Volatility increases ✅
-   - C) Volume decreases
-   - D) They never change width
+   - A) Volatility decreases in the market
+   - B) Volatility increases in the market ✅
+   - C) Trading volume decreases in the market
+   - D) The bands never change their width
 
 2. **The key difference between Keltner Channels and Bollinger Bands is:**
-   - A) Keltner uses ATR for band width; Bollinger uses standard deviation ✅
-   - B) They are mathematically identical
-   - C) Keltner ignores price entirely
-   - D) Bollinger only works on crypto
+   - A) Keltner uses ATR; Bollinger uses std deviation ✅
+   - B) The two channels are mathematically identical
+   - C) Keltner channels ignore price data entirely
+   - D) Bollinger Bands only work on crypto assets
 
 3. **VWAP is primarily used by institutional traders to:**
-   - A) Predict next year's returns
-   - B) Benchmark execution quality against the volume-weighted average price of the day ✅
-   - C) Replace the need for any other indicator
-   - D) Measure long-term trend only
+   - A) Predict the returns for the next full year
+   - B) Replace the need for any other indicator
+   - C) Benchmark execution quality vs the daily average ✅
+   - D) Measure the long-term trend of the asset
+
+4. **The true range for a period is the greatest of three values:**
+   - A) Only the current high minus the current low
+   - B) Current high minus low, and two gap-adjusted values ✅
+   - C) Only the absolute change from the previous close
+   - D) The open minus close and the close minus low
+
+5. **Entry at Rs 100, ATR is 3, and the stop is set 2 ATRs below entry. Where is the stop?**
+   - A) At Rs 100, since ATR does not matter
+   - B) At Rs 97, half an ATR below the entry
+   - C) At Rs 106, two ATRs above the entry
+   - D) At Rs 94, two ATRs below the entry price ✅
+
+6. **A Bollinger Band squeeze (very narrow bands) often precedes:**
+   - A) A long period of absolutely no trading
+   - B) A guaranteed decline in the asset price
+   - C) A significant price move of either direction ✅
+   - D) A permanent narrowing of the Bollinger bands
+
+7. **Donchian Channels were popularized by:**
+   - A) The Turtle Trading experiment of the 1980s ✅
+   - B) A Japanese rice trader in the 1700s era
+   - C) A Nobel prize winning economist in 1990
+   - D) The Chicago Board of Trade in 1950
+
+8. **How does OBV treat volume on a day when price closes higher?**
+   - A) Volume is ignored for that particular day
+   - B) Volume is subtracted from the running total
+   - C) Volume is divided by the daily price range
+   - D) Volume is added to the running cumulative total ✅
+
+9. **A positive Chaikin Money Flow indicates:**
+   - A) Distribution, or selling pressure, is dominant
+   - B) The asset is perfectly neutral right now
+   - C) Accumulation, or buying pressure, is dominant ✅
+   - D) The volume data is unavailable for today
+
+10. **In the breakout walkthrough, why does signal convergence give high confidence?**
+    - A) Several indicator families confirm the same move ✅
+    - B) Because the price gapped up and closed higher
+    - C) The ATR reached its three month low point
+    - D) The bands were narrow for ten days in a row
 
 ---
 ---
@@ -6645,22 +7713,64 @@ Strategy design is an iterative process. You define rules, test them, analyze th
 
 ### 📝 Quiz
 1. **Why use filters/confirmation logic instead of a single indicator?**
-   - A) It guarantees profits
-   - B) It reduces false signals by requiring multiple conditions to align ✅
-   - C) It makes backtesting impossible
-   - D) It has no real benefit
+   - A) It reduces false signals via alignment ✅
+   - B) It guarantees profits on every single trade
+   - C) It makes backtesting impossible to run
+   - D) It has no real benefit for strategies
 
 2. **Sizing positions relative to ATR means:**
    - A) Every position gets the same number of shares
-   - B) Positions are smaller in volatile assets and larger in calm ones, keeping risk roughly constant ✅
+   - B) Smaller positions in volatile assets even out risk ✅
    - C) ATR has nothing to do with position size
    - D) Position size ignores volatility entirely
 
 3. **A max drawdown circuit-breaker is an example of a:**
-   - A) Trend indicator
-   - B) Portfolio-level risk control ✅
-   - C) Momentum indicator
-   - D) Data cleaning step
+   - A) Trend indicator used for entries
+   - B) Momentum indicator for exits
+   - C) A portfolio-level risk control ✅
+   - D) Data cleaning step in pipelines
+
+4. **The Kelly Criterion determines:**
+   - A) The best day of the week to enter a trade
+   - B) The optimal number of assets to trade
+   - C) The ideal time horizon for the strategy
+   - D) The optimal capital fraction to bet per trade ✅
+
+5. **Win rate is 60% and average win equals average loss. What is the full Kelly fraction?**
+   - A) 20%, since (0.6 - 0.4) / 1 equals 0.2 ✅
+   - B) 60%, since the win rate alone decides
+   - C) 10%, since half the win rate is used
+   - D) 40%, since the loss rate is subtracted
+
+6. **A trailing stop that is too tight will:**
+   - A) Lock in profits exactly at the market top
+   - B) Let losses run much larger than needed
+   - C) Exit on normal fluctuations of the asset ✅
+   - D) Ignore the highest price since entry
+
+7. **What can a full Kelly bettor expect?**
+   - A) Zero drawdowns on the account ever
+   - B) Drawdowns of 50% or more at some point ✅
+   - C) Identical returns to a fractional Kelly
+   - D) Guaranteed profits without any risk
+
+8. **What does a time-based exit accomplish?**
+   - A) It removes the need for any stop loss
+   - B) It guarantees a profitable exit always
+   - C) It doubles the position after losses
+   - D) It imposes a maximum holding period ✅
+
+9. **Which of these is a typical trend filter?**
+   - A) Volume exceeding its 20 day average
+   - B) RSI falling below the 30 level
+   - C) MACD crossing above its signal line
+   - D) Price trading above the 200 day SMA ✅
+
+10. **Where should a stop-loss be placed?**
+    - A) At a level that invalidates the thesis ✅
+    - B) At an arbitrary round percentage like 5%
+    - C) As close to entry as possible always
+    - D) At the exact point of maximum profit
 
 ---
 ---
@@ -6828,22 +7938,64 @@ Over the next 4 days, the stock rises to Rs. 104. You exit near the target with 
 
 ### 📝 Quiz
 1. **Mean reversion strategies work best on series that are:**
-   - A) Strongly trending
-   - B) Genuinely stationary/mean-reverting ✅
+   - A) Genuinely stationary and mean-reverting ✅
+   - B) Strongly trending in one direction
    - C) Completely random with no structure
-   - D) Always increasing
+   - D) Always increasing over the long run
 
 2. **The "half-life" of mean reversion estimates:**
-   - A) The total profit of a strategy
-   - B) How long it typically takes a deviation to close halfway back to the mean ✅
-   - C) The number of trades per year
-   - D) The Sharpe ratio
+   - A) The total profit of a trading strategy
+   - B) How long a deviation takes to close halfway ✅
+   - C) The total number of trades in the year
+   - D) The Sharpe ratio of the overall strategy
 
 3. **A Z-score below -2 in a mean-reversion strategy typically triggers:**
-   - A) A short entry
-   - B) A long entry (price is unusually low relative to its mean) ✅
-   - C) No action
-   - D) An immediate exit of all positions
+   - A) A short entry on the same instrument
+   - B) No action until the mean is reached
+   - C) A long entry since price is unusually low ✅
+   - D) An immediate exit of all open positions
+
+4. **What is the mathematical basis of mean reversion?**
+   - A) The presence of a strong linear trend
+   - B) The randomness of a pure random walk
+   - C) The existence of fat tail returns
+   - D) Stationarity of the series over time ✅
+
+5. **Price is 100, the 20-day mean is 105, and the standard deviation is 3. What is the Z-score?**
+   - A) About -1.67, below the -2 threshold ✅
+   - B) About -2.00, exactly at the threshold
+   - C) About +1.67, above the threshold
+   - D) About -0.60, quite close to the mean
+
+6. **In the Ornstein-Uhlenbeck process, what does theta represent?**
+   - A) The long term mean that price reverts to
+   - B) The volatility of the random shocks
+   - C) The speed of reversion toward the mean ✅
+   - D) The drift of the underlying trend
+
+7. **RSI below 30 roughly corresponds to which Z-score range?**
+   - A) Z-scores above +1.5 in the data
+   - B) Z-scores below about -1.5 ✅
+   - C) Z-scores near zero exactly
+   - D) Z-scores above +2.5 for sure
+
+8. **What is the key requirement for a pairs trading pair?**
+   - A) High correlation alone is fully sufficient
+   - B) Both stocks must be in the same sector
+   - C) The pair must have perfectly identical betas
+   - D) Genuine cointegration, not just correlation ✅
+
+9. **What is a value trap in mean reversion?**
+   - A) A stock that reverts faster than expected
+   - B) A stock with absolutely zero volatility at all
+   - C) A stock that is cheap for a fundamental reason ✅
+   - D) A stock that always trades above its mean
+
+10. **How can a strategy system choose between mean reversion and momentum?**
+    - A) Mean reversion when ADX low, momentum when high ✅
+    - B) Always use both approaches at the same time
+    - C) Never switch strategies based on market regime
+    - D) Momentum works only in bear market regimes
 
 ---
 ---
@@ -7038,22 +8190,64 @@ The National Stock Exchange (NSE) provides a liquid universe of stocks for momen
 
 ### 📝 Quiz
 1. **Cross-sectional momentum ranks assets:**
-   - A) Against their own past values only
-   - B) Against each other, going long top performers and short bottom performers ✅
-   - C) Alphabetically
-   - D) By market capitalization only
+   - A) Against each other: long top, short bottom ✅
+   - B) Against their own past values only
+   - C) By market capitalization size only
+   - D) Alphabetically just for convenience
 
 2. **"Momentum crashes" refer to:**
-   - A) Momentum strategies never losing money
-   - B) Sudden, severe reversals in momentum strategy performance during volatile regime shifts ✅
-   - C) A technical indicator
-   - D) A data error
+   - A) Momentum strategies never losing any money
+   - B) Severe reversals during volatile regime shifts ✅
+   - C) A technical indicator for entry signals
+   - D) A data error in the backtest engine itself
 
 3. **Time-series momentum asks:**
-   - A) How does this asset compare to others?
-   - B) Has this specific asset's own return been positive recently? ✅
-   - C) What is the asset's dividend yield?
-   - D) What is the bid-ask spread?
+   - A) How does this asset compare to others
+   - B) What is the asset's dividend yield
+   - C) Has this asset's own return been positive ✅
+   - D) What is the current bid-ask spread
+
+4. **What is absolute momentum?**
+   - A) A decision based on the asset's own return ✅
+   - B) A ranking of all assets against peers
+   - C) A comparison with the market index
+   - D) A measure of trading volume trends
+
+5. **Gross monthly return is 1.5%, turnover is 100% per month, and cost is 0.1% per trade. What is the net return?**
+   - A) 1.4%, since costs subtract from the gross ✅
+   - B) 1.5%, since costs are negligible here
+   - C) 1.6%, since costs add to the gross
+   - D) 0.5%, since turnover doubles the loss
+
+6. **Why do momentum strategies skip the most recent month?**
+   - A) To avoid the high transaction costs
+   - B) To keep the portfolio fully invested
+   - C) To avoid short-term reversal contamination ✅
+   - D) To match the accounting calendar month
+
+7. **Jegadeesh and Titman (1993) found that:**
+   - A) Momentum works only in emerging markets
+   - B) Past winners over 3-12 months beat past losers ✅
+   - C) Momentum profits never survive transaction costs
+   - D) Value investing beats momentum every time
+
+8. **Why did momentum strategies crash in 2009?**
+   - A) Interest rates rose suddenly in the crisis
+   - B) The data provider stopped updating prices
+   - C) Transaction costs tripled during the year
+   - D) Weak stocks rallied sharply in the reversal ✅
+
+9. **According to momentum decay patterns, the strongest positive momentum appears over:**
+   - A) 1 to 4 weeks, the short term
+   - B) 3 to 5 years, the long term
+   - C) 3 to 12 months, the medium term ✅
+   - D) 1 to 2 days, the ultra short term
+
+10. **A declining top-bottom decile spread for your momentum strategy suggests:**
+    - A) The market regime is improving, so hold on tight
+    - B) The strategy is working perfectly, so increase size
+    - C) Transaction costs are falling, so rebalance more
+    - D) The momentum premium is shrinking, so reduce allocation ✅
 
 ---
 ---
@@ -7252,22 +8446,64 @@ The expected return of a pairs trade is the mean reversion of the spread from th
 
 ### 📝 Quiz
 1. **Two series can be highly correlated in returns but NOT cointegrated. This means:**
-   - A) They move together perfectly forever
-   - B) They may drift apart in price over time with no stable long-run relationship ✅
-   - C) Correlation and cointegration are the same thing
-   - D) This situation is impossible
+   - A) This situation is impossible in data
+   - B) They move together perfectly forever
+   - C) Correlation equals cointegration here
+   - D) They may drift apart in price over time ✅
 
 2. **The hedge ratio in pairs trading determines:**
-   - A) The stop-loss level
-   - B) How many units of one asset to trade against the other to form the spread ✅
-   - C) The RSI threshold
-   - D) The dividend yield
+   - A) The stop-loss level for the trade
+   - B) Units of one asset against the other ✅
+   - C) The RSI threshold for the entries
+   - D) The dividend yield of the stocks
 
 3. **"Market neutral" in a pairs trade means:**
-   - A) The trade has zero risk
-   - B) Broad market moves largely cancel out, leaving exposure mainly to relative mispricing ✅
-   - C) The trade only works in flat markets
-   - D) No hedge ratio is needed
+   - A) The trade has absolutely zero risk
+   - B) No hedge ratio is ever needed at all
+   - C) Broad market moves largely cancel out ✅
+   - D) The trade only works in flat markets
+
+4. **The Engle-Granger test for cointegration involves:**
+   - A) Regress Y on X, then ADF test residuals ✅
+   - B) Comparing the means of the two price series
+   - C) Computing the correlation of daily returns
+   - D) Fitting two separate ARIMA models here
+
+5. **You test 100 pairs for cointegration. Using the Bonferroni correction, what significance threshold should you use?**
+   - A) 0.0100, since 1% is the standard
+   - B) 0.0500, since the threshold never moves
+   - C) 0.0001, since 0.01 divided by 100
+   - D) 0.0005, since 0.05 divided by 100 ✅
+
+6. **The spread widens because Stock A rises relative to Stock B. What is the correct trade?**
+   - A) Buy the spread: buy A and buy B together
+   - B) Hold until the spread widens further
+   - C) Short the spread: sell A and buy B ✅
+   - D) Exit all positions and stop trading
+
+7. **What is the first step in pair selection methodology?**
+   - A) Running the cointegration test on the pair
+   - B) A liquid universe grouped by sector first ✅
+   - C) Computing the hedge ratio for the pair
+   - D) Placing the first order immediately
+
+8. **What is a common stop-loss approach for a pairs trade?**
+   - A) Exit if the spread hits 3-4 standard deviations ✅
+   - B) Never use a stop loss in pairs trading
+   - C) Exit when the market index falls below 2%
+   - D) Exit at the very first sign of any profit
+
+9. **What is regime change risk in stat arb?**
+   - A) Transaction costs rising without warning
+   - B) The spread becoming too volatile to trade
+   - C) A merger permanently altering the relationship ✅
+   - D) The hedge ratio becoming perfectly stable
+
+10. **Why should fundamental economic logic support every pair?**
+    - A) Economic relationships tend to persist ✅
+    - B) Statistical relationships never break down
+    - C) It makes the backtest run much faster
+    - D) It removes the need for risk controls
 
 ---
 ---
@@ -7503,22 +8739,64 @@ A backtest is a tool for understanding, not a prediction of future returns. The 
 
 ### 📝 Quiz
 1. **Why is `signal.shift(1)` important before multiplying by returns in a backtest?**
-   - A) It's not important, purely stylistic
-   - B) It prevents using information not yet available at the time of the trade (lookahead bias) ✅
-   - C) It speeds up computation only
-   - D) It changes the sign of returns
+   - A) It prevents lookahead bias in the results ✅
+   - B) It is purely stylistic and does nothing
+   - C) It speeds up the computation only
+   - D) It changes the sign of the returns
 
 2. **The main advantage of event-driven over vectorized backtesting is:**
-   - A) It's always faster
-   - B) It more realistically handles order-dependent effects and timing ✅
-   - C) It requires no code
-   - D) There's no real advantage
+   - A) It is always much faster to run
+   - B) It handles order-dependent effects ✅
+   - C) It requires writing no code at all
+   - D) There is no real advantage at all
 
 3. **Walk-forward testing helps guard against:**
-   - A) Slippage only
-   - B) Overfitting to the full historical dataset by testing on genuinely unseen windows ✅
-   - C) Data source errors only
-   - D) Nothing meaningful
+   - A) Slippage in the execution model
+   - B) Errors in the data source only here
+   - C) Overfitting by testing on unseen data ✅
+   - D) Nothing that matters in practice
+
+4. **A strategy makes 500 trades per year with 0.5% cost per trade. How much capital is lost to costs?**
+   - A) About 5% of capital is lost
+   - B) About 1% of capital is lost
+   - C) About 10% of capital is lost
+   - D) About 2.5% of capital is lost ✅
+
+5. **What are typical transaction costs per trade for Indian cash equities?**
+   - A) About 10-20 basis points per trade ✅
+   - B) About 100-200 basis points per trade
+   - C) About 1-2 basis points per trade
+   - D) Zero, since costs never apply
+
+6. **Which of these can vectorized backtesting NOT handle well?**
+   - A) Simple moving average crossover signals
+   - B) Buy and hold strategies on one asset
+   - C) Pyramiding and partial fills in detail ✅
+   - D) Weekly rebalanced portfolios of assets
+
+7. **A signal is computed from the close price. When should the trade execute?**
+   - A) At the same close price immediately now
+   - B) At the opening price of the next bar ✅
+   - C) One full week after the signal appears
+   - D) At the next day's closing price instead
+
+8. **A backtest Sharpe ratio above 3 is best interpreted as:**
+   - A) A great strategy to deploy immediately
+   - B) A sign the data is perfectly clean
+   - C) The normal result for any good strategy
+   - D) Suspicious and likely overfit or erroneous ✅
+
+9. **"Peeking" in backtesting means:**
+   - A) Looking at the chart before trading live
+   - B) Using intraday data in daily backtests
+   - C) Tweaking parameters after seeing full results ✅
+   - D) Ignoring the first year of data entirely
+
+10. **If a strategy's gross Sharpe ratio is below 1, what is likely true?**
+    - A) It will probably not survive transaction costs ✅
+    - B) It will definitely beat the market index
+    - C) It has absolutely zero transaction costs
+    - D) It should be deployed with heavy leverage
 
 ---
 ---
@@ -7714,22 +8992,64 @@ Remember: the market is a complex adaptive system. No backtest can perfectly cap
 
 ### 📝 Quiz
 1. **Survivorship bias in backtesting occurs when:**
-   - A) A strategy is tested on too little data
-   - B) The historical universe only includes companies that still exist today, excluding delisted/bankrupt ones ✅
-   - C) A strategy has too many trades
-   - D) Transaction costs are ignored
+   - A) The universe is only today's firms ✅
+   - B) The strategy is tested on too little data
+   - C) The strategy has far too many trades
+   - D) Transaction costs are ignored entirely
 
 2. **Why can a purely random strategy sometimes show an impressively high Sharpe ratio?**
-   - A) Random strategies are secretly good
-   - B) With enough random attempts, some will show strong results purely by chance (multiple testing) ✅
-   - C) Sharpe ratios can't be computed for random data
-   - D) It never happens
+   - A) Random strategies are secretly good in markets
+   - B) With enough attempts, chance produces strong results ✅
+   - C) Sharpe ratios cannot be computed for random data
+   - D) It never happens in any backtest whatsoever
 
 3. **A key sign a backtested edge might be real rather than overfit is that it:**
-   - A) Only works on the exact original dataset
-   - B) Degrades gracefully rather than collapsing under out-of-sample tests and parameter perturbations ✅
-   - C) Requires extremely precise, unusual parameter values to work
-   - D) Was found by testing thousands of parameter combinations and keeping the best one
+   - A) Only works on the exact original dataset here
+   - B) Requires precise unusual parameter values to work
+   - C) Degrades gracefully under out-of-sample tests ✅
+   - D) Was found by testing many combos and keeping the best
+
+4. **What is the simplest form of lookahead bias?**
+   - A) Using revised economic data in the backtest
+   - B) Forgetting to adjust for stock splits ever
+   - C) Including delisted companies in the universe
+   - D) Signaling on today's close and trading at it ✅
+
+5. **By how much does survivorship bias typically inflate backtest returns per year?**
+   - A) About 1-3% per year in equity markets ✅
+   - B) About 10-20% per year in equity markets
+   - C) About 0.1% per year in equity markets
+   - D) It does not affect returns at all
+
+6. **What is the standard correction for data snooping?**
+   - A) Testing the strategy more times on the same data
+   - B) Increasing the number of parameter combinations
+   - C) Using a separate validation dataset for selection ✅
+   - D) Removing the worst performing years from data
+
+7. **In the simulation of 1000 random strategies, what best Sharpe can pure chance produce?**
+   - A) Around 0.5, which is quite modest
+   - B) Often above 2.0, which looks impressive ✅
+   - C) Exactly 3.0 every single time for sure
+   - D) Negative, since random returns lose money
+
+8. **How does publication bias distort quant research?**
+   - A) It makes failed strategies look successful
+   - B) It increases the data quality over time
+   - C) It reduces the number of published papers
+   - D) It hides failures since only wins get published ✅
+
+9. **What does the parameter sensitivity robustness check involve?**
+   - A) Fixing parameters and never changing them
+   - B) Using the best parameters from the backtest
+   - C) Varying each parameter by 10-20% and re-testing ✅
+   - D) Removing all parameters from the strategy
+
+10. **A Sharpe drops from 2.5 to 0.8 when a parameter changes by 10%. What does this suggest?**
+    - A) The strategy is likely overfit to parameters ✅
+    - B) The strategy is extremely robust to changes
+    - C) The data must contain a lot of errors
+    - D) The parameter should be doubled quickly
 
 ---
 ---
@@ -7937,23 +9257,65 @@ The conclusion: the strategy has a genuine but modest edge, is vulnerable to ext
 - [NumPy/SciPy — Official random sampling documentation](https://numpy.org/doc/stable/reference/random/index.html) — free, official
 
 ### 📝 Quiz
-1. **The bootstrap method for simulation differs from a pure Monte Carlo normal-distribution simulation because it:**
-   - A) Requires no historical data at all
-   - B) Resamples actual historical returns, preserving real data quirks like fat tails ✅
-   - C) Only works for options pricing
-   - D) Is mathematically identical to Monte Carlo
+1. **How does the bootstrap method differ from pure Monte Carlo?**
+   - A) It requires no historical data at all
+   - B) It resamples actual historical returns ✅
+   - C) It only works for option pricing models
+   - D) It is mathematically identical to Monte Carlo
 
-2. **Stress testing differs from random Monte Carlo simulation in that it:**
-   - A) Applies specific, historically-motivated adverse scenarios rather than random draws ✅
-   - B) Never uses historical data
-   - C) Is the same technique with a different name
-   - D) Cannot be done in Python
+2. **Stress testing differs from random Monte Carlo simulation in that:**
+   - A) It applies specific scenarios, not random ✅
+   - B) It never uses historical data at all
+   - C) It is the same technique under a new name
+   - D) Cannot be performed in Python at all
 
 3. **A strategy whose performance swings wildly with small parameter changes is a sign of:**
-   - A) A robust, reliable edge
-   - B) Likely overfitting to specific parameter values ✅
-   - C) High liquidity
-   - D) Low transaction costs
+   - A) A robust and reliable edge overall
+   - B) High liquidity in the market
+   - C) Likely overfitting to some values ✅
+   - D) Low transaction costs overall
+
+4. **What does block bootstrapping preserve that simple bootstrapping does not?**
+   - A) The calendar day of the week
+   - B) The number of trading days
+   - C) The original price levels
+   - D) Autocorrelation and volatility ✅
+
+5. **In a Monte Carlo simulation, the 5th percentile final value is Rs 95 for a Rs 100 start. What does this mean?**
+   - A) There is a 5% chance of ending below 95 ✅
+   - B) There is a 95% chance of ending at Rs 95
+   - C) The median outcome is exactly Rs 95
+   - D) The strategy always ends at Rs 95
+
+6. **Why does GBM use a drift of (mu - sigma^2/2)?**
+   - A) To account for the bid-ask spread
+   - B) To make the model run faster
+   - C) To account for volatility drag ✅
+   - D) To match the calendar year length
+
+7. **Cholesky decomposition is used in multi-asset simulation to:**
+   - A) Speed up the random number generation
+   - B) Generate correlated random draws ✅
+   - C) Remove outliers from the data now
+   - D) Convert prices into returns here
+
+8. **What is the main limitation of Monte Carlo using normal returns?**
+   - A) It runs too slowly to be useful here
+   - B) It requires too much memory here
+   - C) It cannot handle daily data at all
+   - D) It underestimates extreme events ✅
+
+9. **Which stress scenarios should every strategy be tested against at minimum?**
+   - A) The 2008 crisis and the 2020 COVID crash ✅
+   - B) The 1997 crisis and the 2018 Volmageddon
+   - C) The 2010 flash crash and the 2008 crisis
+   - D) No stress testing is ever required
+
+10. **How should simulation results inform position sizing?**
+    - A) Always trade the maximum position possible
+    - B) Increase size based on the best percentile
+    - C) Ignore simulation and use gut feel
+    - D) Reduce size when drawdown is too large ✅
 
 ---
 ---
@@ -8166,22 +9528,64 @@ The resulting portfolio has lower volatility than any individual strategy, a hig
 
 ### 📝 Quiz
 1. **Risk parity allocates capital so that:**
-   - A) Every asset gets equal capital
-   - B) Every asset contributes roughly equally to total portfolio risk ✅
+   - A) Weighting follows the market cap only
+   - B) Every asset receives exactly equal capital
    - C) The riskiest asset gets the most capital
-   - D) Weighting follows market cap only
+   - D) Each asset contributes equally to total risk ✅
 
 2. **Why do professional quants often use "fractional Kelly" instead of full Kelly?**
-   - A) Full Kelly is illegal
-   - B) Full Kelly is extremely sensitive to estimation errors in win rate/payoff ratio ✅
-   - C) Fractional Kelly always produces higher returns
-   - D) There's no real reason
+   - A) Full Kelly is illegal to use in the markets
+   - B) Full Kelly is very sensitive to estimation errors ✅
+   - C) Fractional Kelly always gives higher returns
+   - D) There is no real reason to do this at all
 
 3. **A key cost consideration when rebalancing frequently is:**
-   - A) Rebalancing is always free
-   - B) Transaction costs from frequent trading can erode the benefits of rebalancing ✅
-   - C) Rebalancing eliminates all risk
+   - A) Rebalancing is always completely free
+   - B) Rebalancing eliminates all portfolio risk
+   - C) Transaction costs erode rebalancing gains ✅
    - D) It has no relation to trading costs
+
+4. **A drawback of market-cap-weighting is:**
+   - A) It incurs very high turnover costs
+   - B) It ignores dividends completely
+   - C) It needs daily rebalancing work
+   - D) Large stocks dominate the portfolio ✅
+
+5. **Win rate 55%, win size is 1.5x loss size. What is the Kelly fraction?**
+   - A) 25%, since 0.55 minus 0.45/1.5 is 0.25 ✅
+   - B) 55%, since the win rate alone decides it
+   - C) 15%, since the loss rate is used
+   - D) 35%, since 1.5 minus 0.45 is used
+
+6. **Equal-weight portfolios tend to tilt toward:**
+   - A) The largest and most liquid stocks
+   - B) Low volatility blue chip companies
+   - C) Smaller and higher volatility names ✅
+   - D) Government bonds and treasuries
+
+7. **When all assets have the same expected return, the minimum variance portfolio:**
+   - A) Always loses to the market portfolio
+   - B) Produces the highest Sharpe ratio overall ✅
+   - C) Has the highest possible expected return
+   - D) Cannot be computed without forecasts
+
+8. **Risk parity is designed primarily for:**
+   - A) Long-only portfolios of assets ✅
+   - B) Highly leveraged short positions
+   - C) Single asset day trading only
+   - D) Options only portfolios instead
+
+9. **With correlations around 0.8, how many stocks are needed for adequate diversification?**
+   - A) About 5 stocks are fully sufficient
+   - B) About 10 to 15 stocks are sufficient
+   - C) Even 50 stocks may not be sufficient ✅
+   - D) Exactly one single stock is enough
+
+10. **A Kelly fraction below 5% suggests what about the strategy?**
+    - A) It likely lacks enough edge to trade ✅
+    - B) It is definitely the best strategy to use
+    - C) It should be traded with maximum leverage
+    - D) The estimates are perfectly accurate
 
 ---
 ---
@@ -8420,22 +9824,64 @@ This strategy outperforms the benchmark with less risk. The Sharpe ratio of 0.75
 
 ### 📝 Quiz
 1. **The main difference between Sharpe and Sortino ratios is:**
-   - A) They are identical
-   - B) Sortino only penalizes downside volatility, while Sharpe penalizes total volatility ✅
-   - C) Sharpe is always higher
+   - A) Sortino penalizes only downside risk ✅
+   - B) The two ratios are completely identical
+   - C) Sharpe is always the higher number
    - D) Sortino ignores returns entirely
 
 2. **Why is comparing a strategy's return to a benchmark essential?**
-   - A) It's not essential
-   - B) A return that looks good in isolation may actually underperform a simple passive alternative ✅
-   - C) Benchmarks are only relevant for mutual funds
+   - A) It is not really essential at all
+   - B) A good return may still lag the index ✅
+   - C) Benchmarks only matter for mutual funds
    - D) It doubles the computation needed
 
 3. **The Calmar Ratio specifically emphasizes:**
-   - A) Total volatility
-   - B) Return relative to maximum drawdown (tail-risk-adjusted performance) ✅
-   - C) Systematic risk only
-   - D) Trading volume
+   - A) Return relative to the max drawdown ✅
+   - B) Total volatility of the returns
+   - C) Systematic risk only through beta
+   - D) Trading volume in the market
+
+4. **CAGR is 15%, volatility is 12%, risk-free is 6%. What is the Sharpe ratio?**
+   - A) 1.25, since 15% divided by 12%
+   - B) 0.50, since 6% divided by 12%
+   - C) 2.50, since 15% plus 12% over 6%
+   - D) 0.75, since (15% - 6%) / 12% ✅
+
+5. **What does the Information ratio measure?**
+   - A) Excess return per tracking error ✅
+   - B) Total return over the maximum drawdown
+   - C) The win rate of the strategy overall
+   - D) The number of trades per year here
+
+6. **The Treynor ratio measures excess return per unit of:**
+   - A) Total volatility of the returns
+   - B) The maximum drawdown size used
+   - C) Systematic risk measured by beta ✅
+   - D) The strategy's tracking error
+
+7. **A 50% drawdown requires what gain to recover to breakeven?**
+   - A) A 50% gain, since loss is symmetric
+   - B) A 100% gain, since the base shrinks ✅
+   - C) A 25% gain, since losses compound
+   - D) A 150% gain, since fees apply
+
+8. **Why is annualizing a one month 2% return dangerous?**
+   - A) It overstates the risk free rate
+   - B) It makes the drawdown look smaller
+   - C) It ignores transaction costs entirely
+   - D) It magnifies noise in short periods ✅
+
+9. **P-hacking in performance evaluation means:**
+   - A) Using robust standard errors in the analysis
+   - B) Comparing against multiple benchmarks
+   - C) Choosing the time period that flatters ✅
+   - D) Computing rolling performance metrics
+
+10. **A rolling Sharpe that declines steadily over time suggests:**
+    - A) The benchmark is outperforming
+    - B) The strategy is improving steadily
+    - C) The market is perfectly stable
+    - D) The strategy is decaying in its edge ✅
 
 ---
 ---
@@ -8751,22 +10197,64 @@ This type of comparison dashboard is directly useful for portfolio construction:
 
 ### 📝 Quiz
 1. **Why is `@st.cache_data` important for a dashboard with expensive data pulls?**
-   - A) It's purely cosmetic
-   - B) Without it, Streamlit re-runs the entire script (including expensive data pulls) on every interaction ✅
-   - C) It has no functional impact
-   - D) It only works for CSV files
+   - A) It only works for CSV files as well
+   - B) It is purely cosmetic and does nothing
+   - C) It has no functional impact at all
+   - D) It avoids full reruns each time ✅
 
 2. **`st.slider` is most appropriate for:**
-   - A) Selecting a single categorical option from a dropdown
-   - B) Letting a user pick a numeric value within a range interactively ✅
-   - C) Uploading files
-   - D) Displaying a static chart
+   - A) Selecting an option from a dropdown list
+   - B) Picking a numeric value within a range ✅
+   - C) Uploading files into the dashboard
+   - D) Displaying a static chart on a page
 
 3. **The general dashboard pattern in this node is:**
    - A) Hardcode all results, no interactivity
-   - B) Widgets capture user input → cached data load → backtest runs → results displayed ✅
-   - C) Dashboards can't use functions from earlier in a project
-   - D) Caching is unrelated to dashboard performance
+   - B) Caching is unrelated to performance
+   - C) Widgets, cached data, backtest, display ✅
+   - D) Dashboards can't reuse project functions
+
+4. **What do tabs do in a Streamlit layout?**
+   - A) Group related content into separate views ✅
+   - B) Place elements side by side in columns
+   - C) Hide content until a button is clicked
+   - D) Display single numbers with deltas
+
+5. **What does st.multiselect allow a user to do?**
+   - A) Choose multiple options at once ✅
+   - B) Upload multiple files at once
+   - C) Pick a single date from a calendar
+   - D) Draw charts with the mouse here
+
+6. **Which of these should NOT use caching?**
+   - A) Loading price data from an API
+   - B) Running an expensive backtest
+   - C) Functions that output random values ✅
+   - D) Computing a covariance matrix
+
+7. **What is st.session_state used for?**
+   - A) Storing data across browser sessions
+   - B) Preserving values across script reruns ✅
+   - C) Caching large data frames overall
+   - D) Styling the dashboard theme here
+
+8. **What does st.metric display?**
+   - A) A single key number with delta ✅
+   - B) A full data table with filters
+   - C) An interactive line chart
+   - D) A progress bar for long tasks
+
+9. **What does st.download_button do?**
+   - A) Installs new Python packages
+   - B) Deploys the app to the cloud
+   - C) Exports results as a file ✅
+   - D) Refreshes the cached data
+
+10. **How can you deploy a public Streamlit dashboard for free?**
+    - A) By embedding it in a Jupyter notebook
+    - B) By emailing the script to users
+    - C) By converting it to a PDF file
+    - D) Via the Streamlit Community Cloud ✅
 
 ---
 ---
@@ -8995,22 +10483,64 @@ Each chart serves a specific purpose in the evaluation. Together they paint a co
 
 ### 📝 Quiz
 1. **Truncating a y-axis in a way that visually exaggerates a small effect is:**
-   - A) A recommended best practice
-   - B) A misleading design choice to avoid ✅
+   - A) A misleading design choice to avoid ✅
+   - B) A recommended best practice for charts
    - C) Required for all financial charts
-   - D) Irrelevant to interpretation
+   - D) Irrelevant to the interpretation
 
 2. **A chart with no accompanying interpretive text:**
    - A) Is always sufficient on its own
-   - B) Forces the reader to do the analytical work the researcher should be doing ✅
+   - B) Forces the reader to do analysis ✅
    - C) Is the professional standard
    - D) Should never include a title
 
 3. **Why prefer direct labeling over a legend when practical?**
-   - A) It's not actually preferable
-   - B) It reduces the reader's need to look back and forth between chart and legend ✅
-   - C) Legends are illegal in research
-   - D) Direct labels use less color
+   - A) It reduces chart-legend switching ✅
+   - B) It is not actually preferable at all
+   - C) Legends are illegal in research work
+   - D) Direct labels use less color here
+
+4. **Why should pie charts generally be avoided in research?**
+   - A) They use too much color to render
+   - B) Humans are poor at comparing angles ✅
+   - C) They cannot show percentages
+   - D) They require interactive software
+
+5. **What is the best fix for overplotting in a dense scatter plot?**
+   - A) Switch to a pie chart instead
+   - B) Remove all of the data points now
+   - C) Increase the marker size greatly
+   - D) Use transparency, sampling, hexbin ✅
+
+6. **What are the four elements of data storytelling?**
+   - A) Data, code, charts, and reports in one
+   - B) Title, axis, legend, and labels in one
+   - C) Context, evidence, interpretation, implication ✅
+   - D) Mean, median, mode, and range in one go
+
+7. **Which color combination should be avoided for accessibility?**
+   - A) Blue and orange combinations
+   - B) Pure red and green combinations ✅
+   - C) Blue and red combinations
+   - D) Gray and black combinations
+
+8. **What do gratuitous 3D effects do in charts?**
+   - A) Add useful information and clarity
+   - B) Improve data accuracy overall
+   - C) Make charts easier to read here
+   - D) Distort perception, adding no info ✅
+
+9. **When should dual y-axes be used?**
+   - A) Whenever the chart looks complex
+   - B) As the default for every chart
+   - C) Sparingly, since they can mislead ✅
+   - D) Never, under any circumstances
+
+10. **Which chart type best communicates the distribution of daily returns?**
+    - A) A histogram with a zero line ✅
+    - B) A pie chart of the returns
+    - C) A scatter plot of prices
+    - D) A bar chart of the mean
 
 ---
 ---
@@ -9255,22 +10785,64 @@ Reading well-written research papers is the best way to learn to write them. Bef
 
 ### 📝 Quiz
 1. **The Results section of a research paper should:**
-   - A) Include heavy interpretation and opinion
-   - B) Present findings objectively, with interpretation reserved for the Discussion section ✅
+   - A) Present findings without interpretation ✅
+   - B) Include heavy interpretation and opinion
    - C) Be skipped in favor of the Conclusion
    - D) Only contain the abstract restated
 
 2. **A good Methodology section should be detailed enough that:**
-   - A) Only the original author can understand it
-   - B) Another researcher could replicate the study ✅
-   - C) It can be skipped by readers
-   - D) It contains no numbers
+   - A) Only the original author can understand
+   - B) Another researcher could replicate it ✅
+   - C) It can be skipped by most readers
+   - D) It contains no numbers at all here
 
 3. **The Literature Review section's main purpose is to:**
-   - A) Pad the paper's length
-   - B) Situate the current work relative to what's already known in the field ✅
-   - C) Present the final results
-   - D) List the author's credentials
+   - A) Pad the paper's length with filler
+   - B) List the author's credentials
+   - C) Situate the work in prior research ✅
+   - D) Present the final results first
+
+4. **What is true about the abstract?**
+   - A) It is written first and never revised
+   - B) It should contain all the raw data
+   - C) It is optional for research papers
+   - D) It is written last and must stand alone ✅
+
+5. **Which of these is the correct introduction structure?**
+   - A) Hook, background, gap, question, preview ✅
+   - B) Preview, results, conclusion, appendix
+   - C) Abstract, data, charts, discussion
+   - D) Question, results, references, conclusion
+
+6. **What should the Discussion section include?**
+   - A) Only a restatement of the tables
+   - B) The raw data in full detail here
+   - C) Interpretation and limitations ✅
+   - D) A list of future reading materials
+
+7. **What does the Conclusion provide?**
+   - A) New data not shown earlier
+   - B) The key takeaway and next steps ✅
+   - C) A second literature review
+   - D) A detailed methodology repeat
+
+8. **How many relevant papers should a course project literature review cite?**
+   - A) About 1 or 2 papers is enough
+   - B) At least 30 papers, no matter what
+   - C) Exactly 100 papers every time
+   - D) At least 5-10 relevant papers ✅
+
+9. **Which section answers "given these results, what have we learned?"**
+   - A) The Methodology section
+   - B) The Abstract section
+   - C) The Discussion section ✅
+   - D) The References section
+
+10. **What does this node recommend for clear research writing?**
+    - A) Use active voice and cut extra words ✅
+    - B) Use passive voice in every sentence
+    - C) Add decorative phrases to fill pages
+    - D) Never revise or edit the draft
 
 ---
 ---
@@ -9493,27 +11065,289 @@ The best practice for improving communication is to present your work to others 
 
 ### 📝 Quiz
 1. **Explicitly stating a study's limitations typically:**
-   - A) Undermines the reader's trust in the finding
-   - B) Increases the reader's trust by demonstrating research maturity and honesty ✅
+   - A) Increases reader trust through honesty ✅
+   - B) Undermines the reader's trust in it
    - C) Is unnecessary if the result is strong
-   - D) Should always be hidden
+   - D) Should always be hidden entirely
 
 2. **A spoken presentation, compared to a written technical report, should:**
-   - A) Include the exact same level of methodological detail
-   - B) Lead with the key finding and save technical depth for follow-up questions ✅
-   - C) Never mention the result
+   - A) Include the same methodology detail
+   - B) Lead with the finding; save depth ✅
+   - C) Never mention the result outright
    - D) Be read verbatim from the written report
 
 3. **Why reference data sources and prior work explicitly?**
-   - A) It's optional and rarely done professionally
-   - B) It supports academic integrity and lets readers independently verify or extend the work ✅
-   - C) It has no real purpose
-   - D) Only journals require this, not student work
+   - A) It is optional and rarely done here
+   - B) Only journals require this, not students
+   - C) It supports integrity and verification ✅
+   - D) It has no real purpose whatsoever
+
+4. **What is true about presenting a statistic like a Sharpe ratio?**
+   - A) The number alone always tells the full story
+   - B) Context must be added for the reader ✅
+   - C) Context makes the statistic less credible
+   - D) Statistics should never be explained
+
+5. **When you present a number, which question should you answer?**
+   - A) What does this number measure and its value? ✅
+   - B) How many decimal places can be included?
+   - C) Which font looks the most professional?
+   - D) What color should the chart background be?
+
+6. **In the six-point communication template, "the result" step asks for:**
+   - A) Every statistic computed in the backtest
+   - B) A full history of parameter choices
+   - C) One number for the key performance metric ✅
+   - D) All charts produced during research
+
+7. **A report for a recruiter should emphasize:**
+   - A) The complete mathematical derivations
+   - B) Results and practical applicability ✅
+   - C) Raw data downloads and scripts
+   - D) The full list of cited references
+
+8. **Data source citations should include:**
+   - A) Only the name of the website used
+   - B) The author's browser and habits
+   - C) Only the number of files downloaded
+   - D) Tickers, date ranges, access dates ✅
+
+9. **In the 10-minute presentation structure, most time goes to:**
+   - A) The results with key charts ✅
+   - B) A complete literature review
+   - C) All methodology equations
+   - D) The full reference list
+
+10. **When asked a question you cannot answer in a presentation, you should:**
+    - A) Repeat an earlier slide verbatim
+    - B) Invent a confident answer quickly
+    - C) Change the subject immediately now
+    - D) Say so honestly; mention related work ✅
 
 ---
 ---
 
-## Node 41: Capstone I — Tier 1 Readiness
+## Node 41: LaTeX for Quantitative Writing
+
+### 🎯 Hook
+Your backtest is done, your dashboard is built, and your strategy makes money in simulation. Now comes the moment that decides whether anyone takes it seriously: the write-up. Word processors fight you the moment you paste a covariance matrix or a Greek letter; LaTeX is a typesetting system built exactly for this job. It is how virtually every academic paper, quant research report, and finance thesis is written. Learn it once in this node and it will carry you through the capstone and every paper you write afterwards.
+
+### 📌 Learning Objectives
+- Explain what LaTeX is and how its compile model differs from a word processor
+- Set up a document with a preamble, document class, and packages in Overleaf
+- Write inline and display mathematics with fractions, sums, and subscripts
+- Build aligned equation blocks with numbering and labels
+- Create tables, figures, and TikZ diagrams
+- Define theorem environments and custom macros
+- Manage citations and a bibliography with BibTeX
+- Integrate LaTeX into a quant research writing workflow
+
+---
+
+### What is LaTeX?
+LaTeX is a markup language and typesetting system for producing high-quality documents, especially ones heavy in mathematics. You write plain text with commands (like \frac{a}{b}) and a compiler (pdfLaTeX, XeLaTeX, or LuaLaTeX) renders the final PDF. Word processors show you a "what you see is what you get" canvas. LaTeX is "what you write is what you get": you focus on content and structure, and the engine handles layout, numbering, and cross-references automatically.
+
+This compile model has three concrete payoffs for quant researchers:
+
+- **Consistent typography**: every equation, table, and heading follows the same professional rules, with no manual formatting drift between drafts.
+- **Automatic numbering**: equations, figures, tables, and sections are numbered and cross-referenced for you; reordering content never breaks references.
+- **Plain-text source**: your document is Git-friendly text. Diffs show exactly what changed between draft versions, just like code.
+
+```mermaid
+flowchart LR
+    A["LaTeX source .tex"] --> B["Compiler: pdfLaTeX"]
+    B --> C["PDF with numbering and cross-refs"]
+    D["Figures exported from Python"] --> A
+    E["BibTeX .bib file"] --> A
+```
+
+### Getting Started with Overleaf
+Overleaf is a free, browser-based LaTeX editor that requires no installation: create a project, paste source, and it compiles in the cloud while you type. It is the standard starting point and is used throughout this node. The alternative is a local installation (MiKTeX or TeX Live) paired with an editor like VS Code or TeXstudio. Choose Overleaf first, and move local only when a project grows large.
+
+### Document Structure
+Every LaTeX document has two parts: the preamble (everything before \begin{document}) and the body. The preamble sets the document class, loads packages, and defines macros. The body is the actual content.
+
+```latex
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{graphicx, booktabs}
+\title{Mean Reversion on the NIFTY 50}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+Mean reversion is a well-studied effect in equity markets.
+\section{Methodology}
+We test a Z-score entry rule on daily data.
+\end{document}
+```
+
+The document class (article, report, beamer) sets the overall layout. Packages extend behavior: amsmath for advanced math, graphicx for images, booktabs for publication tables. Get into the habit of loading only the packages you need.
+
+### Math Mode
+Math in LaTeX comes in two flavors: inline math, written between single dollar signs, and display math, written between \[ and \]. Display equations can be numbered inside an equation environment and labelled for cross-referencing with \label and \ref.
+
+```latex
+The Sharpe ratio is written inline as $SR = \frac{\mu - r_f}{\sigma}$.
+\[
+SR = \frac{\mu - r_f}{\sigma}
+\]
+\begin{equation}
+CAGR = \left( \frac{P_{end}}{P_{start}} \right)^{1/n} - 1
+\label{eq:cagr}
+\end{equation}
+Equation \ref{eq:cagr} shows the compound annual growth rate.
+```
+
+For multi-line derivations, the align environment with the & alignment character and \\ line breaks is the workhorse of quantitative writing:
+
+```latex
+\begin{align}
+\log R_t &= \log P_t - \log P_{t-1}\\
+&= r_t + \log R_{t-1}
+\end{align}
+```
+
+Fractions, sums, products, subscripts, superscripts, and Greek letters cover almost everything in this course: \frac{a}{b}, \sum_{i=1}^{n}, \prod_{i=1}^{n}, r_t^2, \beta, \sigma, \mu, \rho. When you are unsure of a symbol's command, draw it on Detexify and it will suggest the LaTeX code.
+
+### Tables, Figures, and TikZ
+Publication-quality tables use the tabular environment; booktabs gives clean horizontal rules. The figure environment floats images and captions them automatically.
+
+```latex
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\toprule
+Strategy & Sharpe & Max Drawdown \\
+\midrule
+Momentum & 1.12 & -18.3\% \\
+Reversion & 0.89 & -22.1\% \\
+\bottomrule
+\end{tabular}
+\caption{Backtest results comparison.}
+\end{table}
+```
+
+Diagrams and plots can be drawn natively in LaTeX with TikZ and pgfplots. This produces vector-quality graphics that match the document's fonts. For heavy data analysis, the common workflow is: plot in Python (Matplotlib), save to PDF, and include it with \includegraphics. Keep figure files in the project folder and reference them by filename.
+
+### Theorems and Macros
+The amsthm package lets you define theorem-like environments for propositions, lemmas, and definitions, which are numbered automatically. Custom macros with \newcommand let you define shorthand, so you write \R once and the source stays readable and consistent.
+
+```latex
+\usepackage{amsthm}
+\newtheorem{proposition}{Proposition}
+\newcommand{\R}{\mathbb{R}}
+
+\begin{proposition}
+Under a linear factor model, portfolio variance decomposes
+into systematic and idiosyncratic parts.
+\end{proposition}
+```
+
+Macros are the LaTeX equivalent of functions: define a piece of notation once, use it everywhere, and change it in one place.
+
+### Citations and Bibliography
+Papers and reports cite prior work with BibTeX: a .bib file stores references, and \cite{key} inserts them in the text. The bibliography is generated automatically with \bibliography{references} and a style such as plain or abbrv.
+
+```latex
+% references.bib
+@article{carhart1997,
+  author  = {Carhart, Mark M.},
+  title   = {On Persistence in Mutual Fund Performance},
+  journal = {Journal of Finance},
+  year    = {1997},
+  volume  = {52},
+  pages   = {57--82}
+}
+```
+
+In the text you write: "Carhart \cite{carhart1997} documents momentum persistence." The citation keys stay stable while the formatting style can change with one command. Google Scholar and Zotero export BibTeX entries directly, which keeps reference management near-zero-effort.
+
+### The Quant Research Writing Workflow
+A practical workflow for the capstone: keep the document in Git, generate every number from Python (never type statistics by hand), export figures as PDF, and rebuild the PDF after every change. The report compiles from one source of truth, so the text and the numbers cannot drift apart. This is the same discipline as reproducible research: someone (including future you) can re-run everything from source.
+
+### Common Pitfalls
+- **Forgetting the preamble**: an undefined \begin{align} usually means amsmath is missing.
+- **Mixing math and text**: write $x = 5$ not x = 5; the latter produces italic text, not math spacing.
+- **Hand-typing results**: every number in the report should come from Python; a typed number will be wrong somewhere.
+- **Ignoring compilation errors**: fix errors in order; LaTeX stops at the first one and later errors are usually cascade effects.
+- **Forgetting \\ inside align**: every new equation row needs an explicit line break command.
+
+---
+
+### 🔗 Free Resources
+- [Dr. Trefor Bazett -- LaTeX Tutorials (YouTube playlist)](https://www.youtube.com/playlist?list=PLHXZ9OQGMqxcWWkx2DMnQmj5os2X5ZR73) -- free video series, beginner to advanced
+- [Overleaf -- Learn LaTeX in 30 minutes](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes) -- free official tutorial
+- [The LaTeX Wikibook](https://en.wikibooks.org/wiki/LaTeX) -- free comprehensive reference
+- [Detexify -- LaTeX symbol lookup by drawing](https://detexify.kirelabs.org/classify.html) -- free symbol tool
+- [TeX StackExchange](https://tex.stackexchange.com/) -- free Q&A for every LaTeX problem
+
+### 📝 Quiz
+1. **Why do quant researchers prefer LaTeX over word processors for reports?**
+   - A) It automatically generates live market data charts for you
+   - B) It produces professionally typeset math with consistent formatting ✅
+   - C) It runs backtests faster than Python does on large data
+   - D) It replaces the need for statistical software entirely
+
+2. **Which part of a LaTeX source file sets the class, packages, and macros?**
+   - A) The preamble located before the document body begins ✅
+   - B) The abstract section placed near the document end
+   - C) The bibliography file written in BibTeX format
+   - D) The table of contents generated by the compiler
+
+3. **A fraction inside a sentence must be written using:**
+   - A) A separate pdf file compiled before the text
+   - B) A figure environment with a caption line
+   - C) A tabular environment with horizontal rules
+   - D) Inline math with dollar signs, like $\frac{a}{b}$ ✅
+
+4. **What does the align environment add over plain display math?**
+   - A) Automatic charts and plots generated from your data
+   - B) Built-in spell checking of every equation line
+   - C) Numbered rows with aligned columns and line breaks ✅
+   - D) A guaranteed fixed page count for the report
+
+5. **You update a chart after re-running the backtest. How do you refresh the report?**
+   - A) Recompile the document with the old image still in place
+   - B) Overwrite the plot file, then recompile the document ✅
+   - C) Crop the new chart and paste it into the old PDF
+   - D) Change the figure filename to match the old chart
+
+6. **Which of the following is the most reproducible research practice?**
+   - A) Typing final statistics manually after each run
+   - B) Exporting charts as low resolution images
+   - C) Copying tables from Excel into the source
+   - D) Generating every number from Python scripts ✅
+
+7. **Your equations are numbered by hand and cross-references keep breaking. Best fix?**
+   - A) Switch to label and ref inside equation environments ✅
+   - B) Renumber everything alphabetically on every draft
+   - C) Delete all cross-references from the report
+   - D) Insert the equation numbers as image files
+
+8. **To write one inline equation and one display equation, how many dollar signs are needed?**
+   - A) Two: one pair for the inline equation here
+   - B) Six: one pair for every symbol written
+   - C) Four: one pair for inline, one pair for display ✅
+   - D) Eight: a pair for each math element now
+
+9. **Using booktabs, how many rule commands does a simple table with a header and body use?**
+   - A) Two rules: a top rule and a bottom rule
+   - B) Three rules: top, middle, and bottom ✅
+   - C) Four rules: one for each single row
+   - D) One rule: the outer table border
+
+10. **You type $2^3^2$ and LaTeX errors with "double superscript." What is the fix?**
+    - A) Remove one of the superscripts entirely
+    - B) Use parentheses instead of braces
+    - C) Add a space between the two superscripts
+    - D) Wrap the inner part in braces: $2^{3^2}$ ✅
+
+---
+
+## Node 42: Capstone I — Tier 1 Readiness
 
 ### 🎯 Hook
 This is where every single World in this course converges into one deliverable: a complete, honest, end-to-end research project — the same kind of artifact that gets a student noticed by real research teams.
@@ -9733,24 +11567,66 @@ The capstone is the most important single deliverable in this course. It is the 
 
 ### 📝 Quiz
 1. **What distinguishes the Capstone from earlier auto-graded node quizzes?**
-   - A) It's shorter
-   - B) It's manually reviewed against a full checklist covering the entire pipeline, especially bias/robustness practices ✅
-   - C) It doesn't require any code
-   - D) It's optional and ungraded
+   - A) It is much shorter than the other quizzes
+   - B) It is manually reviewed against a full checklist ✅
+   - C) It does not require any code at all here
+   - D) It is completely optional and ungraded here
 
-2. **Why must the capstone include an explicit bias audit (survivorship, lookahead, data snooping)?**
-   - A) It's not actually required
-   - B) These are the most common and most disqualifying mistakes in early-career quant portfolios ✅
-   - C) Bias only matters for academic papers
-   - D) It's purely a formality
+2. **Why must the capstone include an explicit bias audit?**
+   - A) Bias matters only in academic papers
+   - B) Bias errors are the most damning ✅
+   - C) It is purely a formality to fill
+   - D) It is not actually required here
 
 3. **Passing the Capstone gates entry into:**
-   - A) A certificate with no further opportunities
-   - B) Tier 2 real, larger-scope project assignments with mentorship ✅
-   - C) A refund
-   - D) Node 1 again
+   - A) A certificate with no further options
+   - B) A refund of the entire course here
+   - C) Tier 2 projects with mentorship ✅
+   - D) Restarting from Node 1 all over again
+
+4. **A strong research question should specify the strategy, universe, and:**
+   - A) The author's favorite software
+   - B) The number of pages planned here
+   - C) The chart color scheme to use
+   - D) Time period and the criterion ✅
+
+5. **Why should every signal parameter (e.g., a Z-score of 2.0) be documented?**
+   - A) So the report has more pages
+   - B) So the code runs much faster
+   - C) So the charts look better
+   - D) So the reason for each choice ✅
+
+6. **Which stage does the lesson call the most important section for the reviewer?**
+   - A) The dashboard stage
+   - B) The data stage here
+   - C) The bias audit step ✅
+   - D) The write-up stage
+
+7. **The capstone write-up should follow:**
+   - A) The structure from Node 39 ✅
+   - B) A casual blog post format
+   - C) A list of bullet points only
+   - D) No particular structure at all
+
+8. **The capstone dashboard should let a reviewer:**
+   - A) Edit the raw dataset by hand
+   - B) Change the course color scheme
+   - C) Rewrite the literature review
+   - D) Explore parameters and see results ✅
+
+9. **How can parameter optimization on the full dataset be avoided?**
+   - A) Using an out-of-sample split ✅
+   - B) Testing even more parameters
+   - C) Removing the bias audit here
+   - D) Ignoring transaction costs
+
+10. **Who reviews the capstone, and what do they check specifically?**
+    - A) A human, checking for the biases ✅
+    - B) An automated script that checks style
+    - C) A random selection of course peers
+    - D) No one; the quiz is self-graded
 
 ---
 ---
 
-*End of curriculum. 41/41 Nodes complete across 12 Worlds + Orientation.*
+*End of curriculum. 42/42 Nodes complete across 12 Worlds + Orientation.*
