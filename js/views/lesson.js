@@ -181,6 +181,23 @@ function highlightBlocks() {
   });
 }
 
+function fixMermaidViewBoxes() {
+  document.querySelectorAll('#lesson-content .mermaid svg').forEach(function(svg) {
+    var root = svg.querySelector('.root');
+    if (!root || !root.getBBox) return;
+    var bb;
+    try { bb = root.getBBox(); } catch (e) { return; }
+    if (!bb || !isFinite(bb.width) || bb.width === 0) return;
+    var m = 24;
+    var x = Math.floor(bb.x - m);
+    var y = Math.floor(bb.y - m);
+    var w = Math.ceil(bb.width + m * 2);
+    var h = Math.ceil(bb.height + m * 2);
+    svg.setAttribute('viewBox', x + ' ' + y + ' ' + w + ' ' + h);
+    svg.style.maxWidth = '';
+  });
+}
+
 function initMermaid() {
   try {
     mermaid.initialize({
@@ -194,9 +211,12 @@ function initMermaid() {
         textColor: '#e8e0d4',
         fontSize: '14px'
       },
-      flowchart: { useMaxWidth: true }
+      flowchart: { useMaxWidth: true },
+      useMaxWidth: true
     });
-    mermaid.run({ nodes: document.querySelectorAll('#lesson-content .mermaid') });
+    var p = mermaid.run({ nodes: document.querySelectorAll('#lesson-content .mermaid') });
+    if (p && p.then) p.then(fixMermaidViewBoxes);
+    else fixMermaidViewBoxes();
   } catch (e) { /* silent */ }
 }
 
