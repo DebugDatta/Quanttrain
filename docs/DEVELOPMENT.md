@@ -175,7 +175,11 @@ All writes are `mode: "no-cors"` fire-and-forget — silent failure is by design
 
 ### `js/views/worldMap.js` — World Map View
 
-Renders the skill tree with all 13 worlds. Draws node circles, connecting lines, progress bars, and the top stats bar. Reads from `curriculum` data and `store`.
+Renders the skill tree with all 13 worlds. Draws node circles, connecting lines, progress bars, the top stats bar, and the account popover. Reads from `curriculum` data and `store`.
+
+### `js/syllabus.js` — Syllabus FAB & Drawer
+
+Powers the persistent **Syllabus** floating button and the course-outline drawer. `initSyllabus()` (called from `app.js` after `route()`) injects the `.syllabus-fab` into the body and binds globals once. The drawer is built lazily on first open from `curriculum` + `store` so progress dots are always fresh, and removed on every `hashchange`. The fab is shown on map/lesson/quiz and hidden on login.
 
 ### `js/views/lesson.js` — Lesson View
 
@@ -360,11 +364,12 @@ index.html
     ├── js/store.js             (no deps)
     ├── js/utils.js             (no deps)
     ├── js/sync.js              (depends on store.js)
+    ├── js/syllabus.js          (depends on store.js, utils.js)
     ├── js/views/login.js       (depends on store.js, utils.js, sync.js)
     ├── js/views/worldMap.js    (depends on store.js, utils.js, curriculum.json)
     ├── js/views/lesson.js      (depends on store.js, utils.js, curriculum.json, sync.js)
     ├── js/views/quiz.js        (depends on store.js, utils.js, curriculum.json, sync.js)
-    └── js/app.js               (depends on all views, store.js, utils.js)
+    └── js/app.js               (depends on all views, store.js, utils.js, syllabus.js)
 ```
 
 ---

@@ -30,11 +30,16 @@
   .map-header-right { gap: var(--space-sm); }
   .account-btn { max-width: 150px; }
   .account-popover { width: 260px; }
+  .outline-drawer { width: 100vw; }
+  .outline-world-head { padding: var(--space-sm) var(--space-md); }
+  .outline-nodes { padding-left: var(--space-md); }
+  .outline-title { font-size: 1rem; }
 }
 
 @media (max-width: 360px) {
   .node-circle { width: 26px; height: 26px; font-size: 0.7rem; }
   .node-separator { font-size: 0.6rem; }
+  .account-btn { max-width: 110px; }
 }
 
 /* ===== Lesson View ===== */
@@ -88,4 +93,29 @@
   html { font-size: 14px; }
   p { max-width: none; }
   ul, ol { padding-left: var(--space-md); }
+}
+
+/* ===== Syllabus Floating Button ===== */
+@media (max-width: 768px) {
+  .syllabus-fab {
+    right: max(var(--space-md), env(safe-area-inset-right, 0px));
+    bottom: max(var(--space-md), env(safe-area-inset-bottom, 0px));
+    min-height: 42px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .syllabus-fab {
+    min-height: 44px;
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .syllabus-fab {
+    right: max(var(--space-sm), env(safe-area-inset-right, 0px));
+    bottom: max(var(--space-sm), env(safe-area-inset-bottom, 0px));
+  }
 }

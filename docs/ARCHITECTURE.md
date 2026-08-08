@@ -32,6 +32,7 @@ C:\Users\PRAMIT\Downloads\QuantTrain\
 │   ├── app.js                 # Hash router + application initialization
 │   ├── store.js               # localStorage wrapper (identity, progress, XP, streaks, badges)
 │   ├── sync.js                # Apps Script client: login validation (GET) + no-cors writes
+│   ├── syllabus.js            # Persistent Syllabus FAB + course-outline drawer
 │   ├── utils.js               # DOM helpers, date formatting, scoring, event utilities
 │   │
 │   └── views/

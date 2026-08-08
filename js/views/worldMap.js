@@ -152,3 +152,4 @@ function closePopover(btn, popover) {
   }
   if (popover) popover.classList.remove('open');
 }
+

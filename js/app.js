@@ -4,6 +4,7 @@ import { render as renderLogin } from './views/login.js';
 import { render as renderMap } from './views/worldMap.js';
 import { render as renderLesson } from './views/lesson.js';
 import { render as renderQuiz } from './views/quiz.js';
+import { initSyllabus } from './syllabus.js';
 
 const ROUTES = {
   '/login': { view: 'login-view', handler: renderLogin },
@@ -39,4 +40,5 @@ function route() {
 document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('hashchange', route);
   route();
+  initSyllabus();
 });

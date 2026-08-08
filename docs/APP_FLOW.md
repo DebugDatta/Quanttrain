@@ -175,6 +175,18 @@ User opens site
 | 🔥 Streak | Expand tooltip with streak calendar |
 | ⏻ Logout | `resetAll()` → clear identity + local progress → redirect `#/login` (tracked users restore from cloud) |
 
+### Syllabus Drawer
+
+A persistent **Syllabus** floating button (bottom-right) is available on the map, lesson, and quiz pages; it is hidden on the login screen. Available to tracked users and guests.
+
+- Fixed slide-over panel from the right (`--bg-panel`, hairline border, 220ms `--ease-out` translate; backdrop fades 150ms).
+- Header shows "Course Outline" + overall count (`completed / 42 nodes`) + close `×`.
+- Body lists all 13 worlds as collapsible groups (all open by default); world header toggles its node list and rotates a chevron, `aria-expanded` tracks state.
+- Each node row shows a progress dot (gold = lesson + quiz done, patina = lesson done, ring = unvisited) + title, and links to `#/lesson/{id}`.
+- The drawer is built lazily on first open, so progress dots are always fresh.
+- Close: backdrop click, `×`, Escape (refocuses the Syllabus button), or any navigation (`hashchange` removes the drawer from the DOM).
+- The floating button is responsive: safe-area aware (notch / home indicator) and compacted at 768 / 480 / 360px breakpoints.
+
 ### Edge Cases
 - **No visits yet**: All circles dimmed, "Continue" button hidden
 - **World complete**: Full patina bar, 100% label, "Completed" badge on world title

@@ -36,8 +36,9 @@
 | `js/store.js` | localStorageschema — read before reading/writing state |
 | `js/utils.js` | DOM helpers, date formatting, scoring |
 | `js/sync.js` | Apps Script client: login validation (GET) + tracking/writes (POST) |
+| `js/syllabus.js` | Persistent Syllabus floating button + course-outline drawer (map/lesson/quiz, hidden on login) |
 | `js/views/login.js` | Login/guest gate view |
-| `js/views/worldMap.js` | World map renderer |
+| `js/views/worldMap.js` | World map renderer + account popover |
 | `js/views/lesson.js` | Lesson renderer |
 | `js/views/quiz.js` | Quiz renderer + submission |
 | `data/curriculum.json` | All 42 nodes parsed from module.md |
