@@ -1,5 +1,6 @@
 import { getProgress, setProgress, addXp, getAllData } from '../store.js';
 import { $, $$, show, navigate, getNode, getWorldForNode, getCurriculum, escapeHtml } from '../utils.js';
+import { renderText } from '../math.js';
 import { track, syncProgress } from '../sync.js';
 
 let currentNodeId = null;
@@ -9,6 +10,7 @@ export function render(nodeId) {
   const node = getNode(nodeId);
   if (!node) { navigate('#/map'); return; }
   currentNodeId = nodeId;
+  const mathOpts = node.rawMath ? { rawLatex: true } : undefined;
   show('lesson-view');
   track('node_enter', nodeId);
   const world = getWorldForNode(nodeId);
@@ -49,7 +51,7 @@ export function render(nodeId) {
     if (sec.heading) html += '<h3 class="section-heading">' + escapeHtml(sec.heading) + '</h3>';
 
     if (sec.type === 'text') {
-      html += '<div class="lesson-text">' + renderText(sec.content) + '</div>';
+      html += '<div class="lesson-text">' + renderText(sec.content, mathOpts) + '</div>';
     } else if (sec.type === 'code') {
       html += '<div class="lesson-code">'
         + '<button class="lesson-code-copy" data-code="' + attrEsc(sec.code) + '">Copy</button>'
@@ -255,167 +257,3 @@ function totalNodes() {
   return data.worlds.reduce(function(a, w) { return a + w.nodes.length; }, 0);
 }
 
-var TEXT_ENTITY_MAP = {
-  '\u2014': '&mdash;',
-  '\u2013': '&ndash;',
-  '\u2192': '&rarr;',
-  '\u2190': '&larr;',
-  '\u20B9': '&#8377;',
-  '\u00B2': '&sup2;',
-  '\u00B3': '&sup3;',
-  '\u00D7': '&times;',
-  '\u00F7': '&divide;',
-  '\u2212': '&minus;',
-  '\u2264': '&le;',
-  '\u2265': '&ge;',
-  '\u00B1': '&plusmn;',
-  '\u03A0': '&Pi;',
-  '\u03A3': '&Sigma;',
-  '\u03BB': '&lambda;',
-  '\u2713': '&#10003;',
-  '\u25B6': '&#9654;',
-  '\u2714': '&#10004;',
-  '\u00B0': '&deg;'
-};
-
-function nonAsciiToEntities(str) {
-  return str.replace(/([\uD800-\uDBFF][\uDC00-\uDFFF])|[^\x00-\x7F]/g, function(match, pair) {
-    if (pair) {
-      var hi = pair.charCodeAt(0);
-      var lo = pair.charCodeAt(1);
-      var code = (hi - 0xD800) * 0x400 + (lo - 0xDC00) + 0x10000;
-      return '&#x' + code.toString(16) + ';';
-    }
-    return TEXT_ENTITY_MAP[match] || '&#' + match.charCodeAt(0) + ';';
-  });
-}
-
-var LATEX_MAP = {
-  alpha: '&#945;', beta: '&#946;', gamma: '&#947;', delta: '&#948;',
-  epsilon: '&#949;', varepsilon: '&#949;', zeta: '&#950;', eta: '&#951;',
-  theta: '&#952;', vartheta: '&#977;', iota: '&#953;', kappa: '&#954;',
-  lambda: '&#955;', mu: '&#956;', nu: '&#957;', xi: '&#958;',
-  pi: '&#960;', varpi: '&#982;', rho: '&#961;', varrho: '&#1009;',
-  sigma: '&#963;', varsigma: '&#962;', tau: '&#964;', upsilon: '&#965;',
-  phi: '&#966;', varphi: '&#981;', chi: '&#967;', psi: '&#968;',
-  omega: '&#969;',
-  Alpha: '&#913;', Beta: '&#914;', Gamma: '&#915;', Delta: '&#916;',
-  Epsilon: '&#917;', Zeta: '&#918;', Eta: '&#919;', Theta: '&#920;',
-  Iota: '&#921;', Kappa: '&#922;', Lambda: '&#923;', Mu: '&#924;',
-  Nu: '&#925;', Xi: '&#926;', Omicron: '&#927;', Pi: '&#928;',
-  Rho: '&#929;', Sigma: '&#931;', Tau: '&#932;', Upsilon: '&#933;',
-  Phi: '&#934;', Chi: '&#935;', Psi: '&#936;', Omega: '&#937;',
-  times: '&#215;', div: '&#247;', pm: '&#177;', mp: '&#8723;',
-  cdot: '&#183;', circ: '&#176;', bullet: '&#8226;',
-  le: '&#8804;', ge: '&#8805;', ne: '&#8800;', approx: '&#8776;',
-  sim: '&#8764;', simeq: '&#8771;', cong: '&#8773;', equiv: '&#8801;',
-  subset: '&#8834;', supset: '&#8835;', subseteq: '&#8838;', supseteq: '&#8839;',
-  in: '&#8712;', notin: '&#8713;', cap: '&#8745;', cup: '&#8746;',
-  emptyset: '&#8709;', nabla: '&#8711;', partial: '&#8706;',
-  exists: '&#8707;', forall: '&#8704;', infinity: '&#8734;',
-  to: '&#8594;', gets: '&#8592;', leftarrow: '&#8592;', rightarrow: '&#8594;',
-  Leftrightarrow: '&#8660;', Leftarrow: '&#8656;', Rightarrow: '&#8658;',
-  implies: '&#8658;', iff: '&#8660;',
-  ldots: '&#8230;', cdots: '&#8943;', vdots: '&#8942;', ddots: '&#8945;',
-  sum: '&#8721;', prod: '&#8719;', coprod: '&#8720;',
-  int: '&#8747;', oint: '&#8750;', iint: '&#8748;', iiint: '&#8749;',
-  sqrt: '&#8730;', surd: '&#8730;',
-  prime: '&#8242;', infty: '&#8734;', aleph: '&#8501;',
-  angle: '&#8736;', measuredangle: '&#8737;', sphericalangle: '&#8738;',
-  wedge: '&#8743;', vee: '&#8744;',
-  oplus: '&#8853;', otimes: '&#8855;', ominus: '&#8854;', oslash: '&#8856;',
-  deg: '&#176;', percent: '&#37;',
-  exp: 'exp', log: 'log', ln: 'ln', sin: 'sin', cos: 'cos', tan: 'tan',
-  max: 'max', min: 'min', lim: 'lim', sup: 'sup', inf: 'inf',
-  det: 'det', dim: 'dim', hom: 'hom', ker: 'ker', rank: 'rank'
-};
-
-function extractBraceGroup(s, start) {
-  var i = start, depth = 0;
-  while (i < s.length && depth >= 0) {
-    if (s[i] === '{') depth++;
-    else if (s[i] === '}') depth--;
-    if (depth === 0) break;
-    i++;
-  }
-  return { content: s.substring(start + 1, i), end: i + 1 };
-}
-
-function latexToHtml(math) {
-  math = math.replace(/\\text\{([^}]*)\}/g, '$1');
-  math = math.replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>');
-  math = math.replace(/_\{([^}]*)\}/g, '<sub>$1</sub>');
-  math = math.replace(/\^([a-zA-Z0-9])/g, '<sup>$1</sup>');
-  math = math.replace(/_([a-zA-Z0-9])/g, '<sub>$1</sub>');
-
-  var result = '', lastIdx = 0, fracRe = /\\frac/g, m;
-  while ((m = fracRe.exec(math)) !== null) {
-    result += math.substring(lastIdx, m.index);
-    var after = math.substring(m.index + 5);
-    var i = 0;
-    while (i < after.length && after[i] === ' ') i++;
-    if (i < after.length && after[i] === '{') {
-      var numResult = extractBraceGroup(after, i);
-      i = numResult.end;
-      while (i < after.length && after[i] === ' ') i++;
-      if (i < after.length && after[i] === '{') {
-        var denResult = extractBraceGroup(after, i);
-        result += '<span class="frac"><span class="frac-num">' + latexToHtml(numResult.content) + '</span><span class="frac-line">&#x2500;</span><span class="frac-den">' + latexToHtml(denResult.content) + '</span></span>';
-        lastIdx = m.index + 5 + denResult.end;
-        fracRe.lastIndex = lastIdx;
-        continue;
-      }
-    }
-    result += '\\frac';
-    lastIdx = m.index + 5;
-  }
-  result += math.substring(lastIdx);
-  math = result;
-
-  math = math.replace(/\\sqrt(?:\[([^\]]*)\])?\{([^}]*)\}/g, function(m, n, rad) {
-    return '&#8730;<span class="sqrt">' + latexToHtml(rad) + '</span>';
-  });
-  math = math.replace(/\\left\s*[([{|\]]?/g, '');
-  math = math.replace(/\\right\s*[)\]}|]?/g, '');
-  math = math.replace(/\\qquad/g, '  ');
-  math = math.replace(/\\quad/g, '  ');
-  math = math.replace(/\\,/g, ' ');
-  math = math.replace(/\\;/g, '  ');
-  math = math.replace(/\\!/g, '');
-  math = math.replace(/\\:/g, ' ');
-  math = math.replace(/\\([a-zA-Z]+)/g, function(m, cmd) {
-    return LATEX_MAP[cmd] || m;
-  });
-  return math;
-}
-
-function renderText(content) {
-  if (!content) return '';
-  var h = content;
-  // Protect code blocks first
-  var codeBlocks = [];
-  h = h.replace(/`([^`]+)`/g, function(m, c) {
-    codeBlocks.push('<code>' + c + '</code>');
-    return '%%CODE' + (codeBlocks.length - 1) + '%%';
-  });
-  // Handle display math $$...$$
-  h = h.replace(/\$\$([\s\S]+?)\$\$/g, function(m, inner) {
-    return '<div class="math-block">' + latexToHtml(inner.trim()) + '</div>';
-  });
-  // Handle inline math $...$
-  h = h.replace(/\$([^$]+)\$/g, function(m, inner) {
-    return '<span class="math-inline">' + latexToHtml(inner) + '</span>';
-  });
-  // Restore code blocks
-  for (var ci = 0; ci < codeBlocks.length; ci++) {
-    h = h.replace('%%CODE' + ci + '%%', codeBlocks[ci]);
-  }
-  h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  h = h.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  h = h.replace(/\n\n/g, '</p><p>');
-  h = '<p>' + h + '</p>';
-  h = h.replace(/<p><\/p>/g, '');
-  h = h.replace(/\n/g, '<br>');
-  h = nonAsciiToEntities(h);
-  return h;
-}

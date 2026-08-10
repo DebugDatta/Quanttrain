@@ -1,5 +1,7 @@
-import { getProgress, setProgress, addXp } from '../store.js';
+import { getProgress, setProgress, addXp, getIdentity } from '../store.js';
 import { $, $$, show, navigate, getNode, getWorldForNode, getNextNode, escapeHtml } from '../utils.js';
+import { renderMathText } from '../math.js';
+import { downloadQuizReport } from '../pdf.js';
 import { pushQuiz, track } from '../sync.js';
 
 var LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -15,6 +17,7 @@ export function render(nodeId) {
 }
 
 function renderQuestion(node, world) {
+  var mathOpts = node.rawMath ? { rawLatex: true } : undefined;
   var q = node.quiz[currentQuestion];
   var total = node.quiz.length;
   var pct = Math.round((currentQuestion / total) * 100);
@@ -31,7 +34,7 @@ function renderQuestion(node, world) {
     + '<div class="quiz-title"><h2>' + escapeHtml(node.title) + ' Quiz</h2></div>'
     + '<div class="quiz-question">'
     + '<div class="quiz-question-number">Question ' + (currentQuestion + 1) + '</div>'
-    + '<div class="quiz-question-text">' + escapeHtml(q.question) + '</div>'
+    + '<div class="quiz-question-text">' + renderMathText(q.question, mathOpts) + '</div>'
     + '<div class="quiz-question-type">' + (q.type === 'multi' ? 'Select all that apply' : 'Select one') + '</div>'
     + '</div>'
     + '<div class="quiz-options" id="quiz-options">';
@@ -39,7 +42,7 @@ function renderQuestion(node, world) {
   for (var i = 0; i < q.options.length; i++) {
     html += '<div class="quiz-option" data-idx="' + i + '">'
       + '<span class="option-letter">' + LETTERS[i] + '</span>'
-      + '<span>' + escapeHtml(q.options[i].text) + '</span>'
+      + '<span>' + renderMathText(q.options[i].text, mathOpts) + '</span>'
       + '</div>';
   }
 
@@ -131,7 +134,7 @@ function handleSubmit(node, world, q) {
   btn.disabled = false;
 }
 
-function showScore(node) {
+function showScore(node, world) {
   var correctCount = 0;
   for (var ri = 0; ri < responses.length; ri++) {
     if (responses[ri].correct) correctCount++;
@@ -173,6 +176,7 @@ function showScore(node) {
     + '</div>'
     + '<div class="quiz-score-xp">+<span id="quiz-score-xp-count">0</span> XP earned' + bonusText + '</div>'
     + '<div class="quiz-score-actions">'
+    + '<button class="btn btn-secondary" id="quiz-download-pdf">Download PDF</button>'
     + '<button class="btn btn-secondary" id="quiz-back-map">Back to Map</button>'
     + (nextNode ? '<button class="btn btn-primary" id="quiz-next-node">Next Node ></button>' : '')
     + '</div>'
@@ -186,6 +190,27 @@ function showScore(node) {
   if (nextNode) {
     $('#quiz-next-node').onclick = function() { navigate('#/lesson/' + nextNode.id); };
   }
+
+  $('#quiz-download-pdf').onclick = function() {
+    var btn = $('#quiz-download-pdf');
+    btn.disabled = true;
+    btn.textContent = 'Preparing PDF\u2026';
+    downloadQuizReport({
+      node: node,
+      world: world,
+      responses: responses,
+      correctCount: correctCount,
+      total: total,
+      xp: totalXp,
+      identity: getIdentity()
+    }).then(function() {
+      btn.disabled = false;
+      btn.textContent = 'Download PDF';
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Retry Download';
+    });
+  };
 }
 
 function countUp(el, to, duration) {

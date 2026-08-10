@@ -413,8 +413,8 @@ START ──► Show Q1 + options
 ### Score Screen
 
 - Shows: score fraction, percentage bar, correct/incorrect count, XP earned
-- Three buttons:
-  - **Review Answers**: Goes back through questions showing correct answers
+- Buttons:
+  - **Download PDF**: generates a light, print-friendly PDF report (name, UID, date/time, node, score, and every question with all options — correct and attempted ones marked) via `js/pdf.js` + pdfmake (lazy-loaded from CDN only on click)
   - **Back to Map**: `#/map`
   - **Next Node**: `#/lesson/{n+1}` (if n < 42)
 

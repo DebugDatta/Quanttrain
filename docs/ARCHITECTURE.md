@@ -34,12 +34,14 @@ C:\Users\PRAMIT\Downloads\QuantTrain\
 │   ├── sync.js                # Apps Script client: login validation (GET) + no-cors writes
 │   ├── syllabus.js            # Persistent Syllabus FAB + course-outline drawer
 │   ├── utils.js               # DOM helpers, date formatting, scoring, event utilities
+│   ├── math.js                # Shared LaTeX→HTML math renderer (lesson + quiz)
+│   ├── pdf.js                 # Quiz report PDF generation (pdfmake, lazy-loaded)
 │   │
 │   └── views/
 │       ├── login.js           # Login/guest gate view (UID + password)
 │       ├── worldMap.js        # World map with skill tree
 │       ├── lesson.js          # Lesson content renderer
-│       └── quiz.js            # Quiz renderer with submission
+│       └── quiz.js            # Quiz renderer with submission + PDF download
 │
 ├── assets/
 │   └── icons/                 # SVG icons (logo mark, checkmark, flame, star, etc.)
@@ -311,5 +313,6 @@ On `{ok:true}`, `store.applyCloudProfile()` merges XP (max), streak (max), and m
 |---|---|---|
 | highlight.js | `//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.x/highlight.min.js` (+ `styles/atom-one-dark.min.css`) | `lesson.js` — code syntax highlighting |
 | mermaid.js | `//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js` | `lesson.js` — diagram rendering |
+| pdfmake | `//cdn.jsdelivr.net/npm/pdfmake@0.2.20/build/pdfmake.min.js` (+ `vfs_fonts.js`) | `pdf.js` — quiz report PDF generation |
 
-Both are lazy-loaded on demand by `lesson.js` (injected only when a lesson contains code or mermaid blocks; the highlight theme CSS likewise). No `<script>` tags in `index.html` head. No npm, no bundler, no build step.
+All three are lazy-loaded on demand at runtime: `lesson.js` injects highlight.js/mermaid only when a lesson contains code or mermaid blocks (plus the highlight theme CSS), and `pdf.js` injects pdfmake only when the user clicks **Download PDF** on the quiz score screen. No `<script>` tags in `index.html` head. No npm, no bundler, no build step.

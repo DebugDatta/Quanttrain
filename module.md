@@ -3541,7 +3541,7 @@ PCA is used for dimensionality reduction in factor models and for identifying th
 ### Practical Application: Portfolio Variance in Matrix Form
 The formula for portfolio variance in matrix notation is one of the most elegant results in quantitative finance. It expresses the variance of a portfolio as a single matrix expression involving the weight vector and the covariance matrix:
 
-$$sigma_p^2 = w^T \Sigma w$$
+$$\sigma_p^2 = w^T \Sigma w$$
 
 Expanding this for N assets gives:
 

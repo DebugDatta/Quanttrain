@@ -110,6 +110,23 @@
   text-decoration: overline;
   padding-left: 2px;
 }
+.acc-hat {
+  position: relative;
+}
+.acc-hat::before {
+  content: '^';
+  position: absolute;
+  top: -0.55em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65em;
+  line-height: 1;
+  font-style: normal;
+  white-space: nowrap;
+}
+.acc-bar {
+  text-decoration: overline;
+}
 
 /* -- Hook -- */
 .lesson-hook {

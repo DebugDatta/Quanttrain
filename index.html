@@ -4822,7 +4822,7 @@
             {
               "type": "text",
               "heading": "Practical Application: Portfolio Variance in Matrix Form",
-              "content": "The formula for portfolio variance in matrix notation is one of the most elegant results in quantitative finance. It expresses the variance of a portfolio as a single matrix expression involving the weight vector and the covariance matrix:\n\n$$sigma_p^2 = w^T \\Sigma w$$\n\nExpanding this for N assets gives:\n\n$$\\sigma_p^2 = \\sum_{i=1}^{N} \\sum_{j=1}^{N} w_i w_j \\sigma_{ij}$$\n\nThis double summation is what the matrix multiplication computes in a single operation. The diagonal terms (i=j) capture each asset's individual variance contribution. The off-diagonal terms (i does not equal j) capture the covariance contributions. If all correlations are zero, the off-diagonal terms vanish and portfolio variance is just the weighted sum of individual variances."
+              "content": "The formula for portfolio variance in matrix notation is one of the most elegant results in quantitative finance. It expresses the variance of a portfolio as a single matrix expression involving the weight vector and the covariance matrix:\n\n$$\\sigma_p^2 = w^T \\Sigma w$$\n\nExpanding this for N assets gives:\n\n$$\\sigma_p^2 = \\sum_{i=1}^{N} \\sum_{j=1}^{N} w_i w_j \\sigma_{ij}$$\n\nThis double summation is what the matrix multiplication computes in a single operation. The diagonal terms (i=j) capture each asset's individual variance contribution. The off-diagonal terms (i does not equal j) capture the covariance contributions. If all correlations are zero, the off-diagonal terms vanish and portfolio variance is just the weighted sum of individual variances."
             },
             {
               "type": "code",
@@ -15985,6 +15985,7 @@
           "worldId": 12,
           "title": "LaTeX for Quantitative Writing",
           "order": 41,
+          "rawMath": true,
           "hook": "Your backtest is done, your dashboard is built, and your strategy makes money in simulation. Now comes the moment that decides whether anyone takes it seriously: the write-up. Word processors fight you the moment you paste a covariance matrix or a Greek letter; LaTeX is a typesetting system built exactly for this job. It is how virtually every academic paper, quant research report, and finance thesis is written. Learn it once in this node and it will carry you through the capstone and every paper you write afterwards.",
           "objectives": [
             "Explain what LaTeX is and how its compile model differs from a word processor",
