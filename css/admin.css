@@ -1092,3 +1092,133 @@
     text-align: center;
   }
 }
+
+@media (max-width: 480px) {
+  .admin-stats {
+    grid-template-columns: 1fr;
+  }
+  .admin-card-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-card-stat-value {
+    font-size: 1.5rem;
+  }
+  .admin-stat-value {
+    font-size: 2rem;
+  }
+  .admin-header-left {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .admin-header-right {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .admin-sync-status {
+    font-size: 0.6rem;
+  }
+  .admin-login-card {
+    padding: var(--space-xl) var(--space-md);
+  }
+  .admin-login-title {
+    font-size: 1.5rem;
+  }
+  .admin-detail-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+  .admin-detail-student-name {
+    font-size: 1rem;
+  }
+  .admin-card-name {
+    font-size: 1.3rem;
+  }
+  .admin-event-row {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .admin-event-date {
+    min-width: auto;
+  }
+  .admin-quiz-scores-table th:nth-child(3),
+  .admin-quiz-scores-table td:nth-child(3) {
+    display: none;
+  }
+  .admin-badge-wall-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-quiz-chart-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .admin-quiz-chart-label {
+    min-width: auto;
+  }
+  .admin-heatmap-grid {
+    grid-template-columns: repeat(auto-fill, minmax(22px, 1fr));
+  }
+  .admin-heatmap-cell {
+    font-size: 0.5rem;
+  }
+  .admin-section-title {
+    font-size: 1.2rem;
+  }
+  .admin-dashboard {
+    padding: var(--space-md);
+  }
+  .admin-student-detail {
+    padding: var(--space-md);
+  }
+  .admin-card-ring {
+    width: 64px;
+    height: 64px;
+  }
+  .admin-card-ring-bg {
+    width: 64px;
+    height: 64px;
+  }
+  .admin-card-ring-inner {
+    top: 6px;
+    left: 6px;
+    width: 52px;
+    height: 52px;
+  }
+  .admin-card-level {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .admin-stat-value {
+    font-size: 1.6rem;
+  }
+  .admin-card-stat-value {
+    font-size: 1.3rem;
+  }
+  .admin-card-name {
+    font-size: 1.1rem;
+  }
+  .admin-title {
+    font-size: 1.5rem;
+  }
+  .admin-brand {
+    font-size: 0.9rem;
+  }
+  .admin-heatmap-grid {
+    grid-template-columns: repeat(auto-fill, minmax(18px, 1fr));
+  }
+  .admin-heatmap-cell {
+    font-size: 0.45rem;
+  }
+  .admin-event-answers {
+    gap: 2px;
+  }
+  .admin-event-answer {
+    font-size: 0.6rem;
+    padding: 1px 4px;
+  }
+  .admin-back-btn {
+    font-size: 0.75rem;
+  }
+}
