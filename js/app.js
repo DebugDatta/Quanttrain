@@ -4,13 +4,17 @@ import { render as renderLogin } from './views/login.js';
 import { render as renderMap } from './views/worldMap.js';
 import { render as renderLesson } from './views/lesson.js';
 import { render as renderQuiz } from './views/quiz.js';
+import { render as renderAdmin } from './views/admin.js';
+import { render as renderLeaderboard } from './views/leaderboard.js';
 import { initSyllabus } from './syllabus.js';
 
 const ROUTES = {
   '/login': { view: 'login-view', handler: renderLogin },
   '/map': { view: 'map-view', handler: renderMap },
   '/lesson': { view: 'lesson-view', handler: renderLesson },
-  '/quiz': { view: 'quiz-view', handler: renderQuiz }
+  '/quiz': { view: 'quiz-view', handler: renderQuiz },
+  '/admin': { view: 'admin-view', handler: renderAdmin },
+  '/leaderboard': { view: 'leaderboard-view', handler: renderLeaderboard }
 };
 
 function resolveHash(hash) {
@@ -29,6 +33,13 @@ function resolveHash(hash) {
 function route() {
   const identity = getIdentity();
   const hash = window.location.hash;
+  if (hash.startsWith('#/admin')) {
+    const r = resolveHash(hash);
+    if (!r) return;
+    show(r.view);
+    if (r.handler) r.handler();
+    return;
+  }
   if (!identity && !hash.startsWith('#/login')) { navigate('#/login'); return; }
   if (identity && hash.startsWith('#/login')) { navigate('#/map'); return; }
   const r = resolveHash(hash);

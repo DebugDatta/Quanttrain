@@ -2,6 +2,9 @@ import { getProgress, setProgress, addXp, getAllData } from '../store.js';
 import { $, $$, show, navigate, getNode, getWorldForNode, getCurriculum, escapeHtml } from '../utils.js';
 import { renderText } from '../math.js';
 import { track, syncProgress } from '../sync.js';
+import { showXpPopup } from '../gamification/xp-popup.js';
+import { checkBadgesAfterLesson } from '../gamification/badges.js';
+import { checkLevelUp } from '../gamification/celebrate.js';
 
 let currentNodeId = null;
 let scrollHandler = null;
@@ -111,11 +114,16 @@ export function render(nodeId) {
   window.addEventListener('scroll', onScroll);
 
   if (!alreadyDone) {
+    const oldXp = getAllData().xp.total;
     const p = getProgress();
     p.completedNodes.push(nodeId);
     setProgress(p);
     addXp(10, 'lesson', nodeId);
     syncProgress();
+    const newXp = getAllData().xp.total;
+    showXpPopup(10, $('#lesson-quiz-btn'));
+    checkLevelUp(oldXp, newXp);
+    checkBadgesAfterLesson(nodeId);
   }
 
   $('#lesson-back').onclick = function() { navigate('#/map'); };

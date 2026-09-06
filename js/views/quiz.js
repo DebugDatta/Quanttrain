@@ -1,8 +1,10 @@
-import { getProgress, setProgress, addXp, getIdentity } from '../store.js';
+import { getProgress, setProgress, addXp, getAllData, getIdentity } from '../store.js';
 import { $, $$, show, navigate, getNode, getWorldForNode, getNextNode, escapeHtml } from '../utils.js';
 import { renderMathText } from '../math.js';
 import { downloadQuizReport } from '../pdf.js';
 import { pushQuiz, track } from '../sync.js';
+import { checkBadgesAfterQuiz } from '../gamification/badges.js';
+import { checkLevelUp, showPerfectScore } from '../gamification/celebrate.js';
 
 var LETTERS = ['A', 'B', 'C', 'D', 'E', 'F'];
 var currentNodeId = null, currentQuestion = 0, responses = [], answered = false;
@@ -145,6 +147,7 @@ function showScore(node, world) {
   var perfectBonus = correctCount === total ? 10 : 0;
   var totalXp = xpEarned + perfectBonus;
 
+  var oldXp = getAllData().xp.total;
   var progress = getProgress();
   progress.completedQuizzes[node.id] = { score: correctCount, total: total };
   setProgress(progress);
@@ -158,6 +161,11 @@ function showScore(node, world) {
   pushQuiz(node.id, responses.map(function(r) {
     return { question: r.question, selected: r.selected, correct: r.correct };
   }), correctCount, total);
+
+  var newXp = getAllData().xp.total;
+  checkLevelUp(oldXp, newXp);
+  checkBadgesAfterQuiz(node.id, correctCount, total);
+  if (correctCount === total) showPerfectScore();
 
   var nextNode = getNextNode(node.id);
 

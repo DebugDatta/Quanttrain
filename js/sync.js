@@ -1,6 +1,6 @@
 import { getIdentity, getAllData } from './store.js';
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1D7CU-CAplXvSzkD7Osc476nc0-wLGJQE7_eA0DCeRCeVGr2dgKJC3a3FYQC64lfZ/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4bVa41qIp34T0uRzgXh-sVsvfaZ9ZkoH4Q4zoUL0cDtbYR3gAPCx53ejMBu6JzZMM9w/exec';
 
 function snapshot() {
   const id = getIdentity();
@@ -68,4 +68,13 @@ export function syncProgress() {
   const p = snapshot();
   p.action = 'syncProgress';
   send(p);
+}
+
+export function getAllStudents(adminKey) {
+  const url = APPS_SCRIPT_URL
+    + '?action=getAllStudents&key=' + encodeURIComponent(adminKey);
+  return fetch(url)
+    .then(function(r) { return r.json(); })
+    .then(function(d) { return d && d.ok ? d : { ok: false }; })
+    .catch(function() { return { ok: false }; });
 }

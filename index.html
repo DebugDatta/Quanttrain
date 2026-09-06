@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="css/lesson.css">
   <link rel="stylesheet" href="css/quiz.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/gamification.css">
   <script id="curriculum-data" type="application/json">
 {
   "worlds": [
@@ -16798,6 +16800,7 @@
         <div class="login-divider">or</div>
         <button class="btn btn-secondary login-guest-btn" id="login-guest">Guest Access</button>
         <p class="login-info">Login with your UID &amp; phone-number password to sync progress across devices -- not required to browse.</p>
+        <p style="margin-top:12px"><a href="#/admin" style="font-size:0.75rem;color:var(--text-faint)">Admin Dashboard</a></p>
       </div>
     </div>
 
@@ -16814,6 +16817,16 @@
     <!-- Quiz View -->
     <div id="quiz-view" class="view">
       <div class="container" id="quiz-content"></div>
+    </div>
+
+    <!-- Admin View -->
+    <div id="admin-view" class="view">
+      <div id="admin-content"></div>
+    </div>
+
+    <!-- Leaderboard View -->
+    <div id="leaderboard-view" class="view">
+      <div id="leaderboard-content"></div>
     </div>
   </main>
 

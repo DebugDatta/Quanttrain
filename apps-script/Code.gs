@@ -14,6 +14,9 @@ const LOG_HEADERS = [
 
 function doGet(e) {
   try {
+    if (!e || !e.parameter) {
+      return respond({ ok: false, error: 'no parameters' });
+    }
     const p = e.parameter || {};
     if (p.action === 'validateLogin') {
       const uid = String(p.uid || '').trim();
@@ -39,6 +42,60 @@ function doGet(e) {
         lastVisitedNode: s.lastVisitedNode
       });
     }
+    if (p.action === 'getAllStudents') {
+      const adminKey = String(p.key || '').trim();
+      if (adminKey !== 'admin.quants:aarjavbhadwahai') {
+        return respond({ ok: false, error: 'unauthorized' });
+      }
+      const users = allUsers();
+      const results = [];
+      for (const u of users) {
+        const tab = getOrCreateUserTab(u);
+        const s = readStats(tab);
+        results.push({
+          uid: u.uid,
+          name: u.name,
+          year: u.year,
+          course: u.course,
+          xp: s.xp,
+          streak: s.streak,
+          longestStreak: s.longestStreak,
+          lastActive: s.lastActive,
+          completedQuizzes: s.completedQuizzes,
+          objectives: s.objectives,
+          badges: s.badges,
+          lastVisitedNode: s.lastVisitedNode,
+          eventLog: readEventLog(tab)
+        });
+      }
+      return respond({ ok: true, students: results });
+    }
+    if (p.action === 'getLeaderboard') {
+      const uid = String(p.uid || '').trim();
+      if (!uid || !findUserByUid(uid)) {
+        return respond({ ok: false, error: 'unauthorized' });
+      }
+      const users = allUsers();
+      const results = [];
+      for (const u of users) {
+        const tab = getOrCreateUserTab(u);
+        const s = readStats(tab);
+        var quizCount = Object.keys(s.completedQuizzes || {}).length;
+        results.push({
+          uid: u.uid,
+          name: u.name,
+          year: u.year,
+          course: u.course,
+          xp: s.xp,
+          streak: s.streak,
+          longestStreak: s.longestStreak,
+          quizCount: quizCount,
+          lastActive: s.lastActive
+        });
+      }
+      results.sort(function(a, b) { return (b.xp || 0) - (a.xp || 0); });
+      return respond({ ok: true, students: results, yourUid: uid });
+    }
     return respond({ ok: false });
   } catch (err) {
     console.error('doGet error: ' + err.message);
@@ -48,13 +105,25 @@ function doGet(e) {
 
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
-    const action = String(data.action || '');
-    const uid = String(data.uid || '').trim();
-    if (!uid) return;
-    const user = findUserByUid(uid);
-    if (!user) return;
-    const tab = getOrCreateUserTab(user);
+    if (!e || !e.postData || !e.postData.contents) {
+      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: 'no data' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    var data;
+    try { data = JSON.parse(e.postData.contents); } catch (parseErr) {
+      return respond({ ok: false, error: 'invalid json' });
+    }
+    var action = String(data.action || '');
+    var uid = String(data.uid || '').trim();
+    if (!uid) return respond({ ok: false, error: 'no uid' });
+    var user = findUserByUid(uid);
+    if (!user) return respond({ ok: false, error: 'user not found' });
+    var tab;
+    try { tab = getOrCreateUserTab(user); } catch (tabErr) {
+      console.error('getOrCreateUserTab error: ' + tabErr.message);
+      return respond({ ok: false, error: 'sheet error' });
+    }
+    if (!tab) return respond({ ok: false, error: 'no sheet' });
 
     if (action === 'submitQuiz') {
       const nodeId = parseInt(data.nodeId, 10);
@@ -260,4 +329,41 @@ function logEvent(sheet, event, info) {
   const lastRow = sheet.getLastRow();
   const nextRow = lastRow < LOG_HEADER_ROW ? LOG_HEADER_ROW : lastRow + 1;
   sheet.getRange(nextRow, 1, 1, row.length).setValues([row]);
+}
+
+function readEventLog(sheet) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow < LOG_HEADER_ROW) return [];
+  const cols = 4 + MAX_QUESTIONS * 2 + 2;
+  const data = sheet.getRange(LOG_HEADER_ROW, 1, lastRow - LOG_HEADER_ROW + 1, cols).getValues();
+  const events = [];
+  for (const row of data) {
+    const ev = String(row[0] || '').trim();
+    if (!ev) continue;
+    const entry = {
+      event: ev,
+      date: String(row[1] || ''),
+      time: String(row[2] || ''),
+      node: row[3] !== '' ? parseInt(row[3], 10) : null,
+      attempt: row[4] !== '' ? parseInt(row[4], 10) : null
+    };
+    if (ev === 'quiz_attempt') {
+      entry.answers = [];
+      for (let i = 0; i < MAX_QUESTIONS; i++) {
+        const ans = String(row[5 + i * 2] || '').trim();
+        const correct = String(row[5 + i * 2 + 1] || '').trim();
+        if (ans || correct) {
+          entry.answers.push({
+            q: i + 1,
+            selected: ans,
+            correct: correct === 'Yes'
+          });
+        }
+      }
+      entry.score = row[5 + MAX_QUESTIONS * 2] !== '' ? parseInt(row[5 + MAX_QUESTIONS * 2], 10) : null;
+      entry.total = row[5 + MAX_QUESTIONS * 2 + 1] !== '' ? parseInt(row[5 + MAX_QUESTIONS * 2 + 1], 10) : null;
+    }
+    events.push(entry);
+  }
+  return events;
 }

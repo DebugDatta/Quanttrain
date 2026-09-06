@@ -110,3 +110,44 @@ export function getXpForNextLevel(xp) {
 
 export function getAllData() { return load(); }
 export function resetAll() { save(JSON.parse(JSON.stringify(DEFAULT_STORE))); }
+
+export function fullCloudSync(profile) {
+  const s = JSON.parse(JSON.stringify(DEFAULT_STORE));
+  s.identity = { type: 'tracked', uid: profile.uid, name: profile.name, year: profile.year, course: profile.course };
+  if (typeof profile.xp === 'number') s.xp.total = profile.xp;
+  if (typeof profile.streak === 'number') s.streak.current = profile.streak;
+  if (typeof profile.longestStreak === 'number') s.streak.longest = profile.longestStreak;
+  if (profile.lastActive) s.streak.lastActive = profile.lastActive;
+  if (profile.completedQuizzes) {
+    s.progress.completedQuizzes = {};
+    for (const key of Object.keys(profile.completedQuizzes)) {
+      s.progress.completedQuizzes[key] = profile.completedQuizzes[key];
+    }
+  }
+  if (profile.visitedNodes || profile.completedQuizzes) {
+    const merged = [];
+    const seen = {};
+    if (profile.visitedNodes) profile.visitedNodes.forEach(function(id) {
+      const n = parseInt(id, 10);
+      if (!isNaN(n) && !seen[n]) { seen[n] = true; merged.push(n); }
+    });
+    if (profile.completedQuizzes) Object.keys(profile.completedQuizzes).forEach(function(key) {
+      const n = parseInt(key, 10);
+      if (!isNaN(n) && !seen[n]) { seen[n] = true; merged.push(n); }
+    });
+    s.progress.completedNodes = merged;
+  }
+  if (profile.objectives) {
+    s.progress.objectivesChecked = {};
+    for (const key of Object.keys(profile.objectives)) {
+      s.progress.objectivesChecked[key] = (profile.objectives[key] || []).slice();
+    }
+  }
+  if (profile.badges) {
+    s.badges = profile.badges.slice();
+  }
+  if (typeof profile.lastVisitedNode === 'number') {
+    s.progress.lastVisitedNode = profile.lastVisitedNode;
+  }
+  save(s);
+}
