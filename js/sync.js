@@ -31,7 +31,8 @@ function send(payload) {
 export function validateLogin(uid, pass) {
   const url = APPS_SCRIPT_URL
     + '?action=validateLogin&uid=' + encodeURIComponent(uid)
-    + '&pass=' + encodeURIComponent(pass);
+    + '&pass=' + encodeURIComponent(pass)
+    + '&_=' + Date.now();
   return fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(d) { return d && d.ok ? d : { ok: false }; })
@@ -72,7 +73,8 @@ export function syncProgress() {
 
 export function getAllStudents(adminKey) {
   const url = APPS_SCRIPT_URL
-    + '?action=getAllStudents&key=' + encodeURIComponent(adminKey);
+    + '?action=getAllStudents&key=' + encodeURIComponent(adminKey)
+    + '&_=' + Date.now();
   return fetch(url)
     .then(function(r) { return r.json(); })
     .then(function(d) { return d && d.ok ? d : { ok: false }; })

@@ -3,6 +3,10 @@ import { getAdminKey } from './auth.js';
 
 var cachedData = null;
 
+export function clearCache() {
+  cachedData = null;
+}
+
 export function fetchStudents() {
   return getAllStudents(getAdminKey()).then(function(result) {
     if (result.ok && result.students) {

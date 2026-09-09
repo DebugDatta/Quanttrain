@@ -96,18 +96,18 @@ function doGet(e) {
       results.sort(function(a, b) { return (b.xp || 0) - (a.xp || 0); });
       return respond({ ok: true, students: results, yourUid: uid });
     }
+
     return respond({ ok: false });
   } catch (err) {
     console.error('doGet error: ' + err.message);
-    return respond({ ok: false });
+    return respond({ ok: false, error: err.message });
   }
 }
 
 function doPost(e) {
   try {
     if (!e || !e.postData || !e.postData.contents) {
-      return ContentService.createTextOutput(JSON.stringify({ ok: false, error: 'no data' }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return respond({ ok: false, error: 'no data' });
     }
     var data;
     try { data = JSON.parse(e.postData.contents); } catch (parseErr) {
@@ -120,16 +120,15 @@ function doPost(e) {
     if (!user) return respond({ ok: false, error: 'user not found' });
     var tab;
     try { tab = getOrCreateUserTab(user); } catch (tabErr) {
-      console.error('getOrCreateUserTab error: ' + tabErr.message);
-      return respond({ ok: false, error: 'sheet error' });
+      return respond({ ok: false, error: 'sheet error: ' + tabErr.message });
     }
     if (!tab) return respond({ ok: false, error: 'no sheet' });
 
     if (action === 'submitQuiz') {
-      const nodeId = parseInt(data.nodeId, 10);
-      const score = parseInt(data.score, 10) || 0;
-      const total = parseInt(data.total, 10) || 0;
-      const responses = Array.isArray(data.responses) ? data.responses : [];
+      var nodeId = parseInt(data.nodeId, 10);
+      var score = parseInt(data.score, 10) || 0;
+      var total = parseInt(data.total, 10) || 0;
+      var responses = Array.isArray(data.responses) ? data.responses : [];
       logEvent(tab, 'quiz_attempt', {
         nodeId: nodeId,
         attempt: attemptCount(tab, nodeId) + 1,
@@ -137,7 +136,7 @@ function doPost(e) {
         score: score,
         total: total
       });
-      const completed = readStats(tab).completedQuizzes;
+      var completed = readStats(tab).completedQuizzes;
       completed[String(nodeId)] = { score: score, total: total };
       writeStats(tab, {
         xp: parseInt(data.xp, 10) || 0,
@@ -149,11 +148,13 @@ function doPost(e) {
         objectives: data.objectives || null,
         badges: data.badges || null
       });
+      return respond({ ok: true, action: 'submitQuiz' });
     } else if (action === 'trackActivity') {
-      const ev = String(data.event || '');
+      var ev = String(data.event || '');
       if (['login', 'node_enter', 'quiz_start'].indexOf(ev) !== -1) {
         logEvent(tab, ev, { nodeId: data.nodeId ? parseInt(data.nodeId, 10) : null });
       }
+      return respond({ ok: true, action: 'trackActivity' });
     } else if (action === 'syncProgress') {
       writeStats(tab, {
         xp: parseInt(data.xp, 10) || 0,
@@ -165,9 +166,11 @@ function doPost(e) {
         objectives: data.objectives || null,
         badges: data.badges || null
       });
+      return respond({ ok: true, action: 'syncProgress' });
     }
+    return respond({ ok: false, error: 'unknown action: ' + action });
   } catch (err) {
-    console.error('doPost error: ' + err.message);
+    return respond({ ok: false, error: err.message });
   }
 }
 
@@ -260,11 +263,18 @@ function readStats(sheet) {
   let badges = [];
   try { badges = JSON.parse(String(values[11] || '[]')) || []; } catch (err) { badges = []; }
   const lastVisited = String(values[9] || '').trim();
+  const tz = Session.getScriptTimeZone();
+  let lastActiveStr = '';
+  if (values[7] instanceof Date) {
+    lastActiveStr = Utilities.formatDate(values[7], tz, 'yyyy-MM-dd');
+  } else {
+    lastActiveStr = String(values[7] || '').trim();
+  }
   return {
     xp: parseInt(values[4], 10) || 0,
     streak: parseInt(values[5], 10) || 0,
     longestStreak: parseInt(values[6], 10) || 0,
-    lastActive: String(values[7] || ''),
+    lastActive: lastActiveStr,
     completedQuizzes: completed,
     objectives: objectives,
     badges: badges,
@@ -334,18 +344,33 @@ function logEvent(sheet, event, info) {
 function readEventLog(sheet) {
   const lastRow = sheet.getLastRow();
   if (lastRow < LOG_HEADER_ROW) return [];
-  const cols = 4 + MAX_QUESTIONS * 2 + 2;
-  const data = sheet.getRange(LOG_HEADER_ROW, 1, lastRow - LOG_HEADER_ROW + 1, cols).getValues();
+  const cols = 5 + MAX_QUESTIONS * 2 + 2;
+  const rowCount = lastRow - LOG_HEADER_ROW + 1;
+  if (rowCount <= 0) return [];
+  const data = sheet.getRange(LOG_HEADER_ROW, 1, rowCount, cols).getValues();
+  const tz = Session.getScriptTimeZone();
   const events = [];
   for (const row of data) {
     const ev = String(row[0] || '').trim();
-    if (!ev) continue;
+    if (!ev || ev === 'Event') continue;
+    let dateStr = '';
+    let timeStr = '';
+    if (row[1] instanceof Date) {
+      dateStr = Utilities.formatDate(row[1], tz, 'yyyy-MM-dd');
+    } else {
+      dateStr = String(row[1] || '').trim();
+    }
+    if (row[2] instanceof Date) {
+      timeStr = Utilities.formatDate(row[2], tz, 'HH:mm:ss');
+    } else {
+      timeStr = String(row[2] || '').trim();
+    }
     const entry = {
       event: ev,
-      date: String(row[1] || ''),
-      time: String(row[2] || ''),
-      node: row[3] !== '' ? parseInt(row[3], 10) : null,
-      attempt: row[4] !== '' ? parseInt(row[4], 10) : null
+      date: dateStr,
+      time: timeStr,
+      node: row[3] !== '' && row[3] !== null ? parseInt(row[3], 10) : null,
+      attempt: row[4] !== '' && row[4] !== null ? parseInt(row[4], 10) : null
     };
     if (ev === 'quiz_attempt') {
       entry.answers = [];
@@ -360,8 +385,8 @@ function readEventLog(sheet) {
           });
         }
       }
-      entry.score = row[5 + MAX_QUESTIONS * 2] !== '' ? parseInt(row[5 + MAX_QUESTIONS * 2], 10) : null;
-      entry.total = row[5 + MAX_QUESTIONS * 2 + 1] !== '' ? parseInt(row[5 + MAX_QUESTIONS * 2 + 1], 10) : null;
+      entry.score = row[5 + MAX_QUESTIONS * 2] !== '' && row[5 + MAX_QUESTIONS * 2] !== null ? parseInt(row[5 + MAX_QUESTIONS * 2], 10) : null;
+      entry.total = row[5 + MAX_QUESTIONS * 2 + 1] !== '' && row[5 + MAX_QUESTIONS * 2 + 1] !== null ? parseInt(row[5 + MAX_QUESTIONS * 2 + 1], 10) : null;
     }
     events.push(entry);
   }

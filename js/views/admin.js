@@ -1,5 +1,5 @@
 import { isAdmin, adminLogin, adminLogout } from '../admin/auth.js';
-import { fetchStudents, computeDerived, aggregateStats } from '../admin/fetch.js';
+import { fetchStudents, clearCache, computeDerived, aggregateStats } from '../admin/fetch.js';
 import { renderLeaderboard } from '../admin/leaderboard.js';
 import { renderStudentCard } from '../admin/cards.js';
 import { renderQuizChart } from '../admin/charts.js';
@@ -82,6 +82,7 @@ function showDashboard() {
 }
 
 function loadDashboardData() {
+  clearCache();
   var status = $('#admin-sync-status');
   if (status) { status.className = 'admin-sync-status syncing'; status.innerHTML = '<span class="admin-sync-dot"></span> Syncing...'; }
 
