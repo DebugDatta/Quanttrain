@@ -1,6 +1,6 @@
 import { getIdentity, getAllData } from './store.js';
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby4bVa41qIp34T0uRzgXh-sVsvfaZ9ZkoH4Q4zoUL0cDtbYR3gAPCx53ejMBu6JzZMM9w/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyo4gbQSdFmtO-0nMvPIPNZLAYSYbNmrRqy-tcc9wRi91Lq3fGq3LAZCNCcINkqUB6NAQ/exec';
 
 function snapshot() {
   const id = getIdentity();
